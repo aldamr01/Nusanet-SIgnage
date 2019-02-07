@@ -2,47 +2,38 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 
-$route['default_controller']                                    =   'Home';
-$route['404_override']                                          =   '';
-$route['translate_uri_dashes']                                  =   FALSE;
-$route['(:any)']                                                =   'Err/on';
+$route['default_controller']                                =   'Signage';
+$route['404_override']                                      =   'Signage';
+$route['translate_uri_dashes']                              =   FALSE;
 
-//portal akun login,regis,lupas
-$route['portal/registrasi']                                     =   'Registrasi/index';
-$route['portal/registrasi/proses']                              =   'Registrasi/ndaftar';
+//VIEW
+$route['site/list']                                         =   'SiteView/siteList';
+$route['site/create']                                       =   'SiteView/siteCreate';
+$route['site/change/(:num)']                                =   'SiteView/siteUpdate/$1';
+$route['site/drop/(:num)']                                  =   'SiteData/siteDelete/$1';
+$route['site/show/(:num)']                                  =   'SiteView/siteView/$1';
 
-$route['portal/login']                                          =   'Authentication';
-$route['portal/logout']                                         =   'Authentication/logout';
+$route['user/list']                                         =   'UserView/userList';
+$route['user/change/(:num)']                                =   'UserView/userUpdate/$1';
+$route['user/drop/(:num)']                                  =   'UserData/userDelete/$1';
+$route['user/create']                                       =   'UserView/userCreate';
 
-$route['portal/lupa_password']                                  =   'Lupa_password';
-$route['portal/lupa_password/proses']                           =   'Lupa_password/recover';
+//API
+$route['API/UserLogin']                                     =   'Auth/checkUser';
 
-//pengurus
-$route['pengurus/homepage']                                     =   'Pengurus/dashboard';
-$route['pengurus/profilku']                                     =   'Pengurus/profil_saya';
+$route['API/UserNew']                                       =   'UserData/userCreate';
+$route['API/UserView/(:num)']                               =   'UserData/userView/$1';
+$route['API/UserList']                                      =   'UserData/userList';
+$route['API/UserEdit']                                      =   'UserData/userUpdate';
 
-
-//mentoring    
-$route['pengurus/mentoring']                                    =   'Mentoring/index';
-
-//jadwal
-$route['pengurus/mentoring/jadwal']                             =   'Mentoring/jadwal';
-$route['pengurus/mentoring/jadwal/(:any)/(:any)']               =   'Crud/jadwal/$1/$2';
-//$route['pengurus/mentoring']                                  =   '';
-
-//common
-
-//myprofile
-$route['pengurus/profil']                                       =   'Pengurus/profile';
-$route['pengurus/profil/(:any)']                                =   'Pengurus/view/$1/$2';
-$route['pengurus/mentoring/kelas/(:any)/(:any)']                =   'Pengurus/view/$1/$2';
+$route['API/SiteList']                                      =   'SiteData/siteList';
+$route['API/SiteNew']                                       =   'SiteData/siteCreate';
+$route['API/SiteEdit']                                      =   'SiteData/siteUpdate';
+$route['API/SiteView/(:num)']                               =   'SiteData/siteView/$1';
 
 
-//Aplikasi
-$route['pengurus/aplikasi']                                     =   'Aplikasi/index';
-$route['pengurus/aplikasi/kta']                                 =   'Aplikasi/kta';
-$route['pengurus/aplikasi/kta/cetak/(:any)']                    =   'Aplikasi/cetak_kta/$1';
+//AUTH
+$route['Authentication']                                    =   'Auth/login';
+$route['Logoff']                                            =   'Auth/logout';
 
-//REST API
-$route['aplikasi/api/anggota/(:any)']                           =   'Aplikasi/dataglobal/$1';
-
+ 

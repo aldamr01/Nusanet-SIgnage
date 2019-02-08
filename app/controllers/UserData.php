@@ -8,115 +8,89 @@ class UserData extends CI_Controller
     {
         parent::__construct();
         $this->load->model('User');
-        $this->load->model('RouterConfig');
         
-        if(!$this->session->userdata('auth_status'))
-            redirect(base_url('Authentication'));   
-        else
-            if($this->session->userdata('auth_role')!= "Administrator")           
-                redirect(base_url('Authentication'));    
+        // if(!$this->session->userdata('auth_status'))
+        //     redirect(base_url('Authentication'));   
+        // else
+        //     if($this->session->userdata('auth_role')!= "Administrator")           
+        //         redirect(base_url('Authentication'));    
         
 		
     }
 
     public function userCreate()
     {
-        $this->form_validation->set_rules('name_user', 'Name', 'required');
+        $this->form_validation->set_rules('name', 'Name', 'required');
         $this->form_validation->set_rules('username', 'Username', 'required');
         $this->form_validation->set_rules('password', 'Password', 'required');
-        $this->form_validation->set_rules('role', 'Role User', 'required');
+        $this->form_validation->set_rules('site_id', 'Role User', 'required');
         $this->form_validation->set_rules('email', 'Email', 'required');        
 
-        $counter_user       =   User::count()+1;
         $register_user      =   new User;
-        $register_router    =   new RouterConfig;
-
         
         
         $register_user->username            =  $this->input->post('username');
+        $register_user->name                =  $this->input->post('name');
         $register_user->password            =  $this->input->post('password');
-        $register_user->role                =  $this->input->post('role');
-        $register_router->router_name       =  $this->input->post('name_user');
-        $register_router->user_id           =  $counter_user;
-        $register_router->router_ip         =  $this->input->post('router_ip');            
-        $register_router->router_username   =  $this->input->post('router_username');
-        $register_router->router_password   =  $this->input->post('router_password');
-        $register_router->router_port       =  $this->input->post('router_port');
+        $register_user->email               =  $this->input->post('email');
+        $register_user->site_id             =  $this->input->post('site_id');        
         
         
 
         if ($this->form_validation->run())
-            if($register_router->save() && $register_user->save())        
-                redirect(base_url('user/list'));
+            if($register_user->save())        
+                redirect(base_url('site/show/').$this->input->post('site_id'));
             else
-                redirect(base_url('user/create'));
+                redirect(base_url('site/show/').$this->input->post('site_id'));
         else    
-            redirect(base_url('user/create'));
+            redirect(base_url('site/show/').$this->input->post('site_id'));
 
     }
 
-    public function userDelete($id)
+    public function userDelete($id,$site)
     {
-        $flight     = User::find($id);
-        $flight2    = RouterConfig::find($id);
+        $flight     = User::find($id);        
 
-        if($flight->delete() && $flight2->delete())
-            redirect(base_url('user/list'));
+        if($flight->delete())
+            redirect(base_url('site/show/').$site);
         else
-            redirect(base_url('user/list'));
+            redirect(base_url('site/show/').$site);    
     }
 
 
     public function userUpdate()
     {
-        $this->form_validation->set_rules('name_user', 'Name', 'required');
+        $this->form_validation->set_rules('name', 'Name', 'required');
         $this->form_validation->set_rules('username', 'Username', 'required');
         $this->form_validation->set_rules('password', 'Password', 'required');
-        $this->form_validation->set_rules('role', 'Role User', 'required');
-        $this->form_validation->set_rules('router_ip', 'IP ROuter', 'required');
-        $this->form_validation->set_rules('router_username', 'Username Router', 'required');
-        $this->form_validation->set_rules('router_password', 'Password ROuter', 'required');
-        $this->form_validation->set_rules('router_port', 'Port Router', 'required');
-        $this->form_validation->set_rules('id', 'id', 'required');
+        $this->form_validation->set_rules('id', 'Role User', 'required');
+        $this->form_validation->set_rules('email', 'Email', 'required'); 
+        $this->form_validation->set_rules('site_id', 'Email', 'required');
 
         
-        $register_user      =   User::find($this->input->post('id'));
-        $register_router    =   RouterConfig::find($this->input->post('id'));        
-        $id                 =   $this->input->post('id');
+        $update_user      =   User::find($this->input->post('id'));       
 
-        $register_user->username            =  $this->input->post('username');
-        $register_user->password            =  $this->input->post('password');
-        $register_user->role                =  $this->input->post('role');
-        $register_router->router_name       =  $this->input->post('name_user');        
-        $register_router->router_ip         =  $this->input->post('router_ip');            
-        $register_router->router_username   =  $this->input->post('router_username');
-        $register_router->router_password   =  $this->input->post('router_password');
-        $register_router->router_port       =  $this->input->post('router_port');
-        $temp   =   array(            
-            'auth_username'           => $this->input->post('username'),
-            'auth_password'           => $this->input->post('password'),
-            'auth_role'               => $this->input->post('role'),            
-            'auth_router_ip'          => $this->input->post('router_ip'),
-            'auth_router_username'    => $this->input->post('router_username'),
-            'auth_router_password'    => $this->input->post('router_password'),
-            'auth_router_name'        => $this->input->post('router_name')
-        );
+        $update_user->username              =  $this->input->post('username');
+        $update_user->password              =  $this->input->post('password');
+        $update_user->name                  =  $this->input->post('name');
+        $update_user->email                 =  $this->input->post('email');        
+        
+        
 
         if ($this->form_validation->run())
         {
-            if($register_router->save() && $register_user->save())     
-            {
-                $this->session->set_userdata($temp);
-                redirect(base_url('user/change/').$id);
+            if($update_user->save())     
+            {                
+                redirect(base_url('site/show/').$this->input->post('site_id'));
             }                   
             else
             {
-                redirect(base_url('user/change/').$id);
+                redirect(base_url('site/show/').$this->input->post('site_id'));
             }                
         }
         else    
         {
-            redirect(base_url('user/change/').$id);
+            redirect(base_url('site/show/').$this->input->post('site_id'));
         }
 
     }

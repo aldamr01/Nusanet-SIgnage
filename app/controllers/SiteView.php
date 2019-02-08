@@ -41,13 +41,12 @@ class SiteView extends CI_Controller
             $data['user']       =   User::where('site_id',$id)->get();
             $data['screen']     =   Screen_Device::where('site_id',$id)->get();
             $data['content']    =   Content::where('site_id',$id)->get();
-
             
             $final  =   array(
                 'data'  => $data
             );
     
-            echo $this->blade->stream('administrator.site.site_view',$final);
+            echo $this->blade->stream('administrator.site.site_view',$data);
         }            
         else        
         {

@@ -15,7 +15,6 @@ $route['site/show/(:num)']                                  =   'SiteView/siteVi
 
 $route['user/list']                                         =   'UserView/userList';
 $route['user/change/(:num)']                                =   'UserView/userUpdate/$1';
-$route['user/drop/(:num)']                                  =   'UserData/userDelete/$1';
 $route['user/create']                                       =   'UserView/userCreate';
 
 //API
@@ -25,6 +24,7 @@ $route['API/UserNew']                                       =   'UserData/userCr
 $route['API/UserView/(:num)']                               =   'UserData/userView/$1';
 $route['API/UserList']                                      =   'UserData/userList';
 $route['API/UserEdit']                                      =   'UserData/userUpdate';
+$route['API/UserDrop/(:num)/(:num)']                        =   'UserData/userDelete/$1/$2';
 
 $route['API/SiteList']                                      =   'SiteData/siteList';
 $route['API/SiteNew']                                       =   'SiteData/siteCreate';

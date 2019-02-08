@@ -4,6 +4,10 @@ Site <?php echo e($site['name']); ?>
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('content'); ?>
+
+
+
+
 <div class="main-content">
     <div class="content-view">
         <div class="row">
@@ -20,6 +24,10 @@ Site <?php echo e($site['name']); ?>
                         
                         <?php if(count($user)<1): ?>
                             No User Available...
+                            <a class="weatherwidget-io" href="https://forecast7.com/en/n7d26112d75/surabaya/" data-label_1="SURABAYA" data-label_2="WEATHER" data-icons="Climacons Animated" data-theme="original" >SURABAYA WEATHER</a>
+                            <script>
+                            !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
+                            </script>
                         <?php else: ?>                                                                            
                             <?php foreach($user as $val): ?>                                                    
                                 <div id="accordion" role="tablist" aria-multiselectable="true">
@@ -87,7 +95,7 @@ Site <?php echo e($site['name']); ?>
                             No Screen Installed...
                         <?php else: ?>                                                                                
                             <?php foreach($screen as $val): ?>                                                    
-                                <div class="col-md-6">
+                                <div class="col-md-6 table-bordered" >
                                     <a href="#" data-toggle="modal" data-target=".screen<?php echo e($val['id']); ?>">
                                         <p align="center">
                                             <i class='material-icons' style="font-size:70px;">tv</i>                                    
@@ -151,53 +159,52 @@ Site <?php echo e($site['name']); ?>
     <?php echo $__env->make('administrator.template.footer', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 </div>
 
+
 <?php foreach($screen as $val): ?>    
-    <div class="modal fade screen<?php echo e($val['id']); ?>" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title" id="myModalLabel">Screen Name</h4>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <label for="exampleInputName1">Screen Name</label>
-                    <input type="text" class="form-control"
-                        id="exampleInputName1" placeholder="id" value="<?php echo e($val['name']); ?>" />
-                </div>            
-                <div class="form-group">
-                    <label for="exampleInputName1">Screen Url</label>
-                    <input type="text" class="form-control"
-                        id="exampleInputName1" placeholder="Name" readonly="readonly" value="file:///home/leii/Documents/Web/Template/milestoneadmin/milestoneadmin/html/app/ui-material.html"/>
+    <?php echo form_open('API/ScreenEdit'); ?>
+
+        <div class="modal fade screen<?php echo e($val['id']); ?>" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">Screen Name</h4>
                 </div>
-                <div class="form-group">
-                    <label for="exampleInputName1">Screen Status</label><br>
-                    <select name="status" class="form-control" id="">
-                        <?php if($val['status']): ?>
-                            <option value="1" selected>Alive</option>
-                            <option value="0">Deceased</option>
-                        <?php else: ?>
-                            <option value="1">Alive</option>
-                            <option value="0" selected>Deceased</option>
-                        <?php endif; ?>
-                    </select>                    
-                
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="exampleInputName1">Screen Name</label>
+                        <input type="text" class="form-control"
+                           name="name" id="exampleInputName1" placeholder="id" value="<?php echo e($val['name']); ?>" />
+                    </div>            
+                    <div class="form-group">
+                        <label for="exampleInputName1">Screen Url</label>
+                        <input type="text" class="form-control"
+                            id="exampleInputName1" placeholder="Name" readonly="readonly" value="file:///home/leii/Documents/Web/Template/milestoneadmin/milestoneadmin/html/app/ui-material.html"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputName1">Screen Status</label><br>
+                        <input type="number" class="form-control"
+                        name="status" id="exampleInputName1" placeholder="id" value="<?php echo e($val['status']); ?>" maxlength="1" />             
+                        <input type="hidden" name="id" hidden="hidden" id="" value="<?php echo e($val['id']); ?>">
+                        <input type="hidden" name="site_id" hidden="hidden" id="" value="<?php echo e($site['id']); ?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputUsername1">Description</label>
+                        <input type="text" class="form-control"
+                           name="description" id="exampleInputName1" placeholder="id" value="<?php echo e($val['description']); ?>" />
+                    </div>                                            
                 </div>
-                <div class="form-group">
-                    <label for="exampleInputUsername1">Description</label>
-                    <textarea type="text" class="form-control" id="exampleInputUsername1" placeholder="Description" required> <?php echo e($val['description']); ?></textarea>
-                </div>                                            
+                <div class="modal-footer">
+                    <a style="float:left" class="btn btn-danger" title='Drop' href='#'><i class='material-icons'>delete</i>Drop</a>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save Change</button>
+                </div>
+                </div>
             </div>
-            <div class="modal-footer">
-                <a style="float:left" class="btn btn-danger" title='Drop' href='#'><i class='material-icons'>delete</i>Drop</a>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save Change</button>
-            </div>
-            </div>
-        </div>
-    </div>
+        </div>    
+    </form>
 <?php endforeach; ?>
 
 <div class="modal fade addcontent" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -253,6 +260,7 @@ Site <?php echo e($site['name']); ?>
         </div>
     </div>
 </div>
+
 <?php echo form_open('API/ScreenNew'); ?>
 
     <div class="modal fade addscreen" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -281,6 +289,7 @@ Site <?php echo e($site['name']); ?>
                         id="exampleInputUsername1" placeholder="Description" name="description" required/>
                 </div>                                            
                 <input type="hidden" name="site_id" hidden="hidden" value="<?php echo e($site['id']); ?>">
+                <input type="hidden" name="status" hidden="hidden" value="0">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -338,9 +347,10 @@ Site <?php echo e($site['name']); ?>
         </div>
     </div>
 </form>
-<?php echo form_open('API/UserEdit'); ?>
 
-    <?php foreach($user as $val): ?>            
+<?php foreach($user as $val): ?>            
+    <?php echo form_open('API/UserEdit'); ?>
+
         <div class="modal fade edituser<?php echo e($val['id']); ?>" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -385,9 +395,10 @@ Site <?php echo e($site['name']); ?>
                 </div>
                 </div>
             </div>
-        </div>
-    <?php endforeach; ?>
-</form>
+        </div>    
+    </form>
+<?php endforeach; ?>
+
 <?php $__env->stopSection(); ?>
 
 

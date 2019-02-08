@@ -5,6 +5,10 @@ Site {{$site['name']}}
 @endsection
 
 @section('content')
+
+
+
+
 <div class="main-content">
     <div class="content-view">
         <div class="row">
@@ -21,6 +25,10 @@ Site {{$site['name']}}
                         
                         @if (count($user)<1)
                             No User Available...
+                            <a class="weatherwidget-io" href="https://forecast7.com/en/n7d26112d75/surabaya/" data-label_1="SURABAYA" data-label_2="WEATHER" data-icons="Climacons Animated" data-theme="original" >SURABAYA WEATHER</a>
+                            <script>
+                            !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
+                            </script>
                         @else                                                                            
                             @foreach ($user as $val)                                                    
                                 <div id="accordion" role="tablist" aria-multiselectable="true">
@@ -87,7 +95,7 @@ Site {{$site['name']}}
                             No Screen Installed...
                         @else                                                                                
                             @foreach ($screen as $val)                                                    
-                                <div class="col-md-6">
+                                <div class="col-md-6 table-bordered" >
                                     <a href="#" data-toggle="modal" data-target=".screen{{$val['id']}}">
                                         <p align="center">
                                             <i class='material-icons' style="font-size:70px;">tv</i>                                    
@@ -151,8 +159,9 @@ Site {{$site['name']}}
     @include('administrator.template.footer')
 </div>
 
-{!!form_open('API/ScreenEdit')!!}
-    @foreach ($screen as $val)    
+
+@foreach ($screen as $val)    
+    {!!form_open('API/ScreenEdit')!!}
         <div class="modal fade screen{{$val['id']}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -166,7 +175,7 @@ Site {{$site['name']}}
                     <div class="form-group">
                         <label for="exampleInputName1">Screen Name</label>
                         <input type="text" class="form-control"
-                            id="exampleInputName1" placeholder="id" value="{{$val['name']}}" />
+                           name="name" id="exampleInputName1" placeholder="id" value="{{$val['name']}}" />
                     </div>            
                     <div class="form-group">
                         <label for="exampleInputName1">Screen Url</label>
@@ -175,86 +184,84 @@ Site {{$site['name']}}
                     </div>
                     <div class="form-group">
                         <label for="exampleInputName1">Screen Status</label><br>
-                        <select name="status" class="form-control" id="">
-                            @if ($val['status'])
-                                <option value="1" selected>Alive</option>
-                                <option value="0">Deceased</option>
-                            @else
-                                <option value="1">Alive</option>
-                                <option value="0" selected>Deceased</option>
-                            @endif
-                        </select>                    
-                    
+                        <input type="number" class="form-control"
+                        name="status" id="exampleInputName1" placeholder="id" value="{{$val['status']}}" maxlength="1" />             
+                        <input type="hidden" name="id" hidden="hidden" id="" value="{{$val['id']}}">
+                        <input type="hidden" name="site_id" hidden="hidden" id="" value="{{$site['id']}}">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputUsername1">Description</label>
-                        <textarea type="text" class="form-control" id="exampleInputUsername1" placeholder="Description" required> {{$val['description']}}</textarea>
+                        <input type="text" class="form-control"
+                           name="description" id="exampleInputName1" placeholder="id" value="{{$val['description']}}" />
                     </div>                                            
                 </div>
                 <div class="modal-footer">
                     <a style="float:left" class="btn btn-danger" title='Drop' href='#'><i class='material-icons'>delete</i>Drop</a>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save Change</button>
+                    <button type="submit" class="btn btn-primary">Save Change</button>
                 </div>
                 </div>
             </div>
-        </div>
-    @endforeach
-</form>
+        </div>    
+    </form>
+@endforeach
 
-<div class="modal fade addcontent" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-            <h4 class="modal-title" id="myModalLabel">Add New Content</h4>
-        </div>
-        <div class="modal-body">
-            <div class="form-group">
-                <label for="exampleInputName1">Site</label>
-                <input type="text" class="form-control"
-                    id="exampleInputName1" placeholder="id" value="Santika Hotel" disabled="disabled"/>
+{!!form_open_multipart('API/ContentNew')!!}
+    <div class="modal fade addcontent" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Add New Content</h4>
             </div>
-            <div class="form-group">
-                <label for="exampleSelect1">
-                    Screen Device
-                </label>
-                <select class="form-control" id="exampleSelect1"> 
-                    <option value="1">1</option>                  
-                    <option value="2">2</option>  
-                    <option value="3">3</option>  
-                </select>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="exampleInputName1">Site</label>
+                    <input type="text" class="form-control"
+                        id="exampleInputName1" placeholder="id" value="Santika Hotel" disabled="disabled"/>
+                </div>
+                <div class="form-group">
+                    <label for="exampleSelect1">
+                        Screen Device
+                    </label>
+                    <select class="form-control" id="exampleSelect1"> 
+                        <option value="1">1</option>                  
+                        <option value="2">2</option>  
+                        <option value="3">3</option>  
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputName1">Name</label>
+                    <input type="text" class="form-control"
+                        id="exampleInputName1" placeholder="Name" required/>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputUsername1">Username</label>
+                    <input type="text" class="form-control"
+                        id="exampleInputUsername1" placeholder="Username" required/>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Email address</label>
+                    <input type="email" class="form-control"
+                    id="exampleInputEmail1" placeholder="Enter email" required/>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Password</label>
+                    <input type="text" class="form-control"
+                        id="exampleInputPassword1" placeholder="Password" required/>
+                </div>                                    
             </div>
-            <div class="form-group">
-                <label for="exampleInputName1">Name</label>
-                <input type="text" class="form-control"
-                    id="exampleInputName1" placeholder="Name" required/>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Create a New One</button>
             </div>
-            <div class="form-group">
-                <label for="exampleInputUsername1">Username</label>
-                <input type="text" class="form-control"
-                    id="exampleInputUsername1" placeholder="Username" required/>
             </div>
-            <div class="form-group">
-                <label for="exampleInputEmail1">Email address</label>
-                <input type="email" class="form-control"
-                id="exampleInputEmail1" placeholder="Enter email" required/>
-            </div>
-            <div class="form-group">
-                <label for="exampleInputPassword1">Password</label>
-                <input type="text" class="form-control"
-                    id="exampleInputPassword1" placeholder="Password" required/>
-            </div>                                    
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Create a New One</button>
-        </div>
         </div>
     </div>
-</div>
+</form>
+
 {!!form_open('API/ScreenNew')!!}
     <div class="modal fade addscreen" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -282,6 +289,7 @@ Site {{$site['name']}}
                         id="exampleInputUsername1" placeholder="Description" name="description" required/>
                 </div>                                            
                 <input type="hidden" name="site_id" hidden="hidden" value="{{$site['id']}}">
+                <input type="hidden" name="status" hidden="hidden" value="0">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -338,8 +346,9 @@ Site {{$site['name']}}
         </div>
     </div>
 </form>
-{!!form_open('API/UserEdit')!!}
-    @foreach ($user as $val)            
+
+@foreach ($user as $val)            
+    {!!form_open('API/UserEdit')!!}
         <div class="modal fade edituser{{$val['id']}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -384,9 +393,10 @@ Site {{$site['name']}}
                 </div>
                 </div>
             </div>
-        </div>
-    @endforeach
-</form>
+        </div>    
+    </form>
+@endforeach
+
 @endsection
 
 

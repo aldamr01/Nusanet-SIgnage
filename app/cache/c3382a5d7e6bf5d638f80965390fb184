@@ -40,7 +40,7 @@
                                 <label for="exampleInputPassword1">
                                     Phone
                                 </label>
-                                <input name="phone" type="text" class="form-control" id="exampleInputPassword1" placeholder="email" required />
+                                <input name="phone" type="text" class="form-control" id="exampleInputPassword1" placeholder="phone" required />
                             </fieldset>                                                                            
                         </div>
                     </div>

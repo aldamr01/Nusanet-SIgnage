@@ -30,7 +30,9 @@ $route['API/SiteEdit']                                      =   'SiteData/siteUp
 $route['API/SiteView/(:num)']                               =   'SiteData/siteView/$1';
 
 $route['API/ScreenNew']                                     =   'ScreenData/screenCreate';
+$route['API/ScreenEdit']                                    =   'ScreenData/screenUpdate';
 
+$route['API/ContentNew']                                    =   'ContentData/contentCreate';
 
 //AUTH
 $route['Authentication']                                    =   'Auth/login';

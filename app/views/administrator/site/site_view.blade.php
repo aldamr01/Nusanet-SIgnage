@@ -92,7 +92,14 @@ Site {{$site['name']}}
                                         <p align="center">
                                             <i class='material-icons' style="font-size:70px;">tv</i>                                    
                                         </p>
-                                        <h6>{{$val['name']}} : <span class="tag tag-danger">Deceased</span></h6>
+                                        
+                                        @if ($val['status'])
+                                            <h6>{{$val['name']}} : <span class="tag tag-success">Alive</span></h6>
+                                        @else
+                                            <h6>{{$val['name']}} : <span class="tag tag-danger">Deceased</span></h6>
+                                        @endif
+                                        
+                                        
                                     </a>                            
                                 </div>
                             @endforeach
@@ -144,41 +151,56 @@ Site {{$site['name']}}
     @include('administrator.template.footer')
 </div>
 
-@foreach ($screen as $val)    
-    <div class="modal fade screen{{$val['id']}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title" id="myModalLabel">Screen Name</h4>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <label for="exampleInputName1">Screen Name</label>
-                    <input type="text" class="form-control"
-                        id="exampleInputName1" placeholder="id" value="Santika Hotel" />
-                </div>            
-                <div class="form-group">
-                    <label for="exampleInputName1">Screen Url</label>
-                    <input type="text" class="form-control"
-                        id="exampleInputName1" placeholder="Name" readonly="readonly" value="file:///home/leii/Documents/Web/Template/milestoneadmin/milestoneadmin/html/app/ui-material.html"/>
+{!!form_open('API/ScreenEdit')!!}
+    @foreach ($screen as $val)    
+        <div class="modal fade screen{{$val['id']}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">Screen Name</h4>
                 </div>
-                <div class="form-group">
-                    <label for="exampleInputUsername1">Description</label>
-                    <textarea type="text" class="form-control" id="exampleInputUsername1" placeholder="Description" required> </textarea>
-                </div>                                            
-            </div>
-            <div class="modal-footer">
-                <a style="float:left" class="btn btn-danger" title='Drop' href='#'><i class='material-icons'>delete</i>Drop</a>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Create a New One</button>
-            </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="exampleInputName1">Screen Name</label>
+                        <input type="text" class="form-control"
+                            id="exampleInputName1" placeholder="id" value="{{$val['name']}}" />
+                    </div>            
+                    <div class="form-group">
+                        <label for="exampleInputName1">Screen Url</label>
+                        <input type="text" class="form-control"
+                            id="exampleInputName1" placeholder="Name" readonly="readonly" value="file:///home/leii/Documents/Web/Template/milestoneadmin/milestoneadmin/html/app/ui-material.html"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputName1">Screen Status</label><br>
+                        <select name="status" class="form-control" id="">
+                            @if ($val['status'])
+                                <option value="1" selected>Alive</option>
+                                <option value="0">Deceased</option>
+                            @else
+                                <option value="1">Alive</option>
+                                <option value="0" selected>Deceased</option>
+                            @endif
+                        </select>                    
+                    
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputUsername1">Description</label>
+                        <textarea type="text" class="form-control" id="exampleInputUsername1" placeholder="Description" required> {{$val['description']}}</textarea>
+                    </div>                                            
+                </div>
+                <div class="modal-footer">
+                    <a style="float:left" class="btn btn-danger" title='Drop' href='#'><i class='material-icons'>delete</i>Drop</a>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save Change</button>
+                </div>
+                </div>
             </div>
         </div>
-    </div>
-@endforeach
+    @endforeach
+</form>
 
 <div class="modal fade addcontent" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -233,40 +255,42 @@ Site {{$site['name']}}
         </div>
     </div>
 </div>
-
-<div class="modal fade addscreen" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-            <h4 class="modal-title" id="myModalLabel">Add New Screen Device</h4>
-        </div>
-        <div class="modal-body">
-            <div class="form-group">
-                <label for="exampleInputName1">Site</label>
-                <input type="text" class="form-control"
-                    id="exampleInputName1" placeholder="id" value="Santika Hotel" disabled="disabled"/>
-            </div>            
-            <div class="form-group">
-                <label for="exampleInputName1">Screen Name</label>
-                <input type="text" class="form-control"
-                    id="exampleInputName1" placeholder="Name" required/>
+{!!form_open('API/ScreenNew')!!}
+    <div class="modal fade addscreen" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Add New Screen Device</h4>
             </div>
-            <div class="form-group">
-                <label for="exampleInputUsername1">Description</label>
-                <input type="text" class="form-control"
-                    id="exampleInputUsername1" placeholder="Description" required/>
-            </div>                                            
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Create a New One</button>
-        </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="exampleInputName1">Site</label>
+                    <input type="text" class="form-control"
+                        id="exampleInputName1" placeholder="id" value="{{$site['name']}}" disabled="disabled"/>
+                </div>            
+                <div class="form-group">
+                    <label for="exampleInputName1">Screen Name</label>
+                    <input type="text" class="form-control"
+                        id="exampleInputName1" placeholder="Name" name="name" required/>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputUsername1">Description</label>
+                    <input type="text" class="form-control"
+                        id="exampleInputUsername1" placeholder="Description" name="description" required/>
+                </div>                                            
+                <input type="hidden" name="site_id" hidden="hidden" value="{{$site['id']}}">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Create a New One</button>
+            </div>
+            </div>
         </div>
     </div>
-</div>
+</form>
 
 {!!form_open('API/UserNew')!!}
     <div class="modal fade adduser" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">

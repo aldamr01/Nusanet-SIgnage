@@ -94,63 +94,7 @@ class UserData extends CI_Controller
         }
 
     }
-
-    public function userList()
-    {
-        header("Content-Type:Application/json");
-
-        $tmp    =   User::with('datauser')->get();
-        $loop   =   0;
-        $data;
-
-        foreach ($tmp as $val) 
-        {
-            if($val['role']=='User')
-            {
-                $templink       =   "<p align='center'><a  class='' href='".base_url('user/change/').$val['id']."'>Update</a>
-           
-                <a class='btn btn-danger' onclick='return confirm();' href='".base_url('user/drop/').$val['id']."' >Drop</a></p>";
-                $data[$loop][0] =   $val['datauser']['id'];
-                $data[$loop][1] =   $val['datauser']['router_name'];
-                $data[$loop][2] =   $val['datauser']['router_ip'];
-                $data[$loop][3] =   $val['role'];
-                $data[$loop][4] =   $templink;
-                $loop++;
-            }            
-        }
-
-        $final  =   array(
-            'data'  => $data
-        );
-
-		header("Content-Type:Application/json");
-		echo json_encode($final);
-        
-        
-    }
+  
     
-    public function userView($id)
-    {
-        header("Content-Type:Application/json");
 
-        if($id != NULL)
-        {
-            $data['site']       =   Site::find($id);
-            $data['user']       =   User::find($id);
-            $data['screen']     =   Screen_Device::find($id);
-            $data['content']    =   Content::find($id);
-
-            $final  =   array(
-                'data'  => $data
-            );
-    
-            header("Content-Type:Application/json");
-            echo json_encode($final);
-        }            
-        else        
-        {
-            redirect(base_url('user/list'));                    
-        }
-            
-    }
 }

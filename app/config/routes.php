@@ -21,8 +21,6 @@ $route['user/create']                                       =   'UserView/userCr
 $route['API/UserLogin']                                     =   'Auth/checkUser';
 
 $route['API/UserNew']                                       =   'UserData/userCreate';
-$route['API/UserView/(:num)']                               =   'UserData/userView/$1';
-$route['API/UserList']                                      =   'UserData/userList';
 $route['API/UserEdit']                                      =   'UserData/userUpdate';
 $route['API/UserDrop/(:num)/(:num)']                        =   'UserData/userDelete/$1/$2';
 
@@ -30,6 +28,8 @@ $route['API/SiteList']                                      =   'SiteData/siteLi
 $route['API/SiteNew']                                       =   'SiteData/siteCreate';
 $route['API/SiteEdit']                                      =   'SiteData/siteUpdate';
 $route['API/SiteView/(:num)']                               =   'SiteData/siteView/$1';
+
+$route['API/ScreenNew']                                     =   'ScreenData/screenCreate';
 
 
 //AUTH

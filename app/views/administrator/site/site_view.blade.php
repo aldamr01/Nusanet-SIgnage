@@ -131,23 +131,25 @@ Site {{$site['name']}}
                             <thead align="center">                                
                                 <td>No.</td>
                                 <td>Name</td>
-                                <td>Type</td>
+                                <td>filename</td>
                                 <td>Preview</td>
                                 <td>Action</td>                                
                             </thead>
                             <tbody align="center">
-                                <tr>
-                                    <td>1</td>
-                                    <td>Promo 1</td>
-                                    <td>Images</td>
-                                    <td>    
-                                        <img style="max-height: 150px; max-width:70px" src="https://upload.wikimedia.org/wikipedia/commons/c/cb/Broadway_tower_edit.jpg" alt="">                                        
-                                    </td>
-                                    <td>
-                                        <a  class="btn btn-danger" title='Drop' href='#'><i class='material-icons'>delete</i></a>
-                                        <a  class="btn btn-warning" title='Change' href='#'><i class='material-icons'>edit</i></a>                                                                                
-                                    </td>
-                                </tr>
+                                @foreach ($content as $val)                                                                    
+                                    <tr>
+                                        <td>{{$val['id']}}</td>
+                                        <td>{{$val['name']}}</td>
+                                        <td>{{$val['filename']}}</td>
+                                        <td>    
+                                            <img style="max-height: 150px; max-width:70px" src="{{base_url('files/').$val['filename']}}" alt="">                                        
+                                        </td>
+                                        <td>
+                                            <a  class="btn btn-danger" title='Drop' href='#'><i class='material-icons'>delete</i></a>
+                                            <a  class="btn btn-warning" title='Change' href='#'><i class='material-icons'>edit</i></a>                                                                                
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -220,42 +222,38 @@ Site {{$site['name']}}
                 <div class="form-group">
                     <label for="exampleInputName1">Site</label>
                     <input type="text" class="form-control"
-                        id="exampleInputName1" placeholder="id" value="Santika Hotel" disabled="disabled"/>
+                        id="exampleInputName1" placeholder="id" value="{{$site['name']}}" disabled="disabled"/>
                 </div>
                 <div class="form-group">
                     <label for="exampleSelect1">
                         Screen Device
                     </label>
-                    <select class="form-control" id="exampleSelect1"> 
-                        <option value="1">1</option>                  
-                        <option value="2">2</option>  
-                        <option value="3">3</option>  
+                    <select class="form-control" id="exampleSelect1" name="screen_id"> 
+                        @foreach ($screen as $val)
+                            <option name="screen_id" value="{{$val['id']}}">{{$val['name']}}</option>
+                        @endforeach
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputName1">Name</label>
+                    <label for="exampleInputName1">Content Name</label>
                     <input type="text" class="form-control"
-                        id="exampleInputName1" placeholder="Name" required/>
+                        id="exampleInputName1" placeholder="Content Name" name="name" required/>
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputUsername1">Username</label>
+                    <label for="exampleInputUsername1">Description</label>
                     <input type="text" class="form-control"
-                        id="exampleInputUsername1" placeholder="Username" required/>
+                        id="exampleInputUsername1" placeholder="Username" name="desc" required/>
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Email address</label>
-                    <input type="email" class="form-control"
-                    id="exampleInputEmail1" placeholder="Enter email" required/>
+                    <label for="exampleInputEmail1">Image / Video</label>
+                    <input type="file" class="form-control"
+                    id="exampleInputEmail1" placeholder="input file here.." name="file" required/>
                 </div>
-                <div class="form-group">
-                    <label for="exampleInputPassword1">Password</label>
-                    <input type="text" class="form-control"
-                        id="exampleInputPassword1" placeholder="Password" required/>
-                </div>                                    
+                <input type="hidden" name="site_id" hidden="hidden" value="{{$site['id']}}">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Create a New One</button>
+                <button type="submit" class="btn btn-primary">Create a New One</button>
             </div>
             </div>
         </div>

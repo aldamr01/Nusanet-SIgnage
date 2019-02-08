@@ -131,23 +131,25 @@ Site <?php echo e($site['name']); ?>
                             <thead align="center">                                
                                 <td>No.</td>
                                 <td>Name</td>
-                                <td>Type</td>
+                                <td>filename</td>
                                 <td>Preview</td>
                                 <td>Action</td>                                
                             </thead>
                             <tbody align="center">
-                                <tr>
-                                    <td>1</td>
-                                    <td>Promo 1</td>
-                                    <td>Images</td>
-                                    <td>    
-                                        <img style="max-height: 150px; max-width:70px" src="https://upload.wikimedia.org/wikipedia/commons/c/cb/Broadway_tower_edit.jpg" alt="">                                        
-                                    </td>
-                                    <td>
-                                        <a  class="btn btn-danger" title='Drop' href='#'><i class='material-icons'>delete</i></a>
-                                        <a  class="btn btn-warning" title='Change' href='#'><i class='material-icons'>edit</i></a>                                                                                
-                                    </td>
-                                </tr>
+                                <?php foreach($content as $val): ?>                                                                    
+                                    <tr>
+                                        <td><?php echo e($val['id']); ?></td>
+                                        <td><?php echo e($val['name']); ?></td>
+                                        <td><?php echo e($val['filename']); ?></td>
+                                        <td>    
+                                            <img style="max-height: 150px; max-width:70px" src="<?php echo e(base_url('files/').$val['filename']); ?>" alt="">                                        
+                                        </td>
+                                        <td>
+                                            <a  class="btn btn-danger" title='Drop' href='#'><i class='material-icons'>delete</i></a>
+                                            <a  class="btn btn-warning" title='Change' href='#'><i class='material-icons'>edit</i></a>                                                                                
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
                             </tbody>
                         </table>
                     </div>
@@ -207,59 +209,58 @@ Site <?php echo e($site['name']); ?>
     </form>
 <?php endforeach; ?>
 
-<div class="modal fade addcontent" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-            <h4 class="modal-title" id="myModalLabel">Add New Content</h4>
-        </div>
-        <div class="modal-body">
-            <div class="form-group">
-                <label for="exampleInputName1">Site</label>
-                <input type="text" class="form-control"
-                    id="exampleInputName1" placeholder="id" value="Santika Hotel" disabled="disabled"/>
+<?php echo form_open_multipart('API/ContentNew'); ?>
+
+    <div class="modal fade addcontent" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Add New Content</h4>
             </div>
-            <div class="form-group">
-                <label for="exampleSelect1">
-                    Screen Device
-                </label>
-                <select class="form-control" id="exampleSelect1"> 
-                    <option value="1">1</option>                  
-                    <option value="2">2</option>  
-                    <option value="3">3</option>  
-                </select>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="exampleInputName1">Site</label>
+                    <input type="text" class="form-control"
+                        id="exampleInputName1" placeholder="id" value="<?php echo e($site['name']); ?>" disabled="disabled"/>
+                </div>
+                <div class="form-group">
+                    <label for="exampleSelect1">
+                        Screen Device
+                    </label>
+                    <select class="form-control" id="exampleSelect1" name="screen_id"> 
+                        <?php foreach($screen as $val): ?>
+                            <option name="screen_id" value="<?php echo e($val['id']); ?>"><?php echo e($val['name']); ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputName1">Content Name</label>
+                    <input type="text" class="form-control"
+                        id="exampleInputName1" placeholder="Content Name" name="name" required/>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputUsername1">Description</label>
+                    <input type="text" class="form-control"
+                        id="exampleInputUsername1" placeholder="Username" name="desc" required/>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Image / Video</label>
+                    <input type="file" class="form-control"
+                    id="exampleInputEmail1" placeholder="input file here.." name="file" required/>
+                </div>
+                <input type="hidden" name="site_id" hidden="hidden" value="<?php echo e($site['id']); ?>">
             </div>
-            <div class="form-group">
-                <label for="exampleInputName1">Name</label>
-                <input type="text" class="form-control"
-                    id="exampleInputName1" placeholder="Name" required/>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Create a New One</button>
             </div>
-            <div class="form-group">
-                <label for="exampleInputUsername1">Username</label>
-                <input type="text" class="form-control"
-                    id="exampleInputUsername1" placeholder="Username" required/>
             </div>
-            <div class="form-group">
-                <label for="exampleInputEmail1">Email address</label>
-                <input type="email" class="form-control"
-                id="exampleInputEmail1" placeholder="Enter email" required/>
-            </div>
-            <div class="form-group">
-                <label for="exampleInputPassword1">Password</label>
-                <input type="text" class="form-control"
-                    id="exampleInputPassword1" placeholder="Password" required/>
-            </div>                                    
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Create a New One</button>
-        </div>
         </div>
     </div>
-</div>
+</form>
 
 <?php echo form_open('API/ScreenNew'); ?>
 

@@ -97,17 +97,19 @@ Site {{$site['name']}}
                             @foreach ($screen as $val)                                                    
                                 <div class="col-md-6 table-bordered" >
                                     <a href="#" data-toggle="modal" data-target=".screen{{$val['id']}}">
-                                        <p align="center">
-                                            <i class='material-icons' style="font-size:70px;">tv</i>                                    
-                                        </p>
+                                        
                                         
                                         @if ($val['status'])
-                                            <h6>{{$val['name']}} : <span class="tag tag-success">Alive</span></h6>
+                                            <h6>{{$val['name']}}<span style="float:right" class="tag tag-success">Alive</span> </h6>
+                                            <br>    
                                         @else
-                                            <h6>{{$val['name']}} : <span class="tag tag-danger">Deceased</span></h6>
+                                            <h6>{{$val['name']}}<span style="float:right" class="tag tag-danger">Deceased</span></h6>
+                                            <br>
                                         @endif
-                                        
-                                        
+
+                                        <p align="center" >
+                                            <i  class='material-icons' style="font-size:50px;">tv</i>                                    
+                                        </p>                                        
                                     </a>                            
                                 </div>
                             @endforeach
@@ -131,7 +133,7 @@ Site {{$site['name']}}
                             <thead align="center">                                
                                 <td>No.</td>
                                 <td>Name</td>
-                                <td>filename</td>
+                                <td>Screen Target</td>
                                 <td>Preview</td>
                                 <td>Action</td>                                
                             </thead>
@@ -140,9 +142,16 @@ Site {{$site['name']}}
                                     <tr>
                                         <td>{{$val['id']}}</td>
                                         <td>{{$val['name']}}</td>
-                                        <td>{{$val['filename']}}</td>
+                                        <td>{{$val['screen']}}</td>
                                         <td>    
-                                            <img style="max-height: 150px; max-width:70px" src="{{base_url('files/').$val['filename']}}" alt="">                                        
+                                            @if ($val['type']=='video')
+                                            <video width="150" height="75" controls>
+                                                <source src="{{base_url('files/').$val['filename']}}" type="video/mp4">                                                
+                                                Your browser does not support the video tag.
+                                            </video> 
+                                            @else
+                                                <img style="max-height: 150px; max-width:70px" src="{{base_url('files/').$val['filename']}}" alt="">                                            
+                                            @endif                                        
                                         </td>
                                         <td>
                                             <a  class="btn btn-danger" title='Drop' href='#'><i class='material-icons'>delete</i></a>
@@ -229,8 +238,8 @@ Site {{$site['name']}}
                         Screen Device
                     </label>
                     <select class="form-control" id="exampleSelect1" name="screen_id"> 
-                        @foreach ($screen as $val)
-                            <option name="screen_id" value="{{$val['id']}}">{{$val['name']}}</option>
+                        @foreach ($screen as $val)                            
+                            <option name="screen_id" value="{{$val['id']}}">{{$val['name']}}</option>                            
                         @endforeach
                     </select>
                 </div>
@@ -250,6 +259,9 @@ Site {{$site['name']}}
                     id="exampleInputEmail1" placeholder="input file here.." name="file" required/>
                 </div>
                 <input type="hidden" name="site_id" hidden="hidden" value="{{$site['id']}}">
+                @foreach ($screen as $val)
+                    <input type="hidden" name="screen{{$val['id']}}"  value="{{$val['name']}}" hidden="hidden">
+                @endforeach
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

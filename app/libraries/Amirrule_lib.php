@@ -43,4 +43,31 @@ class Amirrule_lib
    
     }
 
+    function formatfile($param)
+    {
+        $path   =   "files/".$param;
+
+        if(file_exists($path.".jpg"))
+            return "images";
+        elseif(file_exists($path.".png"))
+          return "images";
+        elseif(file_exists($path.".jpeg"))
+            return "images";
+        elseif(file_exists($path.".gif"))
+             return "images";
+        elseif(file_exists($path.".mkv"))
+           return "video";
+        elseif(file_exists($path.".mp4"))
+           return "video";
+        elseif(file_exists($path.".3gp"))
+            return "video";
+        elseif(file_exists($path.".flv"))
+            return "video";
+        elseif(file_exists($path.".mpeg"))
+            return "video";
+        else
+            return  false;
+   
+    }
+
 }

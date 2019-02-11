@@ -6,6 +6,9 @@ $route['default_controller']                                =   'Signage';
 $route['404_override']                                      =   'Signage';
 $route['translate_uri_dashes']                              =   FALSE;
 
+//SCREEN URL
+$route['screen/(:num)/(:num)/(:any)']                =   'Signage/screenView/$1/$2/$3';
+
 //VIEW
 $route['site/list']                                         =   'SiteView/siteList';
 $route['site/create']                                       =   'SiteView/siteCreate';

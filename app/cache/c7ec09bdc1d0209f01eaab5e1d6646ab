@@ -129,18 +129,21 @@ Site <?php echo e($site['name']); ?>
                     </div>
                     <hr>
                     <div class="card-block">
-                        <table class="table table-stripped table-bordered">
-                            <thead align="center">                                
-                                <td>No.</td>
-                                <td>Name</td>
-                                <td>Screen Target</td>
-                                <td>Preview</td>
-                                <td>Action</td>                                
+                        <table class="table  table-bordered datatable">
+                            <thead align="center">   
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Name</th>
+                                    <th>Screen Target</th>
+                                    <th>Preview</th>
+                                    <th>Action</th>
+                                </tr>                                                                                             
                             </thead>
                             <tbody align="center">
+                                <?php $loop=1;?>
                                 <?php foreach($content as $val): ?>                                                                    
                                     <tr>
-                                        <td><?php echo e($val['id']); ?></td>
+                                        <td><?php echo e($loop); ?></td>
                                         <td><?php echo e($val['name']); ?></td>
                                         <td><?php echo e($val['screen']); ?></td>
                                         <td>    
@@ -158,6 +161,7 @@ Site <?php echo e($site['name']); ?>
                                             <a  class="btn btn-warning" title='Change' href='#'><i class='material-icons'>edit</i></a>                                                                                
                                         </td>
                                     </tr>
+                                    <?php $loop++?>
                                 <?php endforeach; ?>
                             </tbody>
                         </table>
@@ -192,12 +196,19 @@ Site <?php echo e($site['name']); ?>
                     <div class="form-group">
                         <label for="exampleInputName1">Screen Url</label>
                         <input type="text" class="form-control"
-                            id="exampleInputName1" placeholder="Name" readonly="readonly" value="file:///home/leii/Documents/Web/Template/milestoneadmin/milestoneadmin/html/app/ui-material.html"/>
+                            id="exampleInputName1" placeholder="Name" readonly="readonly" value="<?php echo e(base_url().$site['id'].'/'.$val['id'].'/'.$site['token']); ?>"/>                            
                     </div>
                     <div class="form-group">
                         <label for="exampleInputName1">Screen Status</label><br>
-                        <input type="number" class="form-control"
-                        name="status" id="exampleInputName1" placeholder="id" value="<?php echo e($val['status']); ?>" maxlength="1" />             
+                        <select name="status" id="" class="form-control">
+                            <?php if(!$val['status']): ?>
+                                <option value="0" selected>Deceased</option>
+                                <option value="1">Alive</option>    
+                            <?php else: ?>
+                                <option value="0">Deceased</option>
+                                <option value="1" selected>Alive</option>
+                            <?php endif; ?>                                                        
+                        </select>
                         <input type="hidden" name="id" hidden="hidden" id="" value="<?php echo e($val['id']); ?>">
                         <input type="hidden" name="site_id" hidden="hidden" id="" value="<?php echo e($site['id']); ?>">
                     </div>
@@ -416,10 +427,19 @@ Site <?php echo e($site['name']); ?>
 
 
 <?php $__env->startSection('corejs'); ?>
+    <!-- page scripts -->
+        <script src="<?php echo e(base_url('vendor/datatables/media/js/jquery.dataTables.js')); ?>"></script>
+        <script src="<?php echo e(base_url('vendor/datatables/media/js/dataTables.bootstrap4.js')); ?>"></script>
+        <script>
+                $(document).ready( function () {
+                    $('.datatable').DataTable();
+                } );
+        </script>
+    <!-- end page scripts -->
 
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('menu'); ?>
-<?php echo $__env->make('administrator.template.menu', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+    <?php echo $__env->make('administrator.template.menu', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('administrator.template.template', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

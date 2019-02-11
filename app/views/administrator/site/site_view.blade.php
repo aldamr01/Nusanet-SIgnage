@@ -129,18 +129,21 @@ Site {{$site['name']}}
                     </div>
                     <hr>
                     <div class="card-block">
-                        <table class="table table-stripped table-bordered">
-                            <thead align="center">                                
-                                <td>No.</td>
-                                <td>Name</td>
-                                <td>Screen Target</td>
-                                <td>Preview</td>
-                                <td>Action</td>                                
+                        <table class="table  table-bordered datatable">
+                            <thead align="center">   
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Name</th>
+                                    <th>Screen Target</th>
+                                    <th>Preview</th>
+                                    <th>Action</th>
+                                </tr>                                                                                             
                             </thead>
                             <tbody align="center">
+                                <?php $loop=1;?>
                                 @foreach ($content as $val)                                                                    
                                     <tr>
-                                        <td>{{$val['id']}}</td>
+                                        <td>{{$loop}}</td>
                                         <td>{{$val['name']}}</td>
                                         <td>{{$val['screen']}}</td>
                                         <td>    
@@ -158,6 +161,7 @@ Site {{$site['name']}}
                                             <a  class="btn btn-warning" title='Change' href='#'><i class='material-icons'>edit</i></a>                                                                                
                                         </td>
                                     </tr>
+                                    <?php $loop++?>
                                 @endforeach
                             </tbody>
                         </table>
@@ -191,12 +195,19 @@ Site {{$site['name']}}
                     <div class="form-group">
                         <label for="exampleInputName1">Screen Url</label>
                         <input type="text" class="form-control"
-                            id="exampleInputName1" placeholder="Name" readonly="readonly" value="file:///home/leii/Documents/Web/Template/milestoneadmin/milestoneadmin/html/app/ui-material.html"/>
+                            id="exampleInputName1" placeholder="Name" readonly="readonly" value="{{base_url().$site['id'].'/'.$val['id'].'/'.$site['token']}}"/>                            
                     </div>
                     <div class="form-group">
                         <label for="exampleInputName1">Screen Status</label><br>
-                        <input type="number" class="form-control"
-                        name="status" id="exampleInputName1" placeholder="id" value="{{$val['status']}}" maxlength="1" />             
+                        <select name="status" id="" class="form-control">
+                            @if (!$val['status'])
+                                <option value="0" selected>Deceased</option>
+                                <option value="1">Alive</option>    
+                            @else
+                                <option value="0">Deceased</option>
+                                <option value="1" selected>Alive</option>
+                            @endif                                                        
+                        </select>
                         <input type="hidden" name="id" hidden="hidden" id="" value="{{$val['id']}}">
                         <input type="hidden" name="site_id" hidden="hidden" id="" value="{{$site['id']}}">
                     </div>
@@ -411,9 +422,18 @@ Site {{$site['name']}}
 
 
 @section('corejs')
+    <!-- page scripts -->
+        <script src="{{base_url('vendor/datatables/media/js/jquery.dataTables.js')}}"></script>
+        <script src="{{base_url('vendor/datatables/media/js/dataTables.bootstrap4.js')}}"></script>
+        <script>
+                $(document).ready( function () {
+                    $('.datatable').DataTable();
+                } );
+        </script>
+    <!-- end page scripts -->
 
 @endsection
 
 @section('menu')
-@include('administrator.template.menu')
+    @include('administrator.template.menu')
 @endsection

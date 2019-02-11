@@ -113,7 +113,7 @@ class SiteData extends CI_Controller
             $data['site']       =   Site::find($id);
             $data['user']       =   User::find($id);
             $data['screen']     =   Screen_Device::find($id);
-            $data['content']    =   Content::find($id);
+            $data['content']    =   Content::find($id);            
 
             $final  =   array(
                 'data'  => $data

@@ -30,22 +30,22 @@
             <?php
              $loop = 0;   
             ?>
-            @foreach ($content as $val)
-                @if ($loop!=0)
-                    @if ($val['type']!='video')
-                        <div class="slide" style="background-image: url('{{base_url("files/").$val["filename"]}}');"></div>        
-                    @else
+            <?php foreach($content as $val): ?>
+                <?php if($loop!=0): ?>
+                    <?php if($val['type']!='video'): ?>
+                        <div class="slide" style="background-image: url('<?php echo e(base_url("files/").$val["filename"]); ?>');"></div>        
+                    <?php else: ?>
                         
-                    @endif                    
-                @else
-                    @if ($val['type']!='video')
-                        <div class="slide show" style="background-image: url('{{base_url("files/").$val["filename"]}}');"></div>        
-                    @else
+                    <?php endif; ?>                    
+                <?php else: ?>
+                    <?php if($val['type']!='video'): ?>
+                        <div class="slide show" style="background-image: url('<?php echo e(base_url("files/").$val["filename"]); ?>');"></div>        
+                    <?php else: ?>
                         
-                    @endif                    
-                @endif
+                    <?php endif; ?>                    
+                <?php endif; ?>
                 <?php $loop++ ?>
-            @endforeach            
+            <?php endforeach; ?>            
         </div>
         <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
         <script>

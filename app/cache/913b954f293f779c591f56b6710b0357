@@ -1,0 +1,97 @@
+<?php $__env->startSection('title'); ?>
+	Nusanet-Router View Application
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('content'); ?>
+	<!-- main area -->
+	<div class="main-content">
+		<div class="content-view">
+			<div class="row">
+				<div class="col-sm-6 col-md-4 col-lg-4">
+					<div class="card card-block">
+						<h5 class="m-b-0 v-align-middle text-overflow">							
+							<span id="val-cpu2"></span>
+						</h5>
+						<div class="small text-overflow text-muted">
+							Server CPU Usage
+						</div>
+						<div class="small text-overflow">
+							Updated:&nbsp;<span id="timer"></span>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-6 col-md-4 col-lg-4">
+					<div class="card card-block">
+						<h5 class="m-b-0 v-align-middle text-overflow">							
+							<span id="val-memory2"></span>
+						</h5>
+						<div class="small text-overflow text-muted">
+							Server Memory Usage
+						</div>
+						<div class="small text-overflow">
+							Updated:&nbsp;<span id="timer1"></span>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-6 col-md-4 col-lg-4">
+					<div class="card card-block">
+						<h5 class="m-b-0 v-align-middle text-overflow">						
+							<span id="val-hdd2"></span>
+						</h5>
+						<div class="small text-overflow text-muted">
+							Server Disk Free
+						</div>
+						<div class="small text-overflow">
+							Updated:&nbsp;<span id="timer2"></span>
+						</div>
+					</div>
+				</div>	
+			</div>
+
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="card">
+						<div class="card-header no-bg b-a-0">
+							Line series
+						</div>
+						<div class="card-block">
+							<div class="chart line" style="height:250px"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<?php echo $__env->make('administrator.template.footer', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+	</div>
+	<!-- /main area -->
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('corejs'); ?>
+	<!-- page scripts -->
+	<script src="<?php echo e(base_url('vendor/flot/jquery.flot.js')); ?>"></script>
+	<script src="<?php echo e(base_url('vendor/flot/jquery.flot.resize.js')); ?>"></script>
+	<script src="<?php echo e(base_url('vendor/flot/jquery.flot.categories.js')); ?>"></script>
+	<script src="<?php echo e(base_url('vendor/flot/jquery.flot.stack.js')); ?>"></script>
+	<script src="<?php echo e(base_url('vendor/flot/jquery.flot.time.js')); ?>"></script>
+	<script src="<?php echo e(base_url('vendor/flot/jquery.flot.pie.js')); ?>"></script>
+	<script src="<?php echo e(base_url('vendor/flot-spline/js/jquery.flot.spline.js')); ?>"></script>
+	<script src="<?php echo e(base_url('vendor/flot.orderbars/js/jquery.flot.orderBars.js')); ?>"></script>
+	<!-- end page scripts -->
+
+	<script>
+		window.onload = date_time('timer');
+		window.onload = date_time('timer1');
+		window.onload = date_time('timer2');
+	</script>
+	<script src="<?php echo e(base_url('scripts/nusanet.js')); ?>"></script>
+
+	<!-- initialize page scripts -->
+	<script src="<?php echo e(base_url('scripts/charts/flot.js')); ?>"></script>
+	<!-- end initialize page scripts -->
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('menu'); ?>
+	<?php echo $__env->make('administrator.template.menu', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>	
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('administrator.template.template', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

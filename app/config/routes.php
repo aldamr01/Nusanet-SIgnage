@@ -7,7 +7,7 @@ $route['404_override']                                      =   'Signage';
 $route['translate_uri_dashes']                              =   FALSE;
 
 //SCREEN URL
-$route['screen/(:num)/(:num)/(:any)']                =   'Signage/screenView/$1/$2/$3';
+$route['screen/(:num)/(:num)/(:any)']                       =   'Signage/screenView/$1/$2/$3';
 
 //VIEW
 $route['site/list']                                         =   'SiteView/siteList';
@@ -36,6 +36,9 @@ $route['API/ScreenNew']                                     =   'ScreenData/scre
 $route['API/ScreenEdit']                                    =   'ScreenData/screenUpdate';
 
 $route['API/ContentNew']                                    =   'ContentData/contentCreate';
+
+$route['API/TemplateEdit']                                  =   'TemplateData/templateUpdate';
+$route['API/TemplateNew']                                   =   'TemplateData/templateCreate';
 
 //AUTH
 $route['Authentication']                                    =   'Auth/login';

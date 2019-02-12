@@ -9,12 +9,12 @@ class SiteData extends CI_Controller
 
         // if(!$this->session->userdata('auth_status')){
 		// 	redirect(base_url('Authentication'));
-        // }
-        
+        // }    
         $this->load->model('Site');
         $this->load->model('User');
         $this->load->model('Screen_Device');
         $this->load->model('Content');
+        $this->load->model('Template');
     }
 
     function siteList()
@@ -54,18 +54,33 @@ class SiteData extends CI_Controller
         $this->form_validation->set_rules('email', 'email', 'required');
         $this->form_validation->set_rules('phone', 'phone', 'required');        
         
-        $register_site      =   new Site;                
-        
-        $register_site->name            =  $this->input->post('name');
-        $register_site->location        =  $this->input->post('location');
-        $register_site->email           =  $this->input->post('email');
-        $register_site->phone           =  $this->input->post('phone');
+        $register_site                  =   new Site;          
                 
-        if ($this->form_validation->run())
-            if($register_site->save())        
+        $register_site->name            =   $this->input->post('name');
+        $register_site->location        =   $this->input->post('location');
+        $register_site->email           =   $this->input->post('email');
+        $register_site->phone           =   $this->input->post('phone');
+        $register_site->token           =   $this->amirrule_lib->randomizer(50);
+                
+        if ($this->form_validation->run())        
+            if($register_site->save())     
+            {
+                $site_id                        =   Site::orderBy('id','desc')->first();
+
+                for($i = 1; $i <= 3; $i++)
+                {
+                    
+                    $register_template              =   new Template;
+                    $register_template->type        =   $i;
+                    $register_template->site_id     =   $site_id['id'];
+                    $register_template->save();                    
+                }   
                 redirect(base_url('site/list'));
+            }
             else
+            {
                 redirect(base_url('site/create'));
+            }        
         else    
             redirect(base_url('site/create'));
     }

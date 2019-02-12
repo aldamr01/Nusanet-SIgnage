@@ -40,6 +40,8 @@ $route['API/ContentNew']                                    =   'ContentData/con
 $route['API/TemplateEdit']                                  =   'TemplateData/templateUpdate';
 $route['API/TemplateNew']                                   =   'TemplateData/templateCreate';
 
+$route['API/ScheduleNew']                                   =   'ScheduleData/scheduleCreate';
+
 //AUTH
 $route['Authentication']                                    =   'Auth/login';
 $route['Logoff']                                            =   'Auth/logout';

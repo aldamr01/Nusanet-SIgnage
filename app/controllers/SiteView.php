@@ -15,6 +15,8 @@ class SiteView extends CI_Controller
         $this->load->model('Site');
         $this->load->model('Screen_Device');
         $this->load->model('Content');
+        $this->load->model('Template');
+        $this->load->model('Schedule');
     }
 
     function siteList()
@@ -41,7 +43,8 @@ class SiteView extends CI_Controller
             $data['user']       =   User::where('site_id',$id)->get();
             $data['screen']     =   Screen_Device::where('site_id',$id)->get();
             $data['content']    =   Content::where('site_id',$id)->get();
-            
+            $data['template']   =   Template::where('site_id',$id)->get();
+            $data['schedule']   =   Schedule::where('site_id',$id)->get();
             $final  =   array(
                 'data'  => $data
             );
@@ -54,3 +57,4 @@ class SiteView extends CI_Controller
         }
     }
 }
+

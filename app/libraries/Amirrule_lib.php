@@ -70,4 +70,9 @@ class Amirrule_lib
    
     }
 
+    function time_converter($time)
+    {
+        return date("h:i a", strtotime($time));
+    }
+
 }

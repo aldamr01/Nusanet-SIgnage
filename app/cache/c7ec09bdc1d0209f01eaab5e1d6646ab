@@ -82,21 +82,24 @@ Site <?php echo e($site['name']); ?>
 
                 <div class="card">
                     <div class="card-header no-bg b-a-0">
-                        <b>Template Available</b>                       
+                        <b>Template Available</b>    
+                        <a href="" data-toggle="modal" data-target=".adduser"> 
+                            <i style="float:right" class='material-icons'>add</i>
+                        </a>                   
                     </div>
                     <hr>
                     <div class="card-block">                                           
-                        
+                    <?php foreach($template as $val): ?>
                         <div class="col-md-6 table-bordered" >
-                            <a href="#" data-toggle="modal" data-target=".screen">                                        
-                                <span style="float:left; margin-top:4px;" class="tag tag-success">Template 1</span>
+                            <a href="#" data-toggle="modal" data-target=".template<?php echo e($val['id']); ?>">                                        
+                                <span style="float:left; margin-top:4px;" class="tag tag-success">Template <?php echo e($val['id']); ?></span>
                                 <br>                                   
                                 <p align="center" >
                                     <i  class='material-icons' style="font-size:50px;">photo</i>                                    
                                 </p>                                        
                             </a>                            
                         </div>
-
+                    <?php endforeach; ?>
                     </div>                    
                 </div>
 
@@ -139,6 +142,49 @@ Site <?php echo e($site['name']); ?>
         </div>               
         <div class="row">
             <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header no-bg b-a-0">
+                        <b>Client Schedule</b>
+                        <a href="" data-toggle="modal" data-target=".addschedule"> 
+                            <i style="float:right" class='material-icons'>add</i>
+                        </a>
+                    </div>
+                    <hr>
+                    <div class="card-block">
+                        <table class="table table-stripped table-bordered datatable">
+                            <thead align="center">   
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Group</th>
+                                    <th>Event</th>
+                                    <th>Room</th>
+                                    <th>Start</th>
+                                    <th>Finish</th>
+                                    <th>Display at</th>
+                                    <th>Action</th>
+                                </tr>                                                                                             
+                            </thead>
+                            <tbody align="center">
+                                <?php $loop=1;?>
+                                <?php foreach($schedule as $val): ?>                                                                    
+                                    <tr>
+                                        <td><?php echo e($loop); ?></td>
+                                        <td><?php echo e($val['title']); ?></td>
+                                        <td><?php echo e($val['description']); ?></td>
+                                        <td><?php echo e($val['room']); ?></td>
+                                        <td><?php echo e($val['start']); ?></td>
+                                        <td><?php echo e($val['end']); ?></td>                                        
+                                        <td><?php echo e($val['for_date']); ?></td>
+                                        <td>
+                                            <a  class="btn btn-danger" title='Drop' href='#'><i class='material-icons'>delete</i></a>
+                                        </td>
+                                    </tr>
+                                    <?php $loop++?>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
                 <div class="card">
                     <div class="card-header no-bg b-a-0">
                         <b>Client Content</b>
@@ -270,8 +316,10 @@ Site <?php echo e($site['name']); ?>
                         Screen Device
                     </label>
                     <select class="form-control" id="exampleSelect1" name="screen_id"> 
-                        <?php foreach($screen as $val): ?>                            
-                            <option name="screen_id" value="<?php echo e($val['id']); ?>"><?php echo e($val['name']); ?></option>                            
+                        <?php foreach($screen as $val): ?>    
+                            <?php if($val['type']!=1): ?>
+                                <option name="screen_id" value="<?php echo e($val['id']); ?>"><?php echo e($val['name']); ?></option>                            
+                            <?php endif; ?>                                                    
                         <?php endforeach; ?>
                     </select>
                 </div>
@@ -289,6 +337,76 @@ Site <?php echo e($site['name']); ?>
                     <label for="exampleInputEmail1">Image / Video</label>
                     <input type="file" class="form-control"
                     id="exampleInputEmail1" placeholder="input file here.." name="file" required/>
+                </div>
+                <input type="hidden" name="site_id" hidden="hidden" value="<?php echo e($site['id']); ?>">
+                <?php foreach($screen as $val): ?>
+                    <input type="hidden" name="screen<?php echo e($val['id']); ?>"  value="<?php echo e($val['name']); ?>" hidden="hidden">
+                <?php endforeach; ?>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Create a New One</button>
+            </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<?php echo form_open_multipart('API/ScheduleNew'); ?>
+
+    <div class="modal fade addschedule" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Add New Schedule</h4>
+            </div>
+            <div class="modal-body">                               
+                <div class="form-group">
+                    <label for="exampleInputName1">Group</label>
+                    <input type="text" class="form-control"
+                        id="exampleInputName1" placeholder="Group" name="title" required/>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputUsername1">Event</label>
+                    <input type="text" class="form-control"
+                        id="exampleInputUsername1" placeholder="Event Name" name="description" required/>
+                </div>                                
+                <div class="form-group">
+                    <label for="exampleInputUsername1">Room</label>
+                    <input type="text" class="form-control"
+                        id="exampleInputUsername1" placeholder="Room / Location" name="room" required/>
+                </div>
+                <div class="form-group">                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="exampleInputUsername1">Start time</label>
+                            <input type="time" class="form-control" id="exampleInputUsername1" placeholder="Start time" name="start" required/>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="exampleInputUsername1">End time</label>
+                            <input type="time" class="form-control" id="exampleInputUsername1" placeholder="End time" name="end" required/>
+                        </div>      
+                    </div>                                      
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputUsername1">Display at</label>
+                    <input type="date" class="form-control"
+                        id="exampleInputUsername1" placeholder="Display at" name="for_date" required/>
+                </div>
+                <div class="form-group">
+                    <label for="exampleSelect1">
+                        Screen Device
+                    </label>
+                    <select class="form-control" id="exampleSelect1" name="screen_id"> 
+                        <?php foreach($screen as $val): ?>   
+                            <?php if($val['type']==1): ?>                         
+                                <option name="screen_id" value="<?php echo e($val['id']); ?>"><?php echo e($val['name']); ?></option>                            
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                    </select>
                 </div>
                 <input type="hidden" name="site_id" hidden="hidden" value="<?php echo e($site['id']); ?>">
                 <?php foreach($screen as $val): ?>
@@ -440,6 +558,32 @@ Site <?php echo e($site['name']); ?>
             </div>
         </div>    
     </form>
+<?php endforeach; ?>
+
+<?php foreach($template as $val): ?>
+    <?php echo form_open('API/TemplateEdit'); ?>
+
+        <div class="modal fade template<?php echo e($val['id']); ?>" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">Template <?php echo e($val['id']); ?></h4>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <a style="float:left" class="btn btn-danger" title='Drop' href='#'><i class='material-icons'>delete</i>Drop</a>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save Change</button>
+                </div>
+                </div>
+            </div>
+        </div>    
+    </form>    
 <?php endforeach; ?>
 
 <?php $__env->stopSection(); ?>

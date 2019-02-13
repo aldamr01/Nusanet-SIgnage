@@ -260,7 +260,7 @@ Site {{$site['name']}}
                     <div class="form-group">
                         <label for="exampleInputName1">Screen Url</label>
                         <input type="text" class="form-control"
-                            id="exampleInputName1" placeholder="Name" readonly="readonly" value="{{base_url().$site['id'].'/'.$val['id'].'/'.$site['token']}}"/>                            
+                            id="exampleInputName1" placeholder="Name" readonly="readonly" value="{{base_url().'screen/'.$site['id'].'/'.$val['id'].'/'.$site['token']}}"/>                            
                     </div>
                     <div class="form-group">
                         <label for="exampleInputName1">Screen Status</label><br>

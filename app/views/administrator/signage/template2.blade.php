@@ -52,7 +52,7 @@
     <body style="margin:0;">
         <div class="container">                    
             <div class="row">
-                <div class="col-lg-12" style="margin-top:20px;margin-bottom:40px">
+                <div class="col-lg-12" style="margin-top:20px;margin-bottom:15px">
                     <p align="center">
                         <img src="{{base_url('files/x.png')}}" alt="" style="width:100px;height:100px">
                     </p>
@@ -60,41 +60,8 @@
             </div>
             <div class="row">
                 <div class="col-md-12">                    
-                    <div class="col-md-6 offset-3" style="padding:0;">
-                        <table class="table  table-striped borderless roundedt" style="text-align:center;margin:0">
-                            <thead >
-                                <th style="text-align:center">Group / Event</th>
-                                <th style="text-align:center">Room</th>
-                                <th style="text-align:center">Start / End</th>
-                            </thead>
-                            <tbody>
-                                {{-- <tr>
-                                    <td colspan="3" style="text-align:left;">
-                                        <b style="margin-left:37px">Nusanet</b>
-                                    </td>
-                                </tr> --}}
-                                <tr>
-                                    <td>Nusanet</td>
-                                    <td>Intro Signage</td>
-                                    <td>12:30 PM - 15:00 PM</td>
-                                </tr>
-                                <tr>
-                                    <td>Nusanet</td>
-                                    <td>Intro Signage</td>
-                                    <td>12:30 PM - 15:00 PM</td>
-                                </tr>
-                                <tr>
-                                    <td>Nusanet</td>
-                                    <td>Intro Signage</td>
-                                    <td>12:30 PM - 15:00 PM</td>
-                                </tr>
-                                <tr>
-                                    <td>Nusanet</td>
-                                    <td>Intro Signage</td>
-                                    <td>12:30 PM - 15:00 PM</td>
-                                </tr>
-                            </tbody>
-                        </table>  
+                    <div class="col-md-12" style="padding:0;overflow:hidden">
+                        <img style="width:100%;height:80%" src="{{base_url('files/file_3_2_cf81178ac899ad8d28df7253134bfa7b.jpg')}}" class="img-responsive img-rounded " alt="">
                     </div>
                 </div>
             </div>

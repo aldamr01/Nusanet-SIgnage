@@ -36,7 +36,7 @@ class Signage extends CI_Controller
             {                
                 $data['content']    =   $content;                
                 
-                echo $this->blade->stream('administrator.signage.template3',$data);                                
+                echo $this->blade->stream('administrator.signage.template2',$data);                                
             }
             else
             {

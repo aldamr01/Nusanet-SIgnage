@@ -65,7 +65,7 @@
             <div class="row">
                 <div class="col-md-12">                    
                     <div class="col-md-8 offset-2" style="padding:0;overflow:hidden">
-                        <img style="width:100%;height:100%;" src="{{base_url('files/file_3_2_cf81178ac899ad8d28df7253134bfa7b.jpg')}}" class="img-responsive img-rounded " alt="">
+                        <img style="width:100%;height:80%;" src="{{base_url('files/file_3_2_cf81178ac899ad8d28df7253134bfa7b.jpg')}}" class="img-responsive img-rounded " alt="">
                     </div>
                 </div>
             </div>

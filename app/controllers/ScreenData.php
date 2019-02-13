@@ -14,6 +14,7 @@ class ScreenData extends CI_Controller
     {
         $this->form_validation->set_rules('site_id', 'id', 'required');
         $this->form_validation->set_rules('name', 'name', 'required');
+        $this->form_validation->set_rules('type', 'type', 'required');
         $this->form_validation->set_rules('status', 'status', 'required');
         $this->form_validation->set_rules('description', 'description', 'required');
 
@@ -23,6 +24,7 @@ class ScreenData extends CI_Controller
         $register_screen->status            =  $this->input->post('status');
         $register_screen->name              =  $this->input->post('name');
         $register_screen->description       =  $this->input->post('description');
+        $register_screen->type              =  $this->input->post('type');
         
                 
         if ($this->form_validation->run())

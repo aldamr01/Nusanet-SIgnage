@@ -1,3 +1,5 @@
+<?php echo $__env->make('administrator.signage.templateconf', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+
 <?php $__env->startSection('title'); ?>
 Site <?php echo e($site['name']); ?>
 
@@ -264,6 +266,11 @@ Site <?php echo e($site['name']); ?>
                             id="exampleInputName1" placeholder="Name" readonly="readonly" value="<?php echo e(base_url().'screen/'.$site['id'].'/'.$val['id'].'/'.$site['token']); ?>"/>                            
                     </div>
                     <div class="form-group">
+                        <label for="exampleInputName1">Screen Template</label>
+                        <input type="text" class="form-control"
+                            id="exampleInputName1" placeholder="Name" readonly="readonly" value="Template <?php echo e($val['type']); ?>"/>                            
+                    </div>
+                    <div class="form-group">
                         <label for="exampleInputName1">Screen Status</label><br>
                         <select name="status" id="" class="form-control">
                             <?php if(!$val['status']): ?>
@@ -445,6 +452,16 @@ Site <?php echo e($site['name']); ?>
                         id="exampleInputName1" placeholder="Name" name="name" required/>
                 </div>
                 <div class="form-group">
+                    <label for="exampleSelect1">
+                        Template
+                    </label>
+                    <select class="form-control" id="exampleSelect1" name="type"> 
+                        <?php foreach($template as $val): ?>                                                    
+                            <option name="type" value="<?php echo e($val['type']); ?>">Template <?php echo e($val['type']); ?></option>                                                        
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <div class="form-group">
                     <label for="exampleInputUsername1">Description</label>
                     <input type="text" class="form-control"
                         id="exampleInputUsername1" placeholder="Description" name="description" required/>
@@ -561,7 +578,7 @@ Site <?php echo e($site['name']); ?>
 <?php endforeach; ?>
 
 <?php foreach($template as $val): ?>
-    <?php echo form_open('API/TemplateEdit'); ?>
+    <?php echo form_open_multipart('API/TemplateEdit'); ?>
 
         <div class="modal fade template<?php echo e($val['id']); ?>" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -573,10 +590,17 @@ Site <?php echo e($site['name']); ?>
                     <h4 class="modal-title" id="myModalLabel">Template <?php echo e($val['id']); ?></h4>
                 </div>
                 <div class="modal-body">
-
+                    <?php if($val['type']==1): ?>
+                        <?php echo $__env->yieldContent('template1'); ?>
+                    <?php elseif($val['type']==2): ?>                        
+                        <?php echo $__env->yieldContent('template2'); ?>
+                    <?php elseif($val['type']==3): ?>
+                        <?php echo $__env->yieldContent('template3'); ?>
+                    <?php endif; ?>      
+                    <input type="hidden" name="id" value="<?php echo e($val['id']); ?>" hidden="hidden">
+                    <input type="hidden" name="site_id" hidden="hidden" value="<?php echo e($site['id']); ?>">
                 </div>
                 <div class="modal-footer">
-                    <a style="float:left" class="btn btn-danger" title='Drop' href='#'><i class='material-icons'>delete</i>Drop</a>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary">Save Change</button>
                 </div>

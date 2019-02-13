@@ -42,6 +42,11 @@ class Amirrule_lib
             return  false;
    
     }
+    
+    function today()
+    {
+        return date("Y-m-d");
+    }
 
     function formatfile($param)
     {

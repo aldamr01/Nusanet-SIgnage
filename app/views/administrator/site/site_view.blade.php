@@ -1,4 +1,5 @@
 @extends('administrator.template.template')
+@include('administrator.signage.templateconf')
 
 @section('title')
 Site {{$site['name']}}
@@ -263,6 +264,11 @@ Site {{$site['name']}}
                             id="exampleInputName1" placeholder="Name" readonly="readonly" value="{{base_url().'screen/'.$site['id'].'/'.$val['id'].'/'.$site['token']}}"/>                            
                     </div>
                     <div class="form-group">
+                        <label for="exampleInputName1">Screen Template</label>
+                        <input type="text" class="form-control"
+                            id="exampleInputName1" placeholder="Name" readonly="readonly" value="Template {{$val['type']}}"/>                            
+                    </div>
+                    <div class="form-group">
                         <label for="exampleInputName1">Screen Status</label><br>
                         <select name="status" id="" class="form-control">
                             @if (!$val['status'])
@@ -441,6 +447,16 @@ Site {{$site['name']}}
                         id="exampleInputName1" placeholder="Name" name="name" required/>
                 </div>
                 <div class="form-group">
+                    <label for="exampleSelect1">
+                        Template
+                    </label>
+                    <select class="form-control" id="exampleSelect1" name="type"> 
+                        @foreach ($template as $val)                                                    
+                            <option name="type" value="{{$val['type']}}">Template {{$val['type']}}</option>                                                        
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group">
                     <label for="exampleInputUsername1">Description</label>
                     <input type="text" class="form-control"
                         id="exampleInputUsername1" placeholder="Description" name="description" required/>
@@ -555,7 +571,7 @@ Site {{$site['name']}}
 @endforeach
 
 @foreach ($template as $val)
-    {!!form_open('API/TemplateEdit')!!}
+    {!!form_open_multipart('API/TemplateEdit')!!}
         <div class="modal fade template{{$val['id']}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -566,10 +582,17 @@ Site {{$site['name']}}
                     <h4 class="modal-title" id="myModalLabel">Template {{$val['id']}}</h4>
                 </div>
                 <div class="modal-body">
-
+                    @if ($val['type']==1)
+                        @yield('template1')
+                    @elseif ($val['type']==2)                        
+                        @yield('template2')
+                    @elseif ($val['type']==3)
+                        @yield('template3')
+                    @endif      
+                    <input type="hidden" name="id" value="{{$val['id']}}" hidden="hidden">
+                    <input type="hidden" name="site_id" hidden="hidden" value="{{$site['id']}}">
                 </div>
                 <div class="modal-footer">
-                    <a style="float:left" class="btn btn-danger" title='Drop' href='#'><i class='material-icons'>delete</i>Drop</a>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary">Save Change</button>
                 </div>

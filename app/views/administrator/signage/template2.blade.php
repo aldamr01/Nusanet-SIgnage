@@ -5,9 +5,12 @@
         <style>
             body {
                 z-index: 0;
-                background: url('{{base_url('files/file_3_1_a215bd257a49a94c536adb3e40b78ca0.jpg')}}');
+                background: url('{{base_url("files/").$config["background"]}}');
                 background-size: cover;
-                position: relative;                             
+                position: relative;                   
+                background-repeat: no-repeat;
+                background-position-x: right;
+                background-position-y: top;                          
             }                        
             
             .borderless td, .borderless th {
@@ -52,7 +55,7 @@
                   position: inherit;
               } 
               .xs{
-                border: 3px solid #fbce45;
+                border: 3px solid {{$config['weather']}};
                 padding: 0;
                 border-radius: 2%;
             }
@@ -63,7 +66,7 @@
             <div class="row">
                 <div class="col-lg-12" style="margin-top:20px;margin-bottom:15px">
                     <p align="center">
-                        <img src="{{base_url('files/x.png')}}" alt="" style="width:100px;height:100px">
+                        <img src="{{base_url('files/').$config['logo']}}" alt="" style="width:100px;height:100px">
                     </p>
                 </div>
             </div>
@@ -81,7 +84,7 @@
                 <div class="col-md-12">                    
                     <div class="col-md-6 offset-3">
                         <p align="center">
-                            <a style="position:inherit;" class="weatherwidget-io" href="https://forecast7.com/en/n7d26112d75/surabaya/" data-label_1="SURABAYA" data-label_2="INDONESIA" data-icons="Climacons Animated" data-mode="Current" data-days="3" data-textcolor="#FBCE45">SURABAYA INDONESIA</a>
+                            <a style="position:inherit;" class="weatherwidget-io" href="https://forecast7.com/en/n7d26112d75/surabaya/" data-label_1="SURABAYA" data-label_2="INDONESIA" data-icons="Climacons Animated" data-mode="Current" data-days="3" data-textcolor="{{$config['weather']}}">SURABAYA INDONESIA</a>
                             <script>
                             !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='{{base_url("scripts/weather.js")}}';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
                             </script>

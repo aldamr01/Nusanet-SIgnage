@@ -42,6 +42,7 @@ $route['API/TemplateNew']                                   =   'TemplateData/te
 
 $route['API/ScheduleNew']                                   =   'ScheduleData/scheduleCreate';
 
+
 //AUTH
 $route['Authentication']                                    =   'Auth/login';
 $route['Logoff']                                            =   'Auth/logout';

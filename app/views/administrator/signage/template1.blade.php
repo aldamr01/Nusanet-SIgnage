@@ -95,15 +95,15 @@
                                             </td>
                                         </tr> 
                                         <tr style="border-top:solid 0px white;">
-                                            <td>{{$val['description']}}</td>
-                                            <td>{{$val['room']}}</td>
-                                            <td>{{$val['start']}} - {{$val['end']}}</td>
+                                            <td style="text-align:left;margin-left:37px">{{$val['description']}}</td>
+                                            <td style="text-align:left;margin-left:37px">{{$val['room']}}</td>
+                                            <td style="text-align:left;margin-left:37px">{{$val['start']}} - {{$val['end']}}</td>
                                         </tr>       
                                     @else
                                         <tr style="border-top:solid 0px white;">
-                                            <td>{{$val['description']}}</td>
-                                            <td>{{$val['room']}}</td>
-                                            <td>{{$val['start']}} - {{$val['end']}}</td>
+                                            <td style="text-align:left;margin-left:37px">{{$val['description']}}</td>
+                                            <td style="text-align:left;margin-left:37px">{{$val['room']}}</td>
+                                            <td style="text-align:left;margin-left:37px">{{$val['start']}} - {{$val['end']}}</td>
                                         </tr>  
                                     @endif
                                 @endforeach                                                                

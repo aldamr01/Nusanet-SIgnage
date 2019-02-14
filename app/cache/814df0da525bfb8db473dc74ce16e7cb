@@ -95,15 +95,15 @@
                                             </td>
                                         </tr> 
                                         <tr style="border-top:solid 0px white;">
-                                            <td><?php echo e($val['description']); ?></td>
-                                            <td><?php echo e($val['room']); ?></td>
-                                            <td><?php echo e($val['start']); ?> - <?php echo e($val['end']); ?></td>
+                                            <td style="text-align:left;margin-left:37px"><?php echo e($val['description']); ?></td>
+                                            <td style="text-align:left;margin-left:37px"><?php echo e($val['room']); ?></td>
+                                            <td style="text-align:left;margin-left:37px"><?php echo e($val['start']); ?> - <?php echo e($val['end']); ?></td>
                                         </tr>       
                                     <?php else: ?>
                                         <tr style="border-top:solid 0px white;">
-                                            <td><?php echo e($val['description']); ?></td>
-                                            <td><?php echo e($val['room']); ?></td>
-                                            <td><?php echo e($val['start']); ?> - <?php echo e($val['end']); ?></td>
+                                            <td style="text-align:left;margin-left:37px"><?php echo e($val['description']); ?></td>
+                                            <td style="text-align:left;margin-left:37px"><?php echo e($val['room']); ?></td>
+                                            <td style="text-align:left;margin-left:37px"><?php echo e($val['start']); ?> - <?php echo e($val['end']); ?></td>
                                         </tr>  
                                     <?php endif; ?>
                                 <?php endforeach; ?>                                                                

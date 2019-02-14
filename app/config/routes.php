@@ -8,6 +8,7 @@ $route['translate_uri_dashes']                              =   FALSE;
 
 //SCREEN URL
 $route['screen/(:num)/(:num)/(:any)']                       =   'Signage/screenView/$1/$2/$3';
+$route['screen/controller/(:num)/(:num)/(:any)']            =   'Signage/screenController/$1/$2/$3';
 
 //VIEW
 $route['site/list']                                         =   'SiteView/siteList';
@@ -36,11 +37,13 @@ $route['API/ScreenNew']                                     =   'ScreenData/scre
 $route['API/ScreenEdit']                                    =   'ScreenData/screenUpdate';
 
 $route['API/ContentNew']                                    =   'ContentData/contentCreate';
+$route['API/ContentDrop/(:num)/(:num)']                     =   'ContentData/contentDelete/$1/$2';
 
 $route['API/TemplateEdit']                                  =   'TemplateData/templateUpdate';
 $route['API/TemplateNew']                                   =   'TemplateData/templateCreate';
 
 $route['API/ScheduleNew']                                   =   'ScheduleData/scheduleCreate';
+$route['API/ScheduleDrop/(:num)/(:num)']                    =   'ScheduleData/scheduleDelete/$1/$2';
 
 
 //AUTH

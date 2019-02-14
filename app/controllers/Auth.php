@@ -40,18 +40,13 @@ class Auth extends CI_Controller
             $check  = FALSE;
 
             if(count($auth)>=1){
-                $Udata    = User::with('datauser')->find($auth->id);
+                $Udata    = User::find($auth->id);
                 $Newdata  = array(
                   'auth_id'                 => $Udata['id'],
                   'auth_username'           => $Udata['username'],
                   'auth_password'           => $Udata['password'],
                   'auth_role'               => $Udata['role'],
-                  'auth_status'             => TRUE,
-                  'auth_router_ip'          => $Udata['datauser']['router_ip'],
-                  'auth_router_username'    => $Udata['datauser']['router_username'],
-                  'auth_router_password'    => $Udata['datauser']['router_password'],
-                  'auth_router_name'        => $Udata['datauser']['router_name'],                
-                  'auth_router_interval'    => $Udata['datauser']['interface_interval']
+                  'auth_status'             => TRUE                
                 );
             
                 $this->session->set_userdata($Newdata);

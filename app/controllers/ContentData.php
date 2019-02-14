@@ -6,6 +6,11 @@ class ContentData extends CI_Controller
     function __construct()
     {
         parent::__construct();
+
+        if(!$this->session->userdata('auth_status')){
+			redirect(base_url('Authentication'));
+        }
+        
         $this->load->model('Screen_Device');
         $this->load->model('Content');
         $this->load->library('upload');
@@ -63,5 +68,18 @@ class ContentData extends CI_Controller
                 redirect(base_url('site/show/').$this->input->post('site_id')); 
             }
         }
+    }
+
+    function contentDelete($id,$site)
+    {
+        if(!isset($id) && !isset($site))
+            redirect(base_url('site/list'));
+
+        $flight     = Content::find($id);        
+
+        if($flight->delete())
+            redirect(base_url('site/show/').$site);
+        else
+            redirect(base_url('site/show/').$site); 
     }
 }

@@ -6,6 +6,11 @@ class ScheduleData extends CI_Controller
     function __construct()
     {
         parent::__construct();
+
+        if(!$this->session->userdata('auth_status')){
+			redirect(base_url('Authentication'));
+        }
+        
         $this->load->model('Schedule');
     }
 
@@ -41,6 +46,19 @@ class ScheduleData extends CI_Controller
                 redirect(base_url('site/show/').$this->input->post('site_id'));
         else    
             redirect(base_url('site/show/').$this->input->post('site_id'));
+    }
+
+    function scheduleDelete($id,$site)
+    {
+        if(!isset($id) && !isset($site))
+            redirect(base_url('site/list'));
+
+        $flight     = Schedule::find($id);        
+
+        if($flight->delete())
+            redirect(base_url('site/show/').$site);
+        else
+            redirect(base_url('site/show/').$site);
     }
 }
 

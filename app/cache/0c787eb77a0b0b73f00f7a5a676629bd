@@ -1,8 +1,9 @@
 <?php $__env->startSection('template1'); ?>
+    <?php echo e($val); ?>    
     <div class="form-group">
         <label for="exampleInputPassword1">Weather Widget Color</label>
         <input class="form-control" type="color" value="" id="example-color-input" name="weather">
-    </div>
+    </div>    
     <div class="form-group">
         <label for="exampleInputPassword1">Screen Background</label>
         <input class="form-control" type="file" value="" id="example-file-input" name="background">
@@ -18,6 +19,7 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('template2'); ?>
+    <?php echo e($val); ?>    
     <div class="form-group">
         <label for="exampleInputPassword1">Weather Widget Color</label>
         <input class="form-control" type="color" value="" id="example-color-input" name="weather">

@@ -9,11 +9,11 @@ class UserView extends CI_Controller
         parent::__construct();
         $this->load->model('User');        
 
-        // if(!$this->session->userdata('auth_status'))
-        //     redirect(base_url('Authentication'));   
-        // else
-        //     if($this->session->userdata('auth_role')!= "Administrator")           
-        //         redirect(base_url('Authentication'));
+        if(!$this->session->userdata('auth_status'))
+            redirect(base_url('Authentication'));   
+        else
+            if($this->session->userdata('auth_role')!= "Administrator")           
+                redirect(base_url('Authentication'));
     }
 
     public function userList()

@@ -1,4 +1,4 @@
-{{--  @if ($auth_role=='Administrator')  --}}
+@if ($auth_role=='Administrator')
 <!-- main navigation -->
 <nav>
 	<p class="nav-title">NAVIGATION</p>
@@ -55,7 +55,7 @@
 <!-- /main navigation -->
 
 
-{{--  @elseif ($auth_role=='User')  --}}
+@elseif ($auth_role=='User')
 
 <!-- main navigation -->
 <nav>
@@ -136,4 +136,4 @@
 	</ul>
 </nav>
 <!-- /main navigation -->
-{{--  @endif  --}}
+@endif

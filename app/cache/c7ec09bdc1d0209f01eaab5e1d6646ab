@@ -1,5 +1,3 @@
-<?php echo $__env->make('administrator.signage.templateconf', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-
 <?php $__env->startSection('title'); ?>
 Site <?php echo e($site['name']); ?>
 
@@ -25,11 +23,7 @@ Site <?php echo e($site['name']); ?>
                     <div class="card-block">
                         
                         <?php if(count($user)<1): ?>
-                            No User Available...
-                            <a class="weatherwidget-io" href="https://forecast7.com/en/n7d26112d75/surabaya/" data-label_1="SURABAYA" data-label_2="WEATHER" data-icons="Climacons Animated" data-theme="original" >SURABAYA WEATHER</a>
-                            <script>
-                            !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
-                            </script>
+                            No User Available...                            
                         <?php else: ?>                                                                            
                             <?php foreach($user as $val): ?>                                                    
                                 <div id="accordion" role="tablist" aria-multiselectable="true">
@@ -94,7 +88,7 @@ Site <?php echo e($site['name']); ?>
                     <?php foreach($template as $val): ?>
                         <div class="col-md-6 table-bordered" >
                             <a href="#" data-toggle="modal" data-target=".template<?php echo e($val['id']); ?>">                                        
-                                <span style="float:left; margin-top:4px;" class="tag tag-success">Template <?php echo e($val['id']); ?></span>
+                                <span style="float:left; margin-top:4px;" class="tag tag-success">Template <?php echo e($val['type']); ?></span>
                                 <br>                                   
                                 <p align="center" >
                                     <i  class='material-icons' style="font-size:50px;">photo</i>                                    
@@ -121,10 +115,10 @@ Site <?php echo e($site['name']); ?>
                             No Screen Installed...
                         <?php else: ?>                                                                                
                             <?php foreach($screen as $val): ?>                                                    
-                                <div class="col-md-6 table-bordered" >
+                                <div class="col-md-6 table-bordered" >                                    
                                     <a href="#" data-toggle="modal" data-target=".screen<?php echo e($val['id']); ?>">                                        
                                         
-                                        <?php if($val['status']): ?>
+                                        <?php if(ping_url($val['url'])): ?>
                                             <h6><?php echo e($val['name']); ?><span style="float:right" class="tag tag-success">Alive</span> </h6>
                                             <br>    
                                         <?php else: ?>
@@ -178,7 +172,7 @@ Site <?php echo e($site['name']); ?>
                                         <td><?php echo e($val['end']); ?></td>                                        
                                         <td><?php echo e($val['for_date']); ?></td>
                                         <td>
-                                            <a  class="btn btn-danger" title='Drop' href='#'><i class='material-icons'>delete</i></a>
+                                            <a  class="btn btn-danger" title='Drop' href='<?php echo e(base_url("API/ScheduleDrop/").$val["id"]."/".$site["id"]); ?>' onclick="confirm('Want to Delete it ?')"><i class='material-icons'>delete</i></a>
                                         </td>
                                     </tr>
                                     <?php $loop++?>
@@ -224,8 +218,7 @@ Site <?php echo e($site['name']); ?>
                                             <?php endif; ?>                                        
                                         </td>
                                         <td>
-                                            <a  class="btn btn-danger" title='Drop' href='#'><i class='material-icons'>delete</i></a>
-                                            <a  class="btn btn-warning" title='Change' href='#'><i class='material-icons'>edit</i></a>                                                                                
+                                            <a  class="btn btn-danger" title='Drop' href='<?php echo e(base_url("API/ContentDrop/").$val["id"]."/".$site["id"]); ?>' onclick="confirm('Want to Delete it ?')"><i class='material-icons'>delete</i></a>
                                         </td>
                                     </tr>
                                     <?php $loop++?>
@@ -263,7 +256,15 @@ Site <?php echo e($site['name']); ?>
                     <div class="form-group">
                         <label for="exampleInputName1">Screen Url</label>
                         <input type="text" class="form-control"
-                            id="exampleInputName1" placeholder="Name" readonly="readonly" value="<?php echo e(base_url().'screen/'.$site['id'].'/'.$val['id'].'/'.$site['token']); ?>"/>                            
+                            id="texturl" placeholder="Name" readonly="readonly" value="<?php echo e(base_url().'screen/'.$site['id'].'/'.$val['id'].'/'.$site['token']); ?>"/>                            
+                        <a href="<?php echo e(base_url().'screen/controller/'.$site['id'].'/'.$val['id'].'/'.$site['token']); ?>" class="btn btn-warning" target="_blank">Screen Controller</a>
+                        <a href="<?php echo e(base_url().'screen/'.$site['id'].'/'.$val['id'].'/'.$site['token']); ?>" class="btn btn-info" target="_blank">View Screen</a>
+                        <a onclick="cpyText()" class="btn btn-default">Copy Address</a>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputName1">Device Controller URL</label>
+                        <input type="text" class="form-control"
+                            id="exampleInputName1" placeholder="Name" value="<?php echo e($val['url']); ?>" name="url"/>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputName1">Screen Template</label>
@@ -452,6 +453,11 @@ Site <?php echo e($site['name']); ?>
                         id="exampleInputName1" placeholder="Name" name="name" required/>
                 </div>
                 <div class="form-group">
+                    <label for="exampleInputName1">Device Controller URL</label>
+                    <input type="url" class="form-control"
+                        id="exampleInputName1" placeholder="Url here.." name="url" required/>
+                </div>
+                <div class="form-group">
                     <label for="exampleSelect1">
                         Template
                     </label>
@@ -587,19 +593,68 @@ Site <?php echo e($site['name']); ?>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
-                    <h4 class="modal-title" id="myModalLabel">Template <?php echo e($val['id']); ?></h4>
+                    <h4 class="modal-title" id="myModalLabel">Template <?php echo e($val['type']); ?></h4>
                 </div>
+
+                <?php /*  TEMPLATE MENU PART  */ ?>
                 <div class="modal-body">
                     <?php if($val['type']==1): ?>
-                        <?php echo $__env->yieldContent('template1'); ?>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Weather Widget Color</label>
+                            <input class="form-control" type="color" value="<?php echo e($val['weather']); ?>" id="example-color-input" name="weather">
+                        </div>    
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Screen Background</label><br>
+                            <?php if(!$val['background']): ?>
+                                <input class="form-control" type="file" value="<?php echo e($val['background']); ?>" id="example-file-input" name="background">                                
+                            <?php else: ?>
+                                <img src="<?php echo e(base_url('/files/').$val['background']); ?>" alt="" class="img-rounded" style="width:10%;geight:10%;">
+                                <input class="form-control" type="file" value="<?php echo e($val['background']); ?>" id="example-file-input" name="background">
+                            <?php endif; ?>                                                        
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Screen Logo</label><br>
+                            <?php if(!$val['logo']): ?>
+                                <input class="form-control" type="file" value="<?php echo e($val['logo']); ?>" id="example-file-input" name="logo">                                
+                            <?php else: ?>
+                                <img src="<?php echo e(base_url('/files/').$val['logo']); ?>" alt="" class="img-rounded" style="width:10%;geight:10%;">
+                                <input class="form-control" type="file" value="<?php echo e($val['logo']); ?>" id="example-file-input" name="logo">
+                            <?php endif; ?>          
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Table Widget Color</label>
+                            <input class="form-control" type="color" value="<?php echo e($val['tabel']); ?>" id="example-color-input" name="table">
+                        </div>
                     <?php elseif($val['type']==2): ?>                        
-                        <?php echo $__env->yieldContent('template2'); ?>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Weather Widget Color</label>
+                            <input class="form-control" type="color" value="<?php echo e($val['weather']); ?>" id="example-color-input" name="weather">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Screen Background</label><br>
+                            <?php if(!$val['background']): ?>
+                                <input class="form-control" type="file" value="<?php echo e($val['background']); ?>" id="example-file-input" name="background">                                
+                            <?php else: ?>
+                                <img src="<?php echo e(base_url('/files/').$val['background']); ?>" alt="" class="img-rounded" style="width:10%;geight:10%;">
+                                <input class="form-control" type="file" value="<?php echo e($val['background']); ?>" id="example-file-input" name="background">
+                            <?php endif; ?>                                                        
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Screen Logo</label><br>
+                            <?php if(!$val['logo']): ?>
+                                <input class="form-control" type="file" value="<?php echo e($val['logo']); ?>" id="example-file-input" name="logo">                                
+                            <?php else: ?>
+                                <img src="<?php echo e(base_url('/files/').$val['logo']); ?>" alt="" class="img-rounded" style="width:10%;geight:10%;">
+                                <input class="form-control" type="file" value="<?php echo e($val['logo']); ?>" id="example-file-input" name="logo">
+                            <?php endif; ?>          
+                        </div> 
                     <?php elseif($val['type']==3): ?>
-                        <?php echo $__env->yieldContent('template3'); ?>
-                    <?php endif; ?>      
-                    <input type="hidden" name="id" value="<?php echo e($val['id']); ?>" hidden="hidden">
-                    <input type="hidden" name="site_id" hidden="hidden" value="<?php echo e($site['id']); ?>">
+                        no configuration needed...
+                    <?php endif; ?>                          
                 </div>
+                <?php /*  END MENU TEMPLATE  */ ?>
+                <input type="hidden" name="id" value="<?php echo e($val['id']); ?>" hidden="hidden">
+                <input type="hidden" name="site_id" hidden="hidden" value="<?php echo e($site['id']); ?>">
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary">Save Change</button>
@@ -623,6 +678,21 @@ Site <?php echo e($site['name']); ?>
                 } );
         </script>
     <!-- end page scripts -->
+        <script>
+            function cpyText() {
+                /* Get the text field */
+                var copyText = document.getElementById("texturl");
+              
+                /* Select the text field */
+                copyText.select();
+              
+                /* Copy the text inside the text field */
+                document.execCommand("copy");
+              
+                /* Alert the copied text */
+                alert("Copied the text: " + copyText.value);
+              } 
+        </script>
 
 <?php $__env->stopSection(); ?>
 

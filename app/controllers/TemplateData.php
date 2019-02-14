@@ -6,6 +6,11 @@ class TemplateData extends CI_Controller
     function __construct()
     {
         parent::__construct();
+        
+        if(!$this->session->userdata('auth_status')){
+			redirect(base_url('Authentication'));
+        }
+
         $this->load->model('Template');                
         $this->load->library('upload');
     }
@@ -29,7 +34,7 @@ class TemplateData extends CI_Controller
 
                 
         if($this->form_validation->run()== FALSE)
-        {         
+        {                     
             redirect(base_url('site/show/').$this->input->post('site_id')); 
         }
         else
@@ -37,14 +42,18 @@ class TemplateData extends CI_Controller
             $update_template                =   Template::find($this->input->post('id',TRUE));
             $update_template->weather       =   $a;
             $update_template->tabel         =   $b;
-            // $fbackground                    =   0;
-            // $flogo                          =   0;
+            
 
             if (isset($_FILES['background']) && $_FILES['background']['name'] != '')
             {
                 $extb           =   pathinfo($_FILES['background']['name'], PATHINFO_EXTENSION);
                 $fbackground    =   "file_background".$this->input->post('id',TRUE)."_".md5($this->input->post('id',TRUE));
                 $background     =   $this->ngupload($fbackground,'background');
+                $nbackground    =   $fbackground.".".$extb;
+            }
+            else
+            {
+                $nbackground    =   $update_template->background;
             }
             
             if (isset($_FILES['logo']) && $_FILES['logo']['name'] != '')
@@ -52,10 +61,15 @@ class TemplateData extends CI_Controller
                 $extl           =   pathinfo($_FILES['logo']['name'], PATHINFO_EXTENSION);
                 $flogo          =   "file_logo".$this->input->post('id',TRUE)."_".md5($this->input->post('id',TRUE));
                 $logo           =   $this->ngupload($flogo,'logo');
+                $nlogo          =   $flogo.".".$extl;
+            }
+            else 
+            {
+                echo $nlogo          =   $update_template->logo;                
             }  
 
-            $update_template->background   =   $fbackground.".".$extb;
-            $update_template->logo         =   $flogo.".".$extl;
+            $update_template->background   =   $nbackground;
+            $update_template->logo         =   $nlogo;
 
             if ($update_template->save()) 
             {

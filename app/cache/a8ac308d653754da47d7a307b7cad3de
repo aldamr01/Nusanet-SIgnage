@@ -26,6 +26,11 @@
                 }
                 .container .slide.show {
                 opacity: 1;
+                animation: fade in 2s;
+                transition: 1s ease-in-out;
+                -webkit-transition: opacity 1s ease-in-out;
+                -moz-transition: opacity 1s ease-in-out;
+                -o-transition: opacity 1s ease-in-out;
                 }
     
         </style>

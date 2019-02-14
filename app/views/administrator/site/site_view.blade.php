@@ -1,5 +1,5 @@
 @extends('administrator.template.template')
-@include('administrator.signage.templateconf')
+
 
 @section('title')
 Site {{$site['name']}}
@@ -25,11 +25,7 @@ Site {{$site['name']}}
                     <div class="card-block">
                         
                         @if (count($user)<1)
-                            No User Available...
-                            <a class="weatherwidget-io" href="https://forecast7.com/en/n7d26112d75/surabaya/" data-label_1="SURABAYA" data-label_2="WEATHER" data-icons="Climacons Animated" data-theme="original" >SURABAYA WEATHER</a>
-                            <script>
-                            !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
-                            </script>
+                            No User Available...                            
                         @else                                                                            
                             @foreach ($user as $val)                                                    
                                 <div id="accordion" role="tablist" aria-multiselectable="true">
@@ -93,7 +89,7 @@ Site {{$site['name']}}
                     @foreach ($template as $val)
                         <div class="col-md-6 table-bordered" >
                             <a href="#" data-toggle="modal" data-target=".template{{$val['id']}}">                                        
-                                <span style="float:left; margin-top:4px;" class="tag tag-success">Template {{$val['id']}}</span>
+                                <span style="float:left; margin-top:4px;" class="tag tag-success">Template {{$val['type']}}</span>
                                 <br>                                   
                                 <p align="center" >
                                     <i  class='material-icons' style="font-size:50px;">photo</i>                                    
@@ -120,10 +116,10 @@ Site {{$site['name']}}
                             No Screen Installed...
                         @else                                                                                
                             @foreach ($screen as $val)                                                    
-                                <div class="col-md-6 table-bordered" >
+                                <div class="col-md-6 table-bordered" >                                    
                                     <a href="#" data-toggle="modal" data-target=".screen{{$val['id']}}">                                        
                                         
-                                        @if ($val['status'])
+                                        @if (ping_url($val['url']))
                                             <h6>{{$val['name']}}<span style="float:right" class="tag tag-success">Alive</span> </h6>
                                             <br>    
                                         @else
@@ -177,7 +173,7 @@ Site {{$site['name']}}
                                         <td>{{$val['end']}}</td>                                        
                                         <td>{{$val['for_date']}}</td>
                                         <td>
-                                            <a  class="btn btn-danger" title='Drop' href='#'><i class='material-icons'>delete</i></a>
+                                            <a  class="btn btn-danger" title='Drop' href='{{base_url("API/ScheduleDrop/").$val["id"]."/".$site["id"]}}' onclick="confirm('Want to Delete it ?')"><i class='material-icons'>delete</i></a>
                                         </td>
                                     </tr>
                                     <?php $loop++?>
@@ -223,8 +219,7 @@ Site {{$site['name']}}
                                             @endif                                        
                                         </td>
                                         <td>
-                                            <a  class="btn btn-danger" title='Drop' href='#'><i class='material-icons'>delete</i></a>
-                                            <a  class="btn btn-warning" title='Change' href='#'><i class='material-icons'>edit</i></a>                                                                                
+                                            <a  class="btn btn-danger" title='Drop' href='{{base_url("API/ContentDrop/").$val["id"]."/".$site["id"]}}' onclick="confirm('Want to Delete it ?')"><i class='material-icons'>delete</i></a>
                                         </td>
                                     </tr>
                                     <?php $loop++?>
@@ -261,7 +256,15 @@ Site {{$site['name']}}
                     <div class="form-group">
                         <label for="exampleInputName1">Screen Url</label>
                         <input type="text" class="form-control"
-                            id="exampleInputName1" placeholder="Name" readonly="readonly" value="{{base_url().'screen/'.$site['id'].'/'.$val['id'].'/'.$site['token']}}"/>                            
+                            id="texturl" placeholder="Name" readonly="readonly" value="{{base_url().'screen/'.$site['id'].'/'.$val['id'].'/'.$site['token']}}"/>                            
+                        <a href="{{base_url().'screen/controller/'.$site['id'].'/'.$val['id'].'/'.$site['token']}}" class="btn btn-warning" target="_blank">Screen Controller</a>
+                        <a href="{{base_url().'screen/'.$site['id'].'/'.$val['id'].'/'.$site['token']}}" class="btn btn-info" target="_blank">View Screen</a>
+                        <a onclick="cpyText()" class="btn btn-default">Copy Address</a>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputName1">Device Controller URL</label>
+                        <input type="text" class="form-control"
+                            id="exampleInputName1" placeholder="Name" value="{{$val['url']}}" name="url"/>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputName1">Screen Template</label>
@@ -447,6 +450,11 @@ Site {{$site['name']}}
                         id="exampleInputName1" placeholder="Name" name="name" required/>
                 </div>
                 <div class="form-group">
+                    <label for="exampleInputName1">Device Controller URL</label>
+                    <input type="url" class="form-control"
+                        id="exampleInputName1" placeholder="Url here.." name="url" required/>
+                </div>
+                <div class="form-group">
                     <label for="exampleSelect1">
                         Template
                     </label>
@@ -579,19 +587,68 @@ Site {{$site['name']}}
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
-                    <h4 class="modal-title" id="myModalLabel">Template {{$val['id']}}</h4>
+                    <h4 class="modal-title" id="myModalLabel">Template {{$val['type']}}</h4>
                 </div>
+
+                {{--  TEMPLATE MENU PART  --}}
                 <div class="modal-body">
                     @if ($val['type']==1)
-                        @yield('template1')
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Weather Widget Color</label>
+                            <input class="form-control" type="color" value="{{$val['weather']}}" id="example-color-input" name="weather">
+                        </div>    
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Screen Background</label><br>
+                            @if (!$val['background'])
+                                <input class="form-control" type="file" value="{{$val['background']}}" id="example-file-input" name="background">                                
+                            @else
+                                <img src="{{base_url('/files/').$val['background']}}" alt="" class="img-rounded" style="width:10%;geight:10%;">
+                                <input class="form-control" type="file" value="{{$val['background']}}" id="example-file-input" name="background">
+                            @endif                                                        
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Screen Logo</label><br>
+                            @if (!$val['logo'])
+                                <input class="form-control" type="file" value="{{$val['logo']}}" id="example-file-input" name="logo">                                
+                            @else
+                                <img src="{{base_url('/files/').$val['logo']}}" alt="" class="img-rounded" style="width:10%;geight:10%;">
+                                <input class="form-control" type="file" value="{{$val['logo']}}" id="example-file-input" name="logo">
+                            @endif          
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Table Widget Color</label>
+                            <input class="form-control" type="color" value="{{$val['tabel']}}" id="example-color-input" name="table">
+                        </div>
                     @elseif ($val['type']==2)                        
-                        @yield('template2')
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Weather Widget Color</label>
+                            <input class="form-control" type="color" value="{{$val['weather']}}" id="example-color-input" name="weather">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Screen Background</label><br>
+                            @if (!$val['background'])
+                                <input class="form-control" type="file" value="{{$val['background']}}" id="example-file-input" name="background">                                
+                            @else
+                                <img src="{{base_url('/files/').$val['background']}}" alt="" class="img-rounded" style="width:10%;geight:10%;">
+                                <input class="form-control" type="file" value="{{$val['background']}}" id="example-file-input" name="background">
+                            @endif                                                        
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Screen Logo</label><br>
+                            @if (!$val['logo'])
+                                <input class="form-control" type="file" value="{{$val['logo']}}" id="example-file-input" name="logo">                                
+                            @else
+                                <img src="{{base_url('/files/').$val['logo']}}" alt="" class="img-rounded" style="width:10%;geight:10%;">
+                                <input class="form-control" type="file" value="{{$val['logo']}}" id="example-file-input" name="logo">
+                            @endif          
+                        </div> 
                     @elseif ($val['type']==3)
-                        @yield('template3')
-                    @endif      
-                    <input type="hidden" name="id" value="{{$val['id']}}" hidden="hidden">
-                    <input type="hidden" name="site_id" hidden="hidden" value="{{$site['id']}}">
+                        no configuration needed...
+                    @endif                          
                 </div>
+                {{--  END MENU TEMPLATE  --}}
+                <input type="hidden" name="id" value="{{$val['id']}}" hidden="hidden">
+                <input type="hidden" name="site_id" hidden="hidden" value="{{$site['id']}}">
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary">Save Change</button>
@@ -615,6 +672,21 @@ Site {{$site['name']}}
                 } );
         </script>
     <!-- end page scripts -->
+        <script>
+            function cpyText() {
+                /* Get the text field */
+                var copyText = document.getElementById("texturl");
+              
+                /* Select the text field */
+                copyText.select();
+              
+                /* Copy the text inside the text field */
+                document.execCommand("copy");
+              
+                /* Alert the copied text */
+                alert("Copied the text: " + copyText.value);
+              } 
+        </script>
 
 @endsection
 

@@ -7,9 +7,12 @@ class SiteData extends CI_Controller
     {
         parent::__construct();
 
-        // if(!$this->session->userdata('auth_status')){
-		// 	redirect(base_url('Authentication'));
-        // }    
+        if(!$this->session->userdata('auth_status'))
+            redirect(base_url('Authentication'));   
+        else
+            if($this->session->userdata('auth_role')!= "Administrator")           
+                redirect(base_url('Authentication'));   
+        
         $this->load->model('Site');
         $this->load->model('User');
         $this->load->model('Screen_Device');

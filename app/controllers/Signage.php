@@ -7,9 +7,9 @@ class Signage extends CI_Controller
     {
         parent::__construct();
 
-        // if(!$this->session->userdata('auth_status')){
-		// 	redirect(base_url('Authentication'));
-        // }
+        if(!$this->session->userdata('auth_status')){
+			redirect(base_url('Authentication'));
+        }
         
         $this->load->model('User');
         $this->load->model('Screen_Device');
@@ -21,7 +21,8 @@ class Signage extends CI_Controller
 
     public function index()
     {
-        echo $this->blade->stream('administrator.home');
+        $data = $this->session->all_userdata();
+        echo $this->blade->stream('administrator.home',$data);
     }
 
     function screenView($site_id,$screen_id,$token)
@@ -81,5 +82,29 @@ class Signage extends CI_Controller
             redirect(base_url('site/show/').$this->input->post('site_id'));
         }
 
+    }
+
+    function screenController($site_id,$screen_id,$token)
+    {
+        $site               =   Site::find($site_id);
+        $screen             =   Screen_Device::find($screen_id);
+        $data['screen']     =   Screen_Device::find($screen_id)->first();
+        
+
+        if($site->token == $token)
+        {
+            if($screen->site_id == $site->id)
+            {                                                                          
+                echo $this->blade->stream('administrator.screen.screen_controller',$data);
+            }
+            else
+            {
+                redirect(base_url('site/show/').$this->input->post('site_id'));
+            }
+        }
+        else
+        {
+            redirect(base_url('site/show/').$this->input->post('site_id'));
+        }
     }
 }

@@ -2,9 +2,9 @@
     <head>
         <style>
             .container {
-                width: 100%;
-                height: 100%;
-                position: relative;
+                    width: 100%;
+                    height: 100%;
+                    position: relative;
                 }
                 .container .slide {
                     z-index: 1;
@@ -25,11 +25,11 @@
 
                 }
                 .container .slide.show {
-                opacity: 1;
-                animation: fade in 2s;
-                -webkit-transition: opacity 1s ease-in-out;
-                -moz-transition: opacity 1s ease-in-out;
-                -o-transition: opacity 1s ease-in-out;
+                    transition: opacity 1s ease-in-out;
+                    animation: fade in 2s;
+                    -webkit-transition: opacity 1s ease-in-out;
+                    -moz-transition: opacity 1s ease-in-out;
+                    -o-transition: opacity 1s ease-in-out;
                 }
     
         </style>

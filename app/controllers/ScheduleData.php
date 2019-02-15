@@ -50,13 +50,17 @@ class ScheduleData extends CI_Controller
 
     function scheduleDelete($id,$site)
     {
+
         if(!isset($id) && !isset($site))
             redirect(base_url('site/list'));
 
         $flight     = Schedule::find($id);        
 
         if($flight->delete())
-            redirect(base_url('site/show/').$site);
+            if($this->session->userdata('auth_role')== "Administrator")
+                redirect(base_url('site/show/').$site);
+            else
+                redirect(base_url('screen/MyScreen/'));
         else
             redirect(base_url('site/show/').$site);
     }

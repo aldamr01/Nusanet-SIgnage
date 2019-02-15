@@ -47,6 +47,7 @@ class Auth extends CI_Controller
                   'auth_name'               => $Udata['name'],
                   'auth_password'           => $Udata['password'],
                   'auth_role'               => $Udata['role'],
+                  'auth_site'               => $Udata['site_id'],
                   'auth_status'             => TRUE                
                 );
             

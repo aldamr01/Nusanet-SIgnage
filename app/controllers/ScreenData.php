@@ -13,6 +13,7 @@ class ScreenData extends CI_Controller
 
         $this->load->model('Screen_Device');
         $this->load->model('Content');
+        $this->load->model('Site');
     }
 
     function screenCreate()

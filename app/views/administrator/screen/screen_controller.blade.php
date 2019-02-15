@@ -8,17 +8,17 @@
 <!-- main area -->
     <div class="main-content">
         <div class="content-view">
-        <div class="card">            
-            <div class="card-block">                
-                @if ($screen['url'])
-                    <div class="embed-responsive embed-responsive-16by9">
-                        <iframe class="embed-responsive-item" src="{{$screen['url']}}" allowfullscreen></iframe>
-                    </div>
-                @else
-                    <i>please set device controller url....</i>
-                @endif                
+            <div class="card">            
+                <div class="card-block">                
+                    @if ($screen['url'])
+                        <div class="embed-responsive embed-responsive-16by9">
+                            <iframe class="embed-responsive-item" src="{{$screen['url']}}" allowfullscreen></iframe>
+                        </div>
+                    @else
+                        <i>please set device controller url....</i>
+                    @endif                
+                </div>
             </div>
-        </div>
         </div>
         <!-- bottom footer -->
         <div class="content-footer">

@@ -21,6 +21,9 @@ $route['user/list']                                         =   'UserView/userLi
 $route['user/change/(:num)']                                =   'UserView/userUpdate/$1';
 $route['user/create']                                       =   'UserView/userCreate';
 
+$route['screen/MyScreen']                                   =   'ScreenView/screenMe';
+$route['screen/MyScreen/(:num)/(:any)']                     =   'ScreenView/screenFind/$1/$2';
+
 //API
 $route['API/UserLogin']                                     =   'Auth/checkUser';
 

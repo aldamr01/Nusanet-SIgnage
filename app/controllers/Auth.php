@@ -44,6 +44,7 @@ class Auth extends CI_Controller
                 $Newdata  = array(
                   'auth_id'                 => $Udata['id'],
                   'auth_username'           => $Udata['username'],
+                  'auth_name'               => $Udata['name'],
                   'auth_password'           => $Udata['password'],
                   'auth_role'               => $Udata['role'],
                   'auth_status'             => TRUE                

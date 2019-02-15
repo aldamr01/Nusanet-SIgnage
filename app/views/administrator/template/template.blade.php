@@ -58,12 +58,11 @@
 						<img src="{{base_url('images/nusanet.jpg')}}" class="avatar img-circle" alt="user" title="user" />
 					</div>
 					<div class="user-info expanding-hidden"> 
-						{{--  {{$auth_router_name}}  --}}
-						{{--  <small class="bold">{{$auth_role}}</small>  --}}
+						{{$thisuser['auth_name']}}
+						 <small class="bold">{{$thisuser['auth_role']}}</small> 
 					</div>
 				</a>
-				<div class="dropdown-menu">								
-					{{--  <a class="dropdown-item" href="{{base_url('user/change/')}}{{$auth_id}}">Setting</a>						  --}}
+				<div class="dropdown-menu">													
 					<a class="dropdown-item" href="{{base_url('Logoff')}}">Logout</a>
 				</div>
 			</div>

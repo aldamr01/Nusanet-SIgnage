@@ -18,20 +18,20 @@ class UserView extends CI_Controller
 
     public function userList()
     {
-        $data   =   $this->session->all_userdata();
+        $data['thisuser']   = $this->session->all_userdata();
         echo $this->blade->stream('administrator.user.user_list',$data);
     }
 
     public function userUpdate($id)
     {                    
-        $data           =   $this->session->all_userdata();
+        $data['thisuser']   = $this->session->all_userdata();
         $data['data']   =   User::with('datauser')->where('id',$id)->first();        
         echo $this->blade->stream('administrator.user.user_update',$data);
     }
 
     public function userCreate()
     {
-        $data   =   $this->session->all_userdata();
+        $data['thisuser']   = $this->session->all_userdata();
         echo $this->blade->stream('administrator.user.user_create',$data);
     }
 }

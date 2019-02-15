@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
 $route['default_controller']                                =   'Signage';
-$route['404_override']                                      =   'Signage';
+$route['404_override']                                      =   'Signage/er404';
 $route['translate_uri_dashes']                              =   FALSE;
 
 //SCREEN URL

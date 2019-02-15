@@ -23,19 +23,19 @@ class SiteView extends CI_Controller
 
     function siteList()
     {
-        $data = $this->session->all_userdata();
+        $data['thisuser']   = $this->session->all_userdata();
         echo $this->blade->stream('administrator.site.site_list',$data);
     }
 
     function siteCreate()
     {
-        $data = $this->session->all_userdata();
+        $data['thisuser']   = $this->session->all_userdata();
         echo $this->blade->stream('administrator.site.site_create',$data);
     }
 
     function siteUpdate($id)
     {
-        $data = $this->session->all_userdata();
+        $data['thisuser']   = $this->session->all_userdata();
         $data['data']   =   Site::find($id);
         echo $this->blade->stream('administrator.site.site_update',$data);
     }
@@ -53,7 +53,7 @@ class SiteView extends CI_Controller
             $final  =   array(
                 'data'  => $data
             );
-            $data = $this->session->all_userdata();
+            $data['thisuser']   = $this->session->all_userdata();
             
             echo $this->blade->stream('administrator.site.site_view',$data);
         }            

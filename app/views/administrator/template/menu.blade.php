@@ -1,4 +1,4 @@
-@if ($auth_role=='Administrator')
+@if ($thisuser['auth_role']=='Administrator')
 <!-- main navigation -->
 <nav>
 	<p class="nav-title">NAVIGATION</p>
@@ -55,7 +55,7 @@
 <!-- /main navigation -->
 
 
-@elseif ($auth_role=='User')
+@elseif ($thisuser['auth_role']=='User')
 
 <!-- main navigation -->
 <nav>

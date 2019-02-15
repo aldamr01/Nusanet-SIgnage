@@ -58,12 +58,12 @@
 						<img src="<?php echo e(base_url('images/nusanet.jpg')); ?>" class="avatar img-circle" alt="user" title="user" />
 					</div>
 					<div class="user-info expanding-hidden"> 
-						<?php /*  <?php echo e($auth_router_name); ?>  */ ?>
-						<?php /*  <small class="bold"><?php echo e($auth_role); ?></small>  */ ?>
+						<?php echo e($thisuser['auth_name']); ?>
+
+						 <small class="bold"><?php echo e($thisuser['auth_role']); ?></small> 
 					</div>
 				</a>
-				<div class="dropdown-menu">								
-					<?php /*  <a class="dropdown-item" href="<?php echo e(base_url('user/change/')); ?><?php echo e($auth_id); ?>">Setting</a>						  */ ?>
+				<div class="dropdown-menu">													
 					<a class="dropdown-item" href="<?php echo e(base_url('Logoff')); ?>">Logout</a>
 				</div>
 			</div>

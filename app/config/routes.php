@@ -8,7 +8,7 @@ $route['translate_uri_dashes']                              =   FALSE;
 
 //SCREEN URL
 $route['screen/(:num)/(:num)/(:any)']                       =   'Signage/screenView/$1/$2/$3';
-$route['screen/controller/(:num)/(:num)/(:any)']            =   'Signage/screenController/$1/$2/$3';
+$route['screen/controller/(:num)/(:num)/(:any)']            =   'ScreenData/screenController/$1/$2/$3';
 
 //VIEW
 $route['site/list']                                         =   'SiteView/siteList';

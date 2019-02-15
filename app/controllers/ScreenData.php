@@ -74,5 +74,30 @@ class ScreenData extends CI_Controller
         else    
             redirect(base_url('site/show/').$this->input->post('site_id',TRUE));
     }
+
+    function screenController($site_id,$screen_id,$token)
+    {
+        $site               =   Site::find($site_id);
+        $screen             =   Screen_Device::find($screen_id);
+        $data['screen']     =   Screen_Device::where('id',$screen_id)->first();
+        $data['thisuser']   =   $this->session->all_userdata();
+        
+
+        if($site->token == $token)
+        {
+            if($screen->site_id == $site->id)
+            {                                 
+                echo $this->blade->stream('administrator.screen.screen_controller',$data);
+            }
+            else
+            {
+                redirect(base_url('site/show/').$this->input->post('site_id'));
+            }
+        }
+        else
+        {
+            redirect(base_url('site/show/').$this->input->post('site_id'));
+        }
+    }
 }
 

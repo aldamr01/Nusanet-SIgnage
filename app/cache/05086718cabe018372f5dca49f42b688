@@ -1,22 +1,20 @@
-@extends('administrator.template.template')
+<?php $__env->startSection('title'); ?>
+	<?php echo e($screen['name']); ?> Panel
+<?php $__env->stopSection(); ?>
 
-@section('title')
-	{{$screen['name']}} Panel
-@endsection
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 <!-- main area -->
     <div class="main-content">
         <div class="content-view">
             <div class="card">            
                 <div class="card-block">                
-                    @if ($screen['url'])
+                    <?php if($screen['url']): ?>
                         <div class="embed-responsive embed-responsive-16by9">
-                            <iframe class="embed-responsive-item" src="{{$screen['url']}}" allowfullscreen></iframe>
+                            <iframe class="embed-responsive-item" src="<?php echo e($screen['url']); ?>" allowfullscreen></iframe>
                         </div>
-                    @else
+                    <?php else: ?>
                         <i>please set device controller url....</i>
-                    @endif                
+                    <?php endif; ?>                
                 </div>
             </div>
         </div>
@@ -52,13 +50,15 @@
         <!-- /bottom footer -->
     </div>
 <!-- /main area -->
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('corejs')
+<?php $__env->startSection('corejs'); ?>
     
     <!-- end initialize page scripts -->
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('menu')
-    @include('administrator.template.menu')    
-@endsection
+<?php $__env->startSection('menu'); ?>
+    <?php echo $__env->make('administrator.template.menu', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>    
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('administrator.template.template', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

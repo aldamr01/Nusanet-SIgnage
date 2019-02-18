@@ -30,6 +30,7 @@
 	<link rel="stylesheet" href="{{base_url('styles/app.css')}}" id="load_styles_before"/>
 	<link rel="stylesheet" href="{{base_url('styles/app.skins.css')}} "/>
 	<script src="{{base_url('scripts/timer.js')}}"></script>
+
 	<!-- endbuild -->
 	
 </head>

@@ -1,5 +1,5 @@
 <?php $__env->startSection('title'); ?>
-	Nusanet-Router View Application
+	Nusanet-Digital Signage
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('content'); ?>
@@ -52,7 +52,7 @@
 				<div class="col-lg-12">
 					<div class="card">
 						<div class="card-header no-bg b-a-0">
-							Line series
+							User Statistic
 						</div>
 						<div class="card-block">
 							<div class="chart line" style="height:250px"></div>

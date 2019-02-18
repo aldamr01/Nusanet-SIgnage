@@ -51,29 +51,42 @@ class ScreenData extends CI_Controller
 
     function screenUpdate()
     {
-        $this->form_validation->set_rules('name', 'Name', 'required');
-        $this->form_validation->set_rules('status', 'status', 'required');
-        $this->form_validation->set_rules('id', 'id', 'required');
-        $this->form_validation->set_rules('description', 'description', 'required');        
-        $this->form_validation->set_rules('site_id', 'site_id', 'required');        ;
-        $this->form_validation->set_rules('url', 'url', 'required');
+        if($this->session->userdata('auth_role')== "Administrator")  
+        {
+            $this->form_validation->set_rules('name', 'Name', 'required');
+            $this->form_validation->set_rules('status', 'status', 'required');
+            $this->form_validation->set_rules('id', 'id', 'required');
+            $this->form_validation->set_rules('description', 'description', 'required');        
+            $this->form_validation->set_rules('site_id', 'site_id', 'required');        ;
+            $this->form_validation->set_rules('url', 'url', 'required');
+        }
+        else 
+        {
+            $this->form_validation->set_rules('name', 'Name', 'required');
+            $this->form_validation->set_rules('id', 'id', 'required');
+            $this->form_validation->set_rules('description', 'description', 'required');        
+            $this->form_validation->set_rules('url', 'url', 'required');
+        }
+        
 
         
         $update_screen      =   Screen_Device::find($this->input->post('id',TRUE));                
                 
         $update_screen->name            =  $this->input->post('name');
-        $update_screen->description     =  $this->input->post('description');
-        $update_screen->status          =  $this->input->post('status');     
+        $update_screen->description     =  $this->input->post('description');        
         $update_screen->url             =  $this->input->post('url');
    
        
         if ($this->form_validation->run())
             if($update_screen->save())        
-                redirect(base_url('site/show/').$this->input->post('site_id',TRUE));
+                if($this->session->userdata('auth_role')!= "Administrator")
+                    redirect(base_url(''));
+                else
+                    redirect(base_url('site/show/').$this->input->post('site_id',TRUE));
             else
-                redirect(base_url('site/show/').$this->input->post('site_id',TRUE));
+                echo "x";//redirect(base_url('site/show/').$this->input->post('site_id',TRUE));
         else    
-            redirect(base_url('site/show/').$this->input->post('site_id',TRUE));
+        echo "x";//redirect(base_url('site/show/').$this->input->post('site_id',TRUE));
     }
 
     function screenController($site_id,$screen_id,$token)

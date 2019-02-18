@@ -11,7 +11,13 @@
 
 
 <div class="main-content">
+    
 	<div class="content-view">
+        
+        <a class="btn btn-info" href="" data-toggle="modal" data-target=".confgx"> 
+            <i style="float:left" class='material-icons'>settings</i>
+            Screen Configuration
+        </a>        
 		<div class="card">   
 			<div class="card-header no-bg b-a-0">
 				<b>Device Screen Controller</b>				
@@ -66,7 +72,7 @@
                                         <td>{{$val['end']}}</td>                                        
                                         <td>{{$val['for_date']}}</td>
                                         <td>
-                                            <a  class="btn btn-danger" title='Drop' href='{{base_url("API/ScheduleDrop/").$val["id"]."/".$site["id"]}}' onclick="confirm('Want to Delete it ?')"><i class='material-icons'>delete</i></a>
+                                            <a  class="btn btn-danger" title='Drop' href='{{base_url("API/ScheduleDrop/").$val["id"]."/".$site["id"]}}' onclick="return confirm('Want to Delete it ?')"><i class='material-icons'>delete</i></a>
                                         </td>
                                     </tr>
                                     <?php $loop++?>
@@ -112,7 +118,7 @@
                                             @endif                                        
                                         </td>
                                         <td>
-                                            <a  class="btn btn-danger" title='Drop' href='{{base_url("API/ContentDrop/").$val["id"]."/".$site["id"]}}' onclick="confirm('Want to Delete it ?')"><i class='material-icons'>delete</i></a>
+                                            <a  class="btn btn-danger" title='Drop' href='{{base_url("API/ContentDrop/").$val["id"]."/".$site["id"]}}' onclick="return confirm('Want to Delete it ?')"><i class='material-icons'>delete</i></a>
                                         </td>
                                     </tr>
                                     <?php $loop++?>
@@ -151,11 +157,7 @@
                         Screen Device
                     </label>
                     <select class="form-control" id="exampleSelect1" name="screen_id"> 
-                        @foreach ($screen as $val)    
-                            @if ($val['type']!=1)
-                                <option name="screen_id" value="{{$val['id']}}">{{$val['name']}}</option>                            
-                            @endif                                                    
-                        @endforeach
+                        <option name="screen_id" value="{{$screen['id']}}">{{$screen['name']}}</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -174,9 +176,7 @@
                     id="exampleInputEmail1" placeholder="input file here.." name="file" required/>
                 </div>
                 <input type="hidden" name="site_id" hidden="hidden" value="{{$site['id']}}">
-                @foreach ($screen as $val)
-                    <input type="hidden" name="screen{{$val['id']}}"  value="{{$val['name']}}" hidden="hidden">
-                @endforeach
+                <input type="hidden" name="screen{{$screen['id']}}"  value="{{$screen['name']}}" hidden="hidden">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -235,17 +235,11 @@
                         Screen Device
                     </label>
                     <select class="form-control" id="exampleSelect1" name="screen_id"> 
-                        @foreach ($screen as $val)   
-                            @if($val['type']==1)                         
-                                <option name="screen_id" value="{{$val['id']}}">{{$val['name']}}</option>                            
-                            @endif
-                        @endforeach
+                        <option name="screen_id" value="{{$screen['id']}}">{{$screen['name']}}</option>                                                        
                     </select>
                 </div>
                 <input type="hidden" name="site_id" hidden="hidden" value="{{$site['id']}}">
-                @foreach ($screen as $val)
-                    <input type="hidden" name="screen{{$val['id']}}"  value="{{$val['name']}}" hidden="hidden">
-                @endforeach
+                <input type="hidden" name="screen{{$screen['id']}}"  value="{{$screen['name']}}" hidden="hidden">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -256,6 +250,48 @@
     </div>
 </form>
 
+{!!form_open('API/ScreenEdit')!!}
+    <div class="modal fade confgx" id="confgx" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">{{$screen['name']}}</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="exampleInputName1">Screen Name</label>
+                    <input type="text" class="form-control"
+                        name="name" id="exampleInputName1" placeholder="id" value="{{$screen['name']}}" />
+                </div>                            
+                <div class="form-group">
+                    <label for="exampleInputName1">Device Controller URL</label>
+                    <input type="text" class="form-control"
+                        id="exampleInputName1" placeholder="Name" value="{{$screen['url']}}" name="url"/>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputName1">Screen Template</label>
+                    <input type="text" class="form-control"
+                        id="exampleInputName1" placeholder="Name" readonly="readonly" value="Template {{$screen['type']}}"/>                            
+                </div>                
+                <div class="form-group">
+                    <label for="exampleInputUsername1">Description</label>
+                    <input type="text" class="form-control"
+                        name="description" id="exampleInputName1" placeholder="id" value="{{$screen['description']}}" />
+                </div> 
+                <input type="hidden" name="id" value="{{$screen['id']}}" hidden="hidden">
+            </div>
+            <div class="modal-footer">
+                <a style="float:left" class="btn btn-danger" title='Drop' href='#'><i class='material-icons'>delete</i>Drop</a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save Change</button>
+            </div>
+            </div>
+        </div>
+    </div>    
+</form>
 
 @endsection
 
@@ -268,23 +304,7 @@
                 $(document).ready( function () {
                     $('.datatable').DataTable();
                 } );
-        </script>
-    <!-- end page scripts -->
-        <script>
-            function cpyText() {
-                /* Get the text field */
-                var copyText = document.getElementById("texturl");
-              
-                /* Select the text field */
-                copyText.select();
-              
-                /* Copy the text inside the text field */
-                document.execCommand("copy");
-              
-                /* Alert the copied text */
-                alert("Copied the text: " + copyText.value);
-              } 
-        </script>
+        </script>  
 
 @endsection
 

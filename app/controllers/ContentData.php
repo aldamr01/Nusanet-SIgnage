@@ -27,8 +27,11 @@ class ContentData extends CI_Controller
              
         
         if($this->form_validation->run()== FALSE)
-        {         
-            redirect(base_url('site/show/').$this->input->post('site_id')); 
+        {     
+            if($this->session->userdata('auth_role')== "Administrator") 
+                redirect(base_url('site/show/').$this->input->post('site_id'));     
+            else
+                redirect(base_url());                
         }
         else
         {              
@@ -56,16 +59,22 @@ class ContentData extends CI_Controller
                 $error = array(
                     'error' => $this->upload->display_errors()
                 );
-                echo json_encode($error);
-                die();
-                redirect(base_url('site/show/').$this->input->post('site_id')); 
+
+                if($this->session->userdata('auth_role')== "Administrator") 
+                    redirect(base_url('site/show/').$this->input->post('site_id'));     
+                else
+                    redirect(base_url());    
             }
             else
             {
                 $register_content->filename     =   $this->amirrule_lib->filecheck($fimage);                
                 $register_content->type         =   $this->amirrule_lib->formatfile($fimage);
                 $register_content->save();        
-                redirect(base_url('site/show/').$this->input->post('site_id')); 
+
+                if($this->session->userdata('auth_role')== "Administrator") 
+                    redirect(base_url('site/show/').$this->input->post('site_id'));     
+                else
+                    redirect(base_url());    
             }
         }
     }
@@ -78,7 +87,10 @@ class ContentData extends CI_Controller
         $flight     = Content::find($id);        
 
         if($flight->delete())
-            redirect(base_url('site/show/').$site);
+            if($this->session->userdata('auth_role')== "Administrator") 
+                redirect(base_url('site/show/').$site);
+            else
+                redirect(base_url());                
         else
             redirect(base_url('site/show/').$site); 
     }

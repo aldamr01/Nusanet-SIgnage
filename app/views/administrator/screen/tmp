@@ -1,0 +1,45 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+        <link rel="stylesheet" href="{{base_url('vendor/bootstrap/dist/css/bootstrap.css')}}" />
+        <script src="{{base_url('vendor/jquery/dist/jquery.js')}}"></script>
+        <script src="{{base_url('vendor/bootstrap/dist/js/bootstrap.js')}}"></script>
+        <style>
+            html {
+                height: 100%;
+            }
+            * { padding: 0; margin: 0; }
+            html, body, #fullheight {
+                min-height: 100% !important;
+                height: 100%;
+                padding:0;
+            }      
+            .row{
+                margin:0;
+            }      
+        </style>
+        
+    </head>
+    <body>
+        <div style="background:darkorange" id="fullheight" class="col-md-6" >
+            
+        </div>                        
+        <div style="background:darkkhaki" id="fullheight" class="col-md-6">
+            <div class="row">
+                <div class="col-md-4 offset-MD-4">
+                    <img class="img-rounded" src="https://media-cdn.tripadvisor.com/media/photo-s/08/ec/00/96/parkview-hotel.jpg" style="width:100px;height100px;" alt="">
+                </div>
+            </div>
+            <div class="row">
+                test
+            </div>
+            <div class="row">
+                test
+            </div>
+        </div>    
+    </body>
+    </html>

@@ -40,8 +40,11 @@ class ScheduleData extends CI_Controller
         $register_schedule->site_id         =  $this->input->post('site_id');        
 
         if ($this->form_validation->run())
-            if($register_schedule->save())        
-                redirect(base_url('site/show/').$this->input->post('site_id'));
+            if($register_schedule->save()) 
+                if($this->session->userdata('auth_role')== "Administrator")       
+                    redirect(base_url('site/show/').$this->input->post('site_id'));
+                else
+                    redirect(base_url());
             else
                 redirect(base_url('site/show/').$this->input->post('site_id'));
         else    
@@ -60,7 +63,7 @@ class ScheduleData extends CI_Controller
             if($this->session->userdata('auth_role')== "Administrator")
                 redirect(base_url('site/show/').$site);
             else
-                redirect(base_url('screen/MyScreen/'));
+                redirect(base_url());
         else
             redirect(base_url('site/show/').$site);
     }

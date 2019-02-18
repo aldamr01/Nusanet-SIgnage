@@ -1,7 +1,7 @@
 @extends('administrator.template.template')
 
 @section('title')
-	My Available Screen
+	{{$site['name']}} Signage Panel
 @endsection
 
 @section('content')
@@ -21,11 +21,11 @@
                         </div>
                         <div class="col-md-8">
                             <div class="row">
-                                <a target="_blank" href="{{base_url('screen/MyScreen/').$val['id'].'/'.$site_id}}" class="col-md-12 bg-warning" style="text-align:center">Screen Controller</a>
+                                <a  href="{{base_url('screen/MyScreen/').$val['id'].'/'.$site_id}}" class="col-md-12 bg-warning" style="text-align:center">Screen Controller</a>
                             </div>
                             <br>
                             <div class="row">
-                                @if ($val['status'])
+                                @if ($val['url'] && ping_url($val['url']))
                                     <a target="_blank" href="{{base_url('screen/').$thisuser['auth_site'].'/'.$val['id'].'/'.$site_id}}" class="col-md-12 bg-info" style="text-align:center">View Screen</a>
                                 @else
                                     <a class="col-md-12 bg-default text-muted" style="text-align:center">View Screen</a>
@@ -35,7 +35,7 @@
                       </div>
                       <div class="card-footer">
                         Status : &nbsp; 
-                        @if ($val['status'])
+                        @if (ping_url($val['url']))
                             <span style="color:seagreen">Alive</span>    
                         @else
                             <span style="color:crimson">Unreachable</span>

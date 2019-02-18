@@ -17,8 +17,24 @@ class Signage extends CI_Controller
 
     public function index()
     {
-        $data['thisuser']   = $this->session->all_userdata();
-        echo $this->blade->stream('administrator.home',$data);
+        if(!$this->session->userdata('auth_status'))
+			redirect(base_url('Authentication'));
+        
+
+        if($this->session->userdata('auth_role')== "Administrator")
+        {
+            $data['thisuser']   = $this->session->all_userdata();
+            echo $this->blade->stream('administrator.home',$data);
+        }
+        else
+        {
+            $temp                   =   Site::find($this->session->userdata('auth_site'));        
+            $data['site']           =   $temp;
+            $data['site_id']        =   $temp['token'];
+            $data['thisuser']       =   $this->session->all_userdata();        
+            $data['screen']         =   Screen_Device::where('site_id',$this->session->userdata("auth_site"))->get();
+            echo $this->blade->stream('administrator.screen.screen_list',$data);
+        }
     }
 
     public function er404()

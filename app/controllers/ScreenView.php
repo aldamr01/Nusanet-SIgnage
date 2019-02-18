@@ -16,15 +16,7 @@ class ScreenView extends CI_Controller
 
     function screenMe()
     {
-        if(!$this->session->userdata('auth_status')){
-			redirect(base_url('Authentication'));
-        }
-        
-        $temp                   =   Site::find($this->session->userdata('auth_site'));        
-        $data['site_id']        =   $temp['token'];
-        $data['thisuser']       =   $this->session->all_userdata();        
-        $data['screen']         =   Screen_Device::where('site_id',$this->session->userdata("auth_site"))->get();
-        echo $this->blade->stream('administrator.screen.screen_list',$data);        
+                
     }
 
     function screenFind($id,$token)
@@ -33,9 +25,13 @@ class ScreenView extends CI_Controller
 			redirect(base_url('Authentication'));
         }
                         
+        $where                  =   array(
+            'site_id'   =>  $this->session->userdata('auth_site'),
+            'id'        =>  $id
+        );
         $data['thisuser']       =   $this->session->all_userdata();        
         $data['screen_url']     =   Screen_Device::find($id);
-        $data['screen']         =   Screen_Device::where('site_id',$this->session->userdata('auth_site'))->get();
+        $data['screen']         =   Screen_Device::where($where)->first();
         $data['schedule']       =   Schedule::where('device_id',$id)->get();
         $data['content']        =   Content::where('device_id',$id)->get();
         $data['site']           =   Site::find($this->session->userdata('auth_site'));

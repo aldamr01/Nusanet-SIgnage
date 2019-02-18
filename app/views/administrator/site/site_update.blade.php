@@ -1,7 +1,7 @@
 @extends('administrator.template.template')
 
 @section('title')
-    Create New Site
+    Site Setting Panel
 @endsection
 
 @section('content')

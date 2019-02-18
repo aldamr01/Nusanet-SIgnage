@@ -1,7 +1,7 @@
 @extends('administrator.template.template')
 
 @section('title')
-	Nusanet-Router View Application
+	Nusanet-Digital Signage
 @endsection
 
 @section('content')
@@ -54,7 +54,7 @@
 				<div class="col-lg-12">
 					<div class="card">
 						<div class="card-header no-bg b-a-0">
-							Line series
+							User Statistic
 						</div>
 						<div class="card-block">
 							<div class="chart line" style="height:250px"></div>

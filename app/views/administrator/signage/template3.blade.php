@@ -1,6 +1,6 @@
 <html>
     <head>
-        <meta http-equiv="refresh" content="5" >
+        <meta http-equiv="refresh" content="10" >
         <style>
             .container {
                 width: 100%;
@@ -74,7 +74,7 @@
                     
                     // Hide the previous
                     $imageEls.eq(index - 1).removeClass('show');
-                }, 5000);
+                }, 3000);
             };
             
             // Document Ready.

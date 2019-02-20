@@ -48,20 +48,7 @@
 						</div>
 					</div>
 				</div>	
-			</div>
-
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="card">
-						<div class="card-header no-bg b-a-0">
-							User Statistic
-						</div>
-						<div class="card-block">
-							<div class="chart line" style="height:250px"></div>
-						</div>
-					</div>
-				</div>
-			</div>
+			</div>			
 		</div>
 		@include('administrator.template.footer')
 	</div>

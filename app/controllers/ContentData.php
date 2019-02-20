@@ -82,16 +82,35 @@ class ContentData extends CI_Controller
     function contentDelete($id,$site)
     {
         if(!isset($id) && !isset($site))
-            redirect(base_url('site/list'));
+        redirect(base_url('site/list'));
 
-        $flight     = Content::find($id);        
-
-        if($flight->delete())
-            if($this->session->userdata('auth_role')== "Administrator") 
-                redirect(base_url('site/show/').$site);
+        if($this->session->userdata('auth_role')!= "Administrator")
+        {
+            if($site != $this->session->userdata('auth_status'))
+            {
+                redirect(base_url('site/list'));  
+            }
             else
-                redirect(base_url());                
-        else
-            redirect(base_url('site/show/').$site); 
+            {
+                $flight     = Content::find($id);        
+
+                if($flight->delete())                    
+                    redirect(base_url());
+                else
+                    redirect(base_url());
+            }          
+        }
+        else 
+        {
+            $flight     = Content::find($id);        
+
+            if($flight->delete())
+                if($this->session->userdata('auth_role')== "Administrator")
+                    redirect(base_url('site/show/').$site);
+                else
+                    redirect(base_url());
+            else
+                redirect(base_url('site/show/').$site);
+        }
     }
 }

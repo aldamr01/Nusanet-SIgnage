@@ -80,9 +80,9 @@ Site {{$site['name']}}
                 <div class="card">
                     <div class="card-header no-bg b-a-0">
                         <b>Template Available</b>    
-                        <a href="" data-toggle="modal" data-target=".adduser"> 
+                        {{--  <a href="" data-toggle="modal" data-target=""> 
                             <i style="float:right" class='material-icons'>add</i>
-                        </a>                   
+                        </a>                     --}}
                     </div>
                     <hr>
                     <div class="card-block">                                           
@@ -245,7 +245,7 @@ Site {{$site['name']}}
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
-                    <h4 class="modal-title" id="myModalLabel">Screen Name</h4>
+                    <h4 class="modal-title" id="myModalLabel">{{$val['name']}}</h4>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
@@ -271,7 +271,7 @@ Site {{$site['name']}}
                         <input type="text" class="form-control"
                             id="exampleInputName1" placeholder="Name" readonly="readonly" value="Template {{$val['type']}}"/>                            
                     </div>
-                    <div class="form-group">
+                    {{--  <div class="form-group">
                         <label for="exampleInputName1">Screen Status</label><br>
                         <select name="status" id="" class="form-control">
                             @if (!$val['status'])
@@ -284,7 +284,7 @@ Site {{$site['name']}}
                         </select>
                         <input type="hidden" name="id" hidden="hidden" id="" value="{{$val['id']}}">
                         <input type="hidden" name="site_id" hidden="hidden" id="" value="{{$site['id']}}">
-                    </div>
+                    </div>  --}}
                     <div class="form-group">
                         <label for="exampleInputUsername1">Description</label>
                         <input type="text" class="form-control"
@@ -292,7 +292,7 @@ Site {{$site['name']}}
                     </div>                                            
                 </div>
                 <div class="modal-footer">
-                    <a style="float:left" class="btn btn-danger" title='Drop' href='#'><i class='material-icons'>delete</i>Drop</a>
+                    <a style="float:left" class="btn btn-danger" title='Drop' href='{{base_url("API/ScreenDrop/").$val["id"]."/".$site["id"]}}'><i class='material-icons'>delete</i>Drop</a>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary">Save Change</button>
                 </div>
@@ -338,7 +338,7 @@ Site {{$site['name']}}
                 <div class="form-group">
                     <label for="exampleInputUsername1">Description</label>
                     <input type="text" class="form-control"
-                        id="exampleInputUsername1" placeholder="Username" name="desc" required/>
+                        id="exampleInputUsername1" placeholder="Description.." name="desc" required/>
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Image / Video</label>

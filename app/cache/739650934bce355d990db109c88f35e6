@@ -1,15 +1,14 @@
-@extends('administrator.template.template')
-
-@section('title')
+<?php $__env->startSection('title'); ?>
     Site Setting Panel
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
 <div class="main-content">
 
     <div class="content-view">
         <div class="row">
-            {!!form_open('API/SiteEdit')!!}
+            <?php echo form_open('API/SiteEdit'); ?>
+
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header no-bg b-a-0">
@@ -23,27 +22,27 @@
                                 <label for="4">
                                     Name Site
                                 </label>
-                                <input value="{{$data['name']}}" required name="name" type="text" class="form-control" id="4" placeholder="ex : Hotel Santika or etc.."/>
+                                <input value="<?php echo e($data['name']); ?>" required name="name" type="text" class="form-control" id="4" placeholder="ex : Hotel Santika or etc.."/>
                             </fieldset>                
                             <fieldset class="form-group">
                                 <label for="exampleInputEmail1">
                                     Location
                                 </label>
-                                <input value="{{$data['location']}}" name="location" class="form-control" id="exampleInputEmail1" placeholder="Location Address" required />                                
+                                <input value="<?php echo e($data['location']); ?>" name="location" class="form-control" id="exampleInputEmail1" placeholder="Location Address" required />                                
                             </fieldset>
                             <fieldset class="form-group">
                                 <label for="exampleInputPassword1">
                                     Email
                                 </label>
-                                <input value="{{$data['email']}}" name="email" type="text" class="form-control" id="exampleInputPassword1" placeholder="email" required />
+                                <input value="<?php echo e($data['email']); ?>" name="email" type="text" class="form-control" id="exampleInputPassword1" placeholder="email" required />
                             </fieldset>  
                             <fieldset class="form-group">
                                 <label for="exampleInputPassword1">
                                     Phone
                                 </label>
-                                <input value="{{$data['phone']}}" name="phone" type="text" class="form-control" id="exampleInputPassword1" placeholder="phone" required />
+                                <input value="<?php echo e($data['phone']); ?>" name="phone" type="text" class="form-control" id="exampleInputPassword1" placeholder="phone" required />
                             </fieldset>   
-                            <input type="hidden" name="id" hidden="hidden" value="{{$data['id']}}" id="">                                                                         
+                            <input type="hidden" name="id" hidden="hidden" value="<?php echo e($data['id']); ?>" id="">                                                                         
                         </div>
                     </div>
                 </div>            
@@ -60,16 +59,17 @@
 
     </div>
 
-    @include('administrator.template.footer')
+    <?php echo $__env->make('administrator.template.footer', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 </div>
 
-@endsection
+<?php $__env->stopSection(); ?>
 
 
-@section('corejs')
+<?php $__env->startSection('corejs'); ?>
     
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('menu')
-    @include('administrator.template.menu')    
-@endsection
+<?php $__env->startSection('menu'); ?>
+    <?php echo $__env->make('administrator.template.menu', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>    
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('administrator.template.template', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

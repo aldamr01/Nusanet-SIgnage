@@ -1,15 +1,14 @@
-@extends('administrator.template.template')
-
-@section('title')
+<?php $__env->startSection('title'); ?>
     Create New Site
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
 <div class="main-content">
 
     <div class="content-view">
         <div class="row">
-            {!!form_open('API/SiteNew')!!}
+            <?php echo form_open('API/SiteNew'); ?>
+
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header no-bg b-a-0">
@@ -59,16 +58,17 @@
 
     </div>
 
-    @include('administrator.template.footer')
+    <?php echo $__env->make('administrator.template.footer', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 </div>
 
-@endsection
+<?php $__env->stopSection(); ?>
 
 
-@section('corejs')
+<?php $__env->startSection('corejs'); ?>
     
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('menu')
-    @include('administrator.template.menu')    
-@endsection
+<?php $__env->startSection('menu'); ?>
+    <?php echo $__env->make('administrator.template.menu', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>    
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('administrator.template.template', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

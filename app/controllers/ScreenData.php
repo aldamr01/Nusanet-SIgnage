@@ -113,5 +113,21 @@ class ScreenData extends CI_Controller
             redirect(base_url('site/show/').$this->input->post('site_id'));
         }
     }
+
+    function screenDelete($id,$site)
+    {
+        if(!isset($id) && !isset($site))
+            redirect(base_url('site/list'));
+
+        $flight     = Screen_Device::find($id);        
+
+        if($flight->delete())
+            if($this->session->userdata('auth_role')== "Administrator") 
+                redirect(base_url('site/show/').$site);
+            else
+                redirect(base_url());                
+        else
+            redirect(base_url('site/show/').$site); 
+    }
 }
 

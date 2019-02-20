@@ -37,6 +37,7 @@ $route['API/SiteView/(:num)']                               =   'SiteData/siteVi
 
 $route['API/ScreenNew']                                     =   'ScreenData/screenCreate';
 $route['API/ScreenEdit']                                    =   'ScreenData/screenUpdate';
+$route['API/ScreenDrop/(:num)/(:num)']                      =   'ScreenData/screenDelete/$1/$2';
 
 $route['API/ContentNew']                                    =   'ContentData/contentCreate';
 $route['API/ContentDrop/(:num)/(:num)']                     =   'ContentData/contentDelete/$1/$2';

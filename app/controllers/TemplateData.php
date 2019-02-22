@@ -65,7 +65,7 @@ class TemplateData extends CI_Controller
             }
             else 
             {
-                echo $nlogo          =   $update_template->logo;                
+                $nlogo          =   $update_template->logo;                
             }  
 
             $update_template->background   =   $nbackground;

@@ -53,28 +53,32 @@ class ScreenData extends CI_Controller
     {
         if($this->session->userdata('auth_role')== "Administrator")  
         {
-            $this->form_validation->set_rules('name', 'Name', 'required');
-            $this->form_validation->set_rules('status', 'status', 'required');
+            $this->form_validation->set_rules('name1', 'Name', 'required');
             $this->form_validation->set_rules('id', 'id', 'required');
             $this->form_validation->set_rules('description', 'description', 'required');        
             $this->form_validation->set_rules('site_id', 'site_id', 'required');        ;
             $this->form_validation->set_rules('url', 'url', 'required');
+            $this->form_validation->set_rules('template', 'template', 'required');
         }
         else 
         {
-            $this->form_validation->set_rules('name', 'Name', 'required');
+            $this->form_validation->set_rules('name1', 'Name', 'required');
             $this->form_validation->set_rules('id', 'id', 'required');
             $this->form_validation->set_rules('description', 'description', 'required');        
             $this->form_validation->set_rules('url', 'url', 'required');
+            $this->form_validation->set_rules('template', 'template', 'required');
         }
         
-
+        // header('Content-type:application/json');
+        // echo json_encode($this->input->post());
+        // die();
         
         $update_screen      =   Screen_Device::find($this->input->post('id',TRUE));                
                 
-        $update_screen->name            =  $this->input->post('name');
+        $update_screen->name            =  $this->input->post('name1');
         $update_screen->description     =  $this->input->post('description');        
         $update_screen->url             =  $this->input->post('url');
+        $update_screen->type            =  $this->input->post('template'); 
    
        
         if ($this->form_validation->run())
@@ -84,9 +88,9 @@ class ScreenData extends CI_Controller
                 else
                     redirect(base_url('site/show/').$this->input->post('site_id',TRUE));
             else
-                echo "x";//redirect(base_url('site/show/').$this->input->post('site_id',TRUE));
+                echo "x1";//redirect(base_url('site/show/').$this->input->post('site_id',TRUE));
         else    
-        echo "x";//redirect(base_url('site/show/').$this->input->post('site_id',TRUE));
+            echo validation_errors();//echo "x";//redirect(base_url('site/show/').$this->input->post('site_id',TRUE));
     }
 
     function screenController($site_id,$screen_id,$token)

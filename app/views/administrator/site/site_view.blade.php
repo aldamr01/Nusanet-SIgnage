@@ -172,7 +172,9 @@ Site {{$site['name']}}
                                         <td>{{$val['start']}}</td>
                                         <td>{{$val['end']}}</td>                                        
                                         <td>{{$val['for_date']}}</td>
-                                        <td>
+                                        <td style="display:inherit;">
+                                            
+                                            <a href="#" data-toggle="modal" data-target=".changeschedule{{$val['id']}}"  class="btn btn-info" title='Change' ><i class='material-icons'>update</i></a>
                                             <a  class="btn btn-danger" title='Drop' href='{{base_url("API/ScheduleDrop/").$val["id"]."/".$site["id"]}}' onclick="return confirm('Want to Delete it ?')"><i class='material-icons'>delete</i></a>
                                         </td>
                                     </tr>
@@ -218,7 +220,8 @@ Site {{$site['name']}}
                                                 <img style="max-height: 150px; max-width:70px" src="{{base_url('files/').$val['filename']}}" alt="">                                            
                                             @endif                                        
                                         </td>
-                                        <td>
+                                        <td style="display:table-cell;vertical-align:middle">
+                                            <a data-toggle="modal" data-target=".contentchange{{$val['id']}}"  class="btn btn-info" title='Change' href="#"><i class='material-icons'>update</i></a>
                                             <a  class="btn btn-danger" title='Drop' href='{{base_url("API/ContentDrop/").$val["id"]."/".$site["id"]}}' onclick="return confirm('Want to Delete it ?')"><i class='material-icons'>delete</i></a>
                                         </td>
                                     </tr>
@@ -251,7 +254,7 @@ Site {{$site['name']}}
                     <div class="form-group">
                         <label for="exampleInputName1">Screen Name</label>
                         <input type="text" class="form-control"
-                           name="name" id="exampleInputName1" placeholder="id" value="{{$val['name']}}" />
+                           name="name1" id="exampleInputName1" placeholder="id" value="{{$val['name']}}" />
                     </div>            
                     <div class="form-group">
                         <label for="exampleInputName1">Screen Url</label>
@@ -267,24 +270,23 @@ Site {{$site['name']}}
                             id="exampleInputName1" placeholder="Name" value="{{$val['url']}}" name="url"/>
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputName1">Screen Template</label>
-                        <input type="text" class="form-control"
-                            id="exampleInputName1" placeholder="Name" readonly="readonly" value="Template {{$val['type']}}"/>                            
-                    </div>
-                    {{--  <div class="form-group">
-                        <label for="exampleInputName1">Screen Status</label><br>
-                        <select name="status" id="" class="form-control">
-                            @if (!$val['status'])
-                                <option value="0" selected>Deceased</option>
-                                <option value="1">Alive</option>    
-                            @else
-                                <option value="0">Deceased</option>
-                                <option value="1" selected>Alive</option>
-                            @endif                                                        
+                        <label for="exampleSelect1">
+                            Template
+                        </label>
+                        <select class="form-control" id="exampleSelect1" name="template"> 
+                            @foreach ($template as $valx)   
+                                @if ($val['type']==$valx['type'])
+                                    <option value="{{$valx['type']}}" selected>Template {{$valx['type']}}</option>
+                                @else
+                                    <option value="{{$valx['type']}}">Template {{$valx['type']}}</option>                            
+                                @endif                                    
+                            @endforeach
                         </select>
+                    </div>
+
                         <input type="hidden" name="id" hidden="hidden" id="" value="{{$val['id']}}">
                         <input type="hidden" name="site_id" hidden="hidden" id="" value="{{$site['id']}}">
-                    </div>  --}}
+
                     <div class="form-group">
                         <label for="exampleInputUsername1">Description</label>
                         <input type="text" class="form-control"
@@ -359,6 +361,75 @@ Site {{$site['name']}}
     </div>
 </form>
 
+@foreach ($content as $val)    
+    {!!form_open_multipart('API/ContentChange')!!}
+        <div class="modal fade contentchange{{$val['id']}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">Change Content {{$val['name']}}</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="exampleInputName1">Site</label>
+                        <input type="text" class="form-control"
+                            id="exampleInputName1" placeholder="id" value="{{$site['name']}}" disabled="disabled"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleSelect1">
+                            Screen Device
+                        </label>
+                        <select class="form-control" id="exampleSelect1" name="screen_id"> 
+                            @foreach ($screen as $valx)   
+                                @if($valx['type']!=1)    
+                                    @if ($val['device_id']==$valx['id'])
+                                        <option name="screen_id" value="{{$valx['id']}}" selected>{{$valx['name']}}</option>
+                                    @else
+                                        <option name="screen_id" value="{{$valx['id']}}">{{$valx['name']}}</option>                            
+                                    @endif                                    
+                                @endif
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputName1">Content Name</label>
+                        <input type="text" class="form-control"
+                            id="exampleInputName1" value="{{$val['name']}}" placeholder="Content Name" name="name" required/>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputUsername1">Description</label>
+                        <input type="text" class="form-control"
+                            id="exampleInputUsername1" value="{{$val['description']}}" placeholder="Description.." name="desc" required/>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Image / Video</label>
+                        <br>
+                        @if (!$val['filename'])
+                            <input class="form-control" type="file" value="{{$val['filename']}}" id="example-file-input" name="file">                                
+                        @else
+                            <img src="{{base_url('/files/').$val['filename']}}" alt="" class="img-rounded" style="width:10%;geight:10%;">
+                            <input class="form-control" type="file" value="{{$val['filename']}}" id="example-file-input" name="file">
+                        @endif
+                    </div>
+                    <input type="hidden" name="site_id" hidden="hidden" value="{{$site['id']}}">
+                    <input type="hidden" name="ctid" hidden="hidden" value="{{$val['id']}}">
+                    @foreach ($screen as $val)
+                        <input type="hidden" name="screen{{$val['id']}}"  value="{{$val['name']}}" hidden="hidden">
+                    @endforeach
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-warning">Save Change</button>
+                </div>
+                </div>
+            </div>
+        </div>
+    </form>
+@endforeach
+
 {!!form_open_multipart('API/ScheduleNew')!!}
     <div class="modal fade addschedule" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -428,6 +499,82 @@ Site {{$site['name']}}
     </div>
 </form>
 
+@foreach ($schedule as $val)    
+    {!!form_open_multipart('API/ScheduleChange')!!}
+        <div class="modal fade changeschedule{{$val['id']}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">Change Schedule {{$val['title']}}</h4>
+                </div>
+                <div class="modal-body">                               
+                    <div class="form-group">
+                        <label for="exampleInputName1">Group</label>
+                        <input type="text" class="form-control"
+                            id="exampleInputName1" placeholder="Group" name="title" value="{{$val['title']}}" required/>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputUsername1">Event</label>
+                        <input type="text" class="form-control"
+                            id="exampleInputUsername1" placeholder="Event Name" value="{{$val['description']}}" name="description" required/>
+                    </div>                                
+                    <div class="form-group">
+                        <label for="exampleInputUsername1">Room</label>
+                        <input type="text" class="form-control"
+                            id="exampleInputUsername1" placeholder="Room / Location" value="{{$val['room']}}" name="room" required/>
+                    </div>
+                    <div class="form-group">                    
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="exampleInputUsername1">Start time</label>
+                                <input type="time" class="form-control" id="exampleInputUsername1" value="{{$val['start']}}" placeholder="Start time" name="start" required/>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="exampleInputUsername1">End time</label>
+                                <input type="time" class="form-control" id="exampleInputUsername1" value="{{$val['end']}}" placeholder="End time" name="end" required/>
+                            </div>      
+                        </div>                                      
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputUsername1">Display at</label>
+                        <input type="date" class="form-control"
+                            id="exampleInputUsername1" placeholder="Display at" name="for_date" value="{{$val['for_date']}}" required/>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleSelect1">
+                            Screen Device
+                        </label>
+                        <select class="form-control" id="exampleSelect1" name="screen_id"> 
+                            @foreach ($screen as $valx)   
+                                @if($valx['type']==1)    
+                                    @if ($val['device_id']==$valx['id'])
+                                        <option name="screen_id" value="{{$valx['id']}}" selected>{{$valx['name']}}</option>
+                                    @else
+                                        <option name="screen_id" value="{{$valx['id']}}">{{$valx['name']}}</option>                            
+                                    @endif                                    
+                                @endif
+                            @endforeach
+                        </select>
+                    </div>
+                    <input type="hidden" name="site_id" hidden="hidden" value="{{$site['id']}}">
+                    <input type="hidden" name="sch_id" hidden="hidden" value="{{$val['id']}}">
+                    @foreach ($screen as $valy)
+                        <input type="hidden" name="screen{{$valy['id']}}"  value="{{$valy['name']}}" hidden="hidden">
+                    @endforeach
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-warning">Save Change</button>
+                </div>
+                </div>
+            </div>
+        </div>
+    </form>
+@endforeach
+
 {!!form_open('API/ScreenNew')!!}
     <div class="modal fade addscreen" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -451,8 +598,8 @@ Site {{$site['name']}}
                 </div>
                 <div class="form-group">
                     <label for="exampleInputName1">Device Controller URL</label>
-                    <input type="url" class="form-control"
-                        id="exampleInputName1" placeholder="Url here.." name="url" required/>
+                    <input type="text" class="form-control"
+                        id="exampleInputName1" placeholder="127.0.0.1" name="url" required/>
                 </div>
                 <div class="form-group">
                     <label for="exampleSelect1">

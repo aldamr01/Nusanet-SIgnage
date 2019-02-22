@@ -171,7 +171,9 @@ Site <?php echo e($site['name']); ?>
                                         <td><?php echo e($val['start']); ?></td>
                                         <td><?php echo e($val['end']); ?></td>                                        
                                         <td><?php echo e($val['for_date']); ?></td>
-                                        <td>
+                                        <td style="display:inherit;">
+                                            
+                                            <a href="#" data-toggle="modal" data-target=".changeschedule<?php echo e($val['id']); ?>"  class="btn btn-info" title='Change' ><i class='material-icons'>update</i></a>
                                             <a  class="btn btn-danger" title='Drop' href='<?php echo e(base_url("API/ScheduleDrop/").$val["id"]."/".$site["id"]); ?>' onclick="return confirm('Want to Delete it ?')"><i class='material-icons'>delete</i></a>
                                         </td>
                                     </tr>
@@ -217,7 +219,8 @@ Site <?php echo e($site['name']); ?>
                                                 <img style="max-height: 150px; max-width:70px" src="<?php echo e(base_url('files/').$val['filename']); ?>" alt="">                                            
                                             <?php endif; ?>                                        
                                         </td>
-                                        <td>
+                                        <td style="display:table-cell;vertical-align:middle">
+                                            <a data-toggle="modal" data-target=".contentchange<?php echo e($val['id']); ?>"  class="btn btn-info" title='Change' href="#"><i class='material-icons'>update</i></a>
                                             <a  class="btn btn-danger" title='Drop' href='<?php echo e(base_url("API/ContentDrop/").$val["id"]."/".$site["id"]); ?>' onclick="return confirm('Want to Delete it ?')"><i class='material-icons'>delete</i></a>
                                         </td>
                                     </tr>
@@ -251,7 +254,7 @@ Site <?php echo e($site['name']); ?>
                     <div class="form-group">
                         <label for="exampleInputName1">Screen Name</label>
                         <input type="text" class="form-control"
-                           name="name" id="exampleInputName1" placeholder="id" value="<?php echo e($val['name']); ?>" />
+                           name="name1" id="exampleInputName1" placeholder="id" value="<?php echo e($val['name']); ?>" />
                     </div>            
                     <div class="form-group">
                         <label for="exampleInputName1">Screen Url</label>
@@ -267,24 +270,23 @@ Site <?php echo e($site['name']); ?>
                             id="exampleInputName1" placeholder="Name" value="<?php echo e($val['url']); ?>" name="url"/>
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputName1">Screen Template</label>
-                        <input type="text" class="form-control"
-                            id="exampleInputName1" placeholder="Name" readonly="readonly" value="Template <?php echo e($val['type']); ?>"/>                            
-                    </div>
-                    <?php /*  <div class="form-group">
-                        <label for="exampleInputName1">Screen Status</label><br>
-                        <select name="status" id="" class="form-control">
-                            <?php if(!$val['status']): ?>
-                                <option value="0" selected>Deceased</option>
-                                <option value="1">Alive</option>    
-                            <?php else: ?>
-                                <option value="0">Deceased</option>
-                                <option value="1" selected>Alive</option>
-                            <?php endif; ?>                                                        
+                        <label for="exampleSelect1">
+                            Template
+                        </label>
+                        <select class="form-control" id="exampleSelect1" name="template"> 
+                            <?php foreach($template as $valx): ?>   
+                                <?php if($val['type']==$valx['type']): ?>
+                                    <option value="<?php echo e($valx['type']); ?>" selected>Template <?php echo e($valx['type']); ?></option>
+                                <?php else: ?>
+                                    <option value="<?php echo e($valx['type']); ?>">Template <?php echo e($valx['type']); ?></option>                            
+                                <?php endif; ?>                                    
+                            <?php endforeach; ?>
                         </select>
+                    </div>
+
                         <input type="hidden" name="id" hidden="hidden" id="" value="<?php echo e($val['id']); ?>">
                         <input type="hidden" name="site_id" hidden="hidden" id="" value="<?php echo e($site['id']); ?>">
-                    </div>  */ ?>
+
                     <div class="form-group">
                         <label for="exampleInputUsername1">Description</label>
                         <input type="text" class="form-control"
@@ -360,6 +362,76 @@ Site <?php echo e($site['name']); ?>
     </div>
 </form>
 
+<?php foreach($content as $val): ?>    
+    <?php echo form_open_multipart('API/ContentChange'); ?>
+
+        <div class="modal fade contentchange<?php echo e($val['id']); ?>" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">Change Content <?php echo e($val['name']); ?></h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="exampleInputName1">Site</label>
+                        <input type="text" class="form-control"
+                            id="exampleInputName1" placeholder="id" value="<?php echo e($site['name']); ?>" disabled="disabled"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleSelect1">
+                            Screen Device
+                        </label>
+                        <select class="form-control" id="exampleSelect1" name="screen_id"> 
+                            <?php foreach($screen as $valx): ?>   
+                                <?php if($valx['type']!=1): ?>    
+                                    <?php if($val['device_id']==$valx['id']): ?>
+                                        <option name="screen_id" value="<?php echo e($valx['id']); ?>" selected><?php echo e($valx['name']); ?></option>
+                                    <?php else: ?>
+                                        <option name="screen_id" value="<?php echo e($valx['id']); ?>"><?php echo e($valx['name']); ?></option>                            
+                                    <?php endif; ?>                                    
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputName1">Content Name</label>
+                        <input type="text" class="form-control"
+                            id="exampleInputName1" value="<?php echo e($val['name']); ?>" placeholder="Content Name" name="name" required/>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputUsername1">Description</label>
+                        <input type="text" class="form-control"
+                            id="exampleInputUsername1" value="<?php echo e($val['description']); ?>" placeholder="Description.." name="desc" required/>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Image / Video</label>
+                        <br>
+                        <?php if(!$val['filename']): ?>
+                            <input class="form-control" type="file" value="<?php echo e($val['filename']); ?>" id="example-file-input" name="file">                                
+                        <?php else: ?>
+                            <img src="<?php echo e(base_url('/files/').$val['filename']); ?>" alt="" class="img-rounded" style="width:10%;geight:10%;">
+                            <input class="form-control" type="file" value="<?php echo e($val['filename']); ?>" id="example-file-input" name="file">
+                        <?php endif; ?>
+                    </div>
+                    <input type="hidden" name="site_id" hidden="hidden" value="<?php echo e($site['id']); ?>">
+                    <input type="hidden" name="ctid" hidden="hidden" value="<?php echo e($val['id']); ?>">
+                    <?php foreach($screen as $val): ?>
+                        <input type="hidden" name="screen<?php echo e($val['id']); ?>"  value="<?php echo e($val['name']); ?>" hidden="hidden">
+                    <?php endforeach; ?>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-warning">Save Change</button>
+                </div>
+                </div>
+            </div>
+        </div>
+    </form>
+<?php endforeach; ?>
+
 <?php echo form_open_multipart('API/ScheduleNew'); ?>
 
     <div class="modal fade addschedule" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -430,6 +502,83 @@ Site <?php echo e($site['name']); ?>
     </div>
 </form>
 
+<?php foreach($schedule as $val): ?>    
+    <?php echo form_open_multipart('API/ScheduleChange'); ?>
+
+        <div class="modal fade changeschedule<?php echo e($val['id']); ?>" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">Change Schedule <?php echo e($val['title']); ?></h4>
+                </div>
+                <div class="modal-body">                               
+                    <div class="form-group">
+                        <label for="exampleInputName1">Group</label>
+                        <input type="text" class="form-control"
+                            id="exampleInputName1" placeholder="Group" name="title" value="<?php echo e($val['title']); ?>" required/>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputUsername1">Event</label>
+                        <input type="text" class="form-control"
+                            id="exampleInputUsername1" placeholder="Event Name" value="<?php echo e($val['description']); ?>" name="description" required/>
+                    </div>                                
+                    <div class="form-group">
+                        <label for="exampleInputUsername1">Room</label>
+                        <input type="text" class="form-control"
+                            id="exampleInputUsername1" placeholder="Room / Location" value="<?php echo e($val['room']); ?>" name="room" required/>
+                    </div>
+                    <div class="form-group">                    
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="exampleInputUsername1">Start time</label>
+                                <input type="time" class="form-control" id="exampleInputUsername1" value="<?php echo e($val['start']); ?>" placeholder="Start time" name="start" required/>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="exampleInputUsername1">End time</label>
+                                <input type="time" class="form-control" id="exampleInputUsername1" value="<?php echo e($val['end']); ?>" placeholder="End time" name="end" required/>
+                            </div>      
+                        </div>                                      
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputUsername1">Display at</label>
+                        <input type="date" class="form-control"
+                            id="exampleInputUsername1" placeholder="Display at" name="for_date" value="<?php echo e($val['for_date']); ?>" required/>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleSelect1">
+                            Screen Device
+                        </label>
+                        <select class="form-control" id="exampleSelect1" name="screen_id"> 
+                            <?php foreach($screen as $valx): ?>   
+                                <?php if($valx['type']==1): ?>    
+                                    <?php if($val['device_id']==$valx['id']): ?>
+                                        <option name="screen_id" value="<?php echo e($valx['id']); ?>" selected><?php echo e($valx['name']); ?></option>
+                                    <?php else: ?>
+                                        <option name="screen_id" value="<?php echo e($valx['id']); ?>"><?php echo e($valx['name']); ?></option>                            
+                                    <?php endif; ?>                                    
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    <input type="hidden" name="site_id" hidden="hidden" value="<?php echo e($site['id']); ?>">
+                    <input type="hidden" name="sch_id" hidden="hidden" value="<?php echo e($val['id']); ?>">
+                    <?php foreach($screen as $valy): ?>
+                        <input type="hidden" name="screen<?php echo e($valy['id']); ?>"  value="<?php echo e($valy['name']); ?>" hidden="hidden">
+                    <?php endforeach; ?>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-warning">Save Change</button>
+                </div>
+                </div>
+            </div>
+        </div>
+    </form>
+<?php endforeach; ?>
+
 <?php echo form_open('API/ScreenNew'); ?>
 
     <div class="modal fade addscreen" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -454,8 +603,8 @@ Site <?php echo e($site['name']); ?>
                 </div>
                 <div class="form-group">
                     <label for="exampleInputName1">Device Controller URL</label>
-                    <input type="url" class="form-control"
-                        id="exampleInputName1" placeholder="Url here.." name="url" required/>
+                    <input type="text" class="form-control"
+                        id="exampleInputName1" placeholder="127.0.0.1" name="url" required/>
                 </div>
                 <div class="form-group">
                     <label for="exampleSelect1">

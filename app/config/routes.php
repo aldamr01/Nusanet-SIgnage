@@ -41,12 +41,14 @@ $route['API/ScreenDrop/(:num)/(:num)']                      =   'ScreenData/scre
 
 $route['API/ContentNew']                                    =   'ContentData/contentCreate';
 $route['API/ContentDrop/(:num)/(:num)']                     =   'ContentData/contentDelete/$1/$2';
+$route['API/ContentChange']                                 =   'ContentData/contentUpdate';
 
 $route['API/TemplateEdit']                                  =   'TemplateData/templateUpdate';
 $route['API/TemplateNew']                                   =   'TemplateData/templateCreate';
 
 $route['API/ScheduleNew']                                   =   'ScheduleData/scheduleCreate';
 $route['API/ScheduleDrop/(:num)/(:num)']                    =   'ScheduleData/scheduleDelete/$1/$2';
+$route['API/ScheduleChange']                                =   'ScheduleData/scheduleUpdate';
 
 
 //AUTH

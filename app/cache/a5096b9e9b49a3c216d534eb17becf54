@@ -19,11 +19,11 @@
 			<div class="card-header no-bg b-a-0">
 				<b>Device Screen Controller</b>				
 			</div>
-			<hr>         
+            <hr>                     
 			<div class="card-block">                
 				<?php if($screen_url['url'] && ping_url($screen_url['url']) ): ?>
-					<div class="embed-responsive embed-responsive-1by1">
-						<iframe class="embed-responsive-item" src="<?php echo e($screen_url['url']); ?>" allowfullscreen></iframe>
+					<div class="embed-responsive embed-responsive-21by9">
+						<iframe class="embed-responsive-item" src="<?php echo e('http://'.$screen_url['url']); ?>" allowfullscreen></iframe>
 					</div>
 				<?php else: ?>
 					<i>cant reach device url , please check device controller url / make sure device ip is correct....</i>
@@ -264,7 +264,7 @@
                 <div class="form-group">
                     <label for="exampleInputName1">Screen Name</label>
                     <input type="text" class="form-control"
-                        name="name" id="exampleInputName1" placeholder="id" value="<?php echo e($screen['name']); ?>" />
+                        name="name1" id="exampleInputName1" placeholder="id" value="<?php echo e($screen['name']); ?>" />
                 </div>                            
                 <div class="form-group">
                     <label for="exampleInputName1">Device Controller URL</label>
@@ -272,10 +272,19 @@
                         id="exampleInputName1" placeholder="Name" value="<?php echo e($screen['url']); ?>" name="url"/>
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputName1">Screen Template</label>
-                    <input type="text" class="form-control"
-                        id="exampleInputName1" placeholder="Name" readonly="readonly" value="Template <?php echo e($screen['type']); ?>"/>                            
-                </div>                
+                    <label for="exampleSelect1">
+                        Template
+                    </label>
+                    <select class="form-control" id="exampleSelect1" name="template"> 
+                        <?php foreach($template as $valx): ?>   
+                            <?php if($screen['type']==$valx['type']): ?>
+                                <option value="<?php echo e($valx['type']); ?>" selected>Template <?php echo e($valx['type']); ?></option>
+                            <?php else: ?>
+                                <option value="<?php echo e($valx['type']); ?>">Template <?php echo e($valx['type']); ?></option>                            
+                            <?php endif; ?>                                    
+                        <?php endforeach; ?>
+                    </select>
+                </div>              
                 <div class="form-group">
                     <label for="exampleInputUsername1">Description</label>
                     <input type="text" class="form-control"

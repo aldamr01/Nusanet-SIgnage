@@ -22,11 +22,11 @@
 			<div class="card-header no-bg b-a-0">
 				<b>Device Screen Controller</b>				
 			</div>
-			<hr>         
+            <hr>                     
 			<div class="card-block">                
 				@if ($screen_url['url'] && ping_url($screen_url['url']) )
-					<div class="embed-responsive embed-responsive-1by1">
-						<iframe class="embed-responsive-item" src="{{$screen_url['url']}}" allowfullscreen></iframe>
+					<div class="embed-responsive embed-responsive-21by9">
+						<iframe class="embed-responsive-item" src="{{'http://'.$screen_url['url']}}" allowfullscreen></iframe>
 					</div>
 				@else
 					<i>cant reach device url , please check device controller url / make sure device ip is correct....</i>
@@ -264,7 +264,7 @@
                 <div class="form-group">
                     <label for="exampleInputName1">Screen Name</label>
                     <input type="text" class="form-control"
-                        name="name" id="exampleInputName1" placeholder="id" value="{{$screen['name']}}" />
+                        name="name1" id="exampleInputName1" placeholder="id" value="{{$screen['name']}}" />
                 </div>                            
                 <div class="form-group">
                     <label for="exampleInputName1">Device Controller URL</label>
@@ -272,10 +272,19 @@
                         id="exampleInputName1" placeholder="Name" value="{{$screen['url']}}" name="url"/>
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputName1">Screen Template</label>
-                    <input type="text" class="form-control"
-                        id="exampleInputName1" placeholder="Name" readonly="readonly" value="Template {{$screen['type']}}"/>                            
-                </div>                
+                    <label for="exampleSelect1">
+                        Template
+                    </label>
+                    <select class="form-control" id="exampleSelect1" name="template"> 
+                        @foreach ($template as $valx)   
+                            @if ($screen['type']==$valx['type'])
+                                <option value="{{$valx['type']}}" selected>Template {{$valx['type']}}</option>
+                            @else
+                                <option value="{{$valx['type']}}">Template {{$valx['type']}}</option>                            
+                            @endif                                    
+                        @endforeach
+                    </select>
+                </div>              
                 <div class="form-group">
                     <label for="exampleInputUsername1">Description</label>
                     <input type="text" class="form-control"

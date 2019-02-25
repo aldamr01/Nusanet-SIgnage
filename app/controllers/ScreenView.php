@@ -30,6 +30,7 @@ class ScreenView extends CI_Controller
             'id'        =>  $id
         );
         $data['thisuser']       =   $this->session->all_userdata();        
+        $data['template']       =   Template::where('site_id',$id)->get();
         $data['screen_url']     =   Screen_Device::find($id);
         $data['screen']         =   Screen_Device::where($where)->first();
         $data['schedule']       =   Schedule::where('device_id',$id)->get();

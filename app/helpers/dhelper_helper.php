@@ -6,6 +6,7 @@ if ( ! function_exists('create_captcha'))
 {
     function ping_url($url)
     {
+               
         $ch         =    curl_init($url);
 
         curl_setopt($ch, CURLOPT_TIMEOUT, 2);
@@ -16,8 +17,9 @@ if ( ! function_exists('create_captcha'))
         $httpcode   =   curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
         curl_close($ch);
+        //echo 'eror'.$httpcode;
 
-        if($httpcode>=200 && $httpcode<300)
+        if($httpcode>=200 && $httpcode<400)
             return true;
         else
             return false;        

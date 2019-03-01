@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>[404] Halaman tidak ada</title>
+<title>404 Page Not Found</title>
 <style type="text/css">
 
 ::selection { background-color: #E13300; color: white; }
@@ -56,9 +56,9 @@ p {
 </style>
 </head>
 <body>
-	<div id="container">		
-		<h1 align="center"><?php echo $heading; ?></h1>
-		<h5 align="center"><?php echo $message; ?></h5>
+	<div id="container">
+		<h1><?php echo $heading; ?></h1>
+		<?php echo $message; ?>
 	</div>
 </body>
 </html>

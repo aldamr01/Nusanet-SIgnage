@@ -89,7 +89,7 @@ Site {{$site['name']}}
                     @foreach ($template as $val)
                         <div class="col-md-6 table-bordered" >
                             <a href="#" data-toggle="modal" data-target=".template{{$val['id']}}">                                        
-                                <span style="float:left; margin-top:4px;" class="tag tag-success">Template {{$val['type']}}</span>
+                                <span style="float:left; margin-top:4px;" class="tag tag-success">{{$val['name']}} template-{{$val['type']}}</span>
                                 <br>                                   
                                 <p align="center" >
                                     <i  class='material-icons' style="font-size:50px;">photo</i>                                    
@@ -734,11 +734,15 @@ Site {{$site['name']}}
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
-                    <h4 class="modal-title" id="myModalLabel">Template {{$val['type']}}</h4>
+                    <h4 class="modal-title" id="myModalLabel">{{$val['name']}} template-{{$val['type']}}</h4>
                 </div>
 
                 {{--  TEMPLATE MENU PART  --}}
                 <div class="modal-body">
+                    <div class="form-group">
+                        <label for="name">Template Name</label>
+                        <input type="text" class="form-control" name="name" required value="{{$val['name']}}">
+                    </div>
                     @if ($val['type']==1)
                         <div class="form-group">
                             <label for="exampleInputPassword1">Weather Widget Color</label>
@@ -765,6 +769,14 @@ Site {{$site['name']}}
                         <div class="form-group">
                             <label for="exampleInputPassword1">Table Widget Color</label>
                             <input class="form-control" type="color" value="{{$val['tabel']}}" id="example-color-input" name="table">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Gradient Weather Background Color</label>
+                            <input class="form-control" type="color" value="{{$val['gradient_color']}}" id="example-color-input" name="gradient">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Weather Background Color</label>
+                            <input class="form-control" type="color" value="{{$val['center_color']}}" id="example-color-input" name="center">
                         </div>
                     @elseif ($val['type']==2)                        
                         <div class="form-group">

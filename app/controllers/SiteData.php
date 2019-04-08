@@ -26,7 +26,7 @@ class SiteData extends CI_Controller
 
         $site   =   Site::all(); 
         $loop   =   0;   
-        $data;
+        $data ;
 
         foreach ($site as $val) 
         {
@@ -76,6 +76,7 @@ class SiteData extends CI_Controller
                     $register_template              =   new Template;
                     $register_template->type        =   $i;
                     $register_template->site_id     =   $site_id['id'];
+                    $register_template->name        =   "default".$i;
                     $register_template->save();                    
                 }   
                 redirect(base_url('site/list'));

@@ -88,7 +88,7 @@ Site <?php echo e($site['name']); ?>
                     <?php foreach($template as $val): ?>
                         <div class="col-md-6 table-bordered" >
                             <a href="#" data-toggle="modal" data-target=".template<?php echo e($val['id']); ?>">                                        
-                                <span style="float:left; margin-top:4px;" class="tag tag-success">Template <?php echo e($val['type']); ?></span>
+                                <span style="float:left; margin-top:4px;" class="tag tag-success"><?php echo e($val['name']); ?> template-<?php echo e($val['type']); ?></span>
                                 <br>                                   
                                 <p align="center" >
                                     <i  class='material-icons' style="font-size:50px;">photo</i>                                    
@@ -742,7 +742,7 @@ Site <?php echo e($site['name']); ?>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
-                    <h4 class="modal-title" id="myModalLabel">Template <?php echo e($val['type']); ?></h4>
+                    <h4 class="modal-title" id="myModalLabel"><?php echo e($val['name']); ?> template-<?php echo e($val['type']); ?></h4>
                 </div>
 
                 <?php /*  TEMPLATE MENU PART  */ ?>
@@ -773,6 +773,14 @@ Site <?php echo e($site['name']); ?>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Table Widget Color</label>
                             <input class="form-control" type="color" value="<?php echo e($val['tabel']); ?>" id="example-color-input" name="table">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Gradient Weather Background Color</label>
+                            <input class="form-control" type="color" value="<?php echo e($val['gradient_color']); ?>" id="example-color-input" name="gradient">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Weather Background Color</label>
+                            <input class="form-control" type="color" value="<?php echo e($val['center_color']); ?>" id="example-color-input" name="center">
                         </div>
                     <?php elseif($val['type']==2): ?>                        
                         <div class="form-group">

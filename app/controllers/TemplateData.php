@@ -19,7 +19,7 @@ class TemplateData extends CI_Controller
     function templateUpdate()
     {
         $this->form_validation->set_rules('id', 'id', 'required');
-        $this->form_validation->set_rules('site_id', 'sid', 'required');
+        $this->form_validation->set_rules('site_id', 'sid', 'required');        
              
         if ($this->input->post('weather',TRUE))         
              $a = $this->input->post('weather',TRUE);        
@@ -31,6 +31,16 @@ class TemplateData extends CI_Controller
         else 
              $b = NULL;
         
+        if ($this->input->post('gradient',TRUE))         
+             $c = $this->input->post('gradient',TRUE);        
+        else 
+             $c = NULL;
+
+        if ($this->input->post('center',TRUE))         
+             $d = $this->input->post('center',TRUE);        
+        else 
+             $d = NULL;
+        
 
                 
         if($this->form_validation->run()== FALSE)
@@ -39,9 +49,12 @@ class TemplateData extends CI_Controller
         }
         else
         {              
-            $update_template                =   Template::find($this->input->post('id',TRUE));
-            $update_template->weather       =   $a;
-            $update_template->tabel         =   $b;
+            $update_template                    =   Template::find($this->input->post('id',TRUE));
+            $update_template->weather           =   $a;
+            $update_template->tabel             =   $b;
+            $update_template->gradient_color    =   $c;
+            $update_template->center_color      =   $d;
+            $update_template->name              =   $this->input->post('name',TRUE);
             
 
             if (isset($_FILES['background']) && $_FILES['background']['name'] != '')

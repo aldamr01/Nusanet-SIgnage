@@ -70,7 +70,7 @@ class Signage extends CI_Controller
         if($site->token == $token)
         {
             if($screen->site_id == $site->id)
-            {                                              
+            {                                            
                 switch ($screen->type) {
                     case '1':
                         echo $this->blade->stream('administrator.signage.template1',$data);

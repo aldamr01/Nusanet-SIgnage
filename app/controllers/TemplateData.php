@@ -15,6 +15,27 @@ class TemplateData extends CI_Controller
         $this->load->library('upload');
     }
 
+    function templateCreate()
+    {
+        $this->form_validation->set_rules('name','name','required');
+        $this->form_validation->set_rules('site_id','site_id','required');
+        $this->form_validation->set_rules('type','type','required');
+
+        if(!$this->form_validation->run())
+            redirect(base_url('site/show').$this->input->post('site_id'));
+        
+        $template   =   new Template;
+
+        $template->site_id  =   $this->input->post('site_id');
+        $template->name     =   $this->input->post('name');
+        $template->type     =   $this->input->post('type');
+
+        if($template->save())
+            redirect(base_url('site/show/').$this->input->post('site_id')); 
+        else 
+            redirect(base_url('site/show/').$this->input->post('site_id')); 
+    }
+
 
     function templateUpdate()
     {
@@ -95,6 +116,42 @@ class TemplateData extends CI_Controller
             
         }
     
+    }
+
+    function templateDelete($id,$site)
+    {
+
+        if(!isset($id) && !isset($site))
+            redirect(base_url('site/show'));
+
+        if($this->session->userdata('auth_role')!= "Administrator")
+        {
+            if($site != $this->session->userdata('auth_status'))
+            {
+                redirect(base_url('site/list'));  
+            }
+            else
+            {
+                $flight     = Template::find($id);        
+
+                if($flight->delete())                    
+                    redirect(base_url());
+                else
+                    redirect(base_url());
+            }          
+        }
+        else 
+        {
+            $flight     = Template::find($id);        
+
+            if($flight->delete())
+                if($this->session->userdata('auth_role')== "Administrator")
+                    redirect(base_url('site/show/').$site);
+                else
+                    redirect(base_url());
+            else
+                redirect(base_url('site/show/').$site);
+        }        
     }
 
     function ngupload($name,$file)

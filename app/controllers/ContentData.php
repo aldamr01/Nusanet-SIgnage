@@ -163,7 +163,7 @@ class ContentData extends CI_Controller
     function contentDelete($id,$site)
     {
         if(!isset($id) && !isset($site))
-        redirect(base_url('site/list'));
+            redirect(base_url('site/list'));
 
         if($this->session->userdata('auth_role')!= "Administrator")
         {

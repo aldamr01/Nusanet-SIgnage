@@ -80,9 +80,9 @@ Site {{$site['name']}}
                 <div class="card">
                     <div class="card-header no-bg b-a-0">
                         <b>Template Available</b>    
-                        {{--  <a href="" data-toggle="modal" data-target=""> 
+                        <a href="" data-toggle="modal" data-target=".addtemplate"> 
                             <i style="float:right" class='material-icons'>add</i>
-                        </a>                     --}}
+                        </a>                    
                     </div>
                     <hr>
                     <div class="card-block">                                           
@@ -725,6 +725,47 @@ Site {{$site['name']}}
     </form>
 @endforeach
 
+{!!form_open('API/TemplateNew')!!}
+    <div class="modal fade addtemplate" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Add a Tamplate</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="exampleInputName1">Site</label>
+                    <input type="text" class="form-control"
+                        id="exampleInputName1" placeholder="id" value="{{$site['name']}}" disabled="disabled"/>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputName1">Name</label>
+                    <input type="text" class="form-control"
+                        id="exampleInputName1" placeholder="name" name="name" required/>
+                </div>                
+                <div class="form-group">
+                    <label for="name1">Template Type</label>
+                    <select class="form-control" name="type" id="">
+                        @foreach ($type as $val)
+                            <option value="{{$val['type']}}">Template Type {{$val['type']}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                                    
+                <input type="hidden" name="site_id" hidden="hidden" value="{{$site['id']}}">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Create a New One</button>
+            </div>
+            </div>
+        </div>
+    </div>
+</form>
+
 @foreach ($template as $val)
     {!!form_open_multipart('API/TemplateEdit')!!}
         <div class="modal fade template{{$val['id']}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -809,6 +850,7 @@ Site {{$site['name']}}
                 <input type="hidden" name="id" value="{{$val['id']}}" hidden="hidden">
                 <input type="hidden" name="site_id" hidden="hidden" value="{{$site['id']}}">
                 <div class="modal-footer">
+                    <a style="float:left" class="btn btn-danger" title='Drop' href='{{base_url("API/TemplateDrop/").$val["id"]."/".$site["id"]}}'><i class='material-icons'>delete</i>Drop</a>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary">Save Change</button>
                 </div>

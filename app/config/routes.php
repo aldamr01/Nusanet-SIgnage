@@ -45,6 +45,7 @@ $route['API/ContentChange']                                 =   'ContentData/con
 
 $route['API/TemplateEdit']                                  =   'TemplateData/templateUpdate';
 $route['API/TemplateNew']                                   =   'TemplateData/templateCreate';
+$route['API/TemplateDrop/(:num)/(:num)']                    =   'TemplateData/templateDelete/$1/$2';
 
 $route['API/ScheduleNew']                                   =   'ScheduleData/scheduleCreate';
 $route['API/ScheduleDrop/(:num)/(:num)']                    =   'ScheduleData/scheduleDelete/$1/$2';

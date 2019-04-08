@@ -18,6 +18,7 @@ class SiteView extends CI_Controller
         $this->load->model('Screen_Device');
         $this->load->model('Content');
         $this->load->model('Template');
+        $this->load->model('TemplateType');
         $this->load->model('Schedule');
     }
 
@@ -44,6 +45,7 @@ class SiteView extends CI_Controller
     {
         if($id != NULL)
         {
+            $data['type']       =   TemplateType::all();
             $data['site']       =   Site::find($id);
             $data['user']       =   User::where('site_id',$id)->get();
             $data['screen']     =   Screen_Device::where('site_id',$id)->get();

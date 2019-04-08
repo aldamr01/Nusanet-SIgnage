@@ -79,9 +79,9 @@ Site <?php echo e($site['name']); ?>
                 <div class="card">
                     <div class="card-header no-bg b-a-0">
                         <b>Template Available</b>    
-                        <?php /*  <a href="" data-toggle="modal" data-target=""> 
+                        <a href="" data-toggle="modal" data-target=".addtemplate"> 
                             <i style="float:right" class='material-icons'>add</i>
-                        </a>                     */ ?>
+                        </a>                    
                     </div>
                     <hr>
                     <div class="card-block">                                           
@@ -732,6 +732,48 @@ Site <?php echo e($site['name']); ?>
     </form>
 <?php endforeach; ?>
 
+<?php echo form_open('API/TemplateNew'); ?>
+
+    <div class="modal fade addtemplate" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Add a Tamplate</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="exampleInputName1">Site</label>
+                    <input type="text" class="form-control"
+                        id="exampleInputName1" placeholder="id" value="<?php echo e($site['name']); ?>" disabled="disabled"/>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputName1">Name</label>
+                    <input type="text" class="form-control"
+                        id="exampleInputName1" placeholder="name" name="name" required/>
+                </div>                
+                <div class="form-group">
+                    <label for="name1">Template Type</label>
+                    <select class="form-control" name="type" id="">
+                        <?php foreach($type as $val): ?>
+                            <option value="<?php echo e($val['type']); ?>">Template Type <?php echo e($val['type']); ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                                    
+                <input type="hidden" name="site_id" hidden="hidden" value="<?php echo e($site['id']); ?>">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Create a New One</button>
+            </div>
+            </div>
+        </div>
+    </div>
+</form>
+
 <?php foreach($template as $val): ?>
     <?php echo form_open_multipart('API/TemplateEdit'); ?>
 
@@ -747,6 +789,10 @@ Site <?php echo e($site['name']); ?>
 
                 <?php /*  TEMPLATE MENU PART  */ ?>
                 <div class="modal-body">
+                    <div class="form-group">
+                        <label for="name">Template Name</label>
+                        <input type="text" class="form-control" name="name" required value="<?php echo e($val['name']); ?>">
+                    </div>
                     <?php if($val['type']==1): ?>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Weather Widget Color</label>
@@ -813,6 +859,7 @@ Site <?php echo e($site['name']); ?>
                 <input type="hidden" name="id" value="<?php echo e($val['id']); ?>" hidden="hidden">
                 <input type="hidden" name="site_id" hidden="hidden" value="<?php echo e($site['id']); ?>">
                 <div class="modal-footer">
+                    <a style="float:left" class="btn btn-danger" title='Drop' href='<?php echo e(base_url("API/TemplateDrop/").$val["id"]."/".$site["id"]); ?>'><i class='material-icons'>delete</i>Drop</a>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary">Save Change</button>
                 </div>

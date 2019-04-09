@@ -64,7 +64,7 @@
 
 		<!-- template -->
 		<li>
-			<a href="{{base_url('template/MyTemplate/1/123123')}}">
+			<a href="{{base_url('template/MyTemplate')}}">
 				<i class="material-icons text-info">map</i>
 				<span>Template</span>
 			</a>

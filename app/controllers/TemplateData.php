@@ -31,9 +31,15 @@ class TemplateData extends CI_Controller
         $template->type     =   $this->input->post('type');
 
         if($template->save())
-            redirect(base_url('site/show/').$this->input->post('site_id')); 
+            if($this->session->userdata('auth_role')!= "Administrator")
+                redirect(base_url('site/show/').$this->input->post('site_id')); 
+            else 
+                redirect(base_url('template/MyTemplate')); 
         else 
-            redirect(base_url('site/show/').$this->input->post('site_id')); 
+            if($this->session->userdata('auth_role')!= "Administrator")
+                redirect(base_url('site/show/').$this->input->post('site_id')); 
+            else 
+                redirect(base_url('template/MyTemplate')); 
     }
 
 
@@ -107,11 +113,17 @@ class TemplateData extends CI_Controller
 
             if ($update_template->save()) 
             {
-                redirect(base_url('site/show/').$this->input->post('site_id')); 
+                if($this->session->userdata('auth_role')!= "Administrator")
+                    redirect(base_url('site/show/').$this->input->post('site_id')); 
+                else 
+                    redirect(base_url('template/MyTemplate')); 
             }    
             else 
             {
-                redirect(base_url('site/show/').$this->input->post('site_id')); 
+                if($this->session->userdata('auth_role')!= "Administrator")
+                    redirect(base_url('site/show/').$this->input->post('site_id')); 
+                else 
+                    redirect(base_url('template/MyTemplate')); 
             }    
             
         }

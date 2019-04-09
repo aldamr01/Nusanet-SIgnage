@@ -60,7 +60,17 @@
 				<span>Home</span>
 			</a>
 		</li>
-		<!-- /dashboard -->		      
+		<!-- /dashboard -->		
+
+		<!-- template -->
+		<li>
+			<a href="{{base_url('template/MyTemplate/1/123123')}}">
+				<i class="material-icons text-info">map</i>
+				<span>Template</span>
+			</a>
+		</li>
+		<!-- /template -->	      
+
         <!-- Logout -->
 		<li>
 			<a onclick="return confirm('do you want to logoff now ?')" href="{{base_url('Logoff')}}">

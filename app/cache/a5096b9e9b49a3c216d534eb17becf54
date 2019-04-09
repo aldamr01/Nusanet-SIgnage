@@ -11,7 +11,7 @@
     
 	<div class="content-view">
         
-        <a class="btn btn-info" href="" data-toggle="modal" data-target=".confgx"> 
+        <a class="btn btn-info" href="" data-toggle="modal" data-target=".confgx">
             <i style="float:left" class='material-icons'>settings</i>
             Screen Configuration
         </a>        

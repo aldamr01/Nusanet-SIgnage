@@ -88,7 +88,7 @@ Site {{$site['name']}}
                     <div class="card-block">                                           
                     @foreach ($template as $val)
                         <div class="col-md-6 table-bordered" >
-                            <a href="#" data-toggle="modal" data-target=".template{{$val['id']}}">                                        
+                            <a href="#" data-toggle="modal" data-target=".template{{$val['id']}}">
                                 <span style="float:left; margin-top:4px;" class="tag tag-success">{{$val['name']}} template-{{$val['type']}}</span>
                                 <br>                                   
                                 <p align="center" >

@@ -22,6 +22,7 @@ $route['user/change/(:num)']                                =   'UserView/userUp
 $route['user/create']                                       =   'UserView/userCreate';
 
 $route['screen/MyScreen/(:num)/(:any)']                     =   'ScreenView/screenFind/$1/$2';
+$route['template/MyTemplate']                               =   'TemplateView/templateFind';
 
 //API
 $route['API/UserLogin']                                     =   'Auth/checkUser';

@@ -28,15 +28,15 @@
 	<link rel="stylesheet" href="{{base_url('vendor/font-awesome/css/font-awesome.css')}} " />
 	<link rel="stylesheet" href="{{base_url('vendor/animate.css/animate.css')}}" />
 	<link rel="stylesheet" href="{{base_url('styles/app.css')}}" id="load_styles_before"/>
-	<link rel="stylesheet" href="{{base_url('styles/app.skins.css')}} "/>
-	<script src="{{base_url('scripts/timer.js')}}"></script>
-
-	<!-- endbuild -->
+	<link rel="stylesheet" href="{{base_url('styles/app.skins.css')}} "/>	
+	<link rel="stylesheet" href="{{base_url('styles/spectrum.css')}} "/>		
 	
+	<script src="{{base_url('vendor/jquery/dist/jquery.js')}}"></script>	
+	<script src="{{base_url('scripts/timer.js')}}"></script>	
+	<script src="{{base_url('scripts/spectrum.js')}}"></script>
 </head>
 
 <body>
-
 	<div class="app">
 		<!--sidebar panel-->
 		<div class="off-canvas-overlay" data-toggle="sidebar"></div>
@@ -116,6 +116,7 @@
 			}
 		};
 
+
 	</script>
 
 	<!-- build:js({.tmp,app}) scripts/app.min.js -->
@@ -128,7 +129,7 @@
 	<script src="{{base_url('scripts/constants.js')}}"></script>
 	<script src="{{base_url('scripts/main.js')}}"></script>
 	<script src="{{base_url('scripts/nusanet.js')}}"></script>
-
+	
 	<!-- endbuild -->
 
 	@yield('corejs')

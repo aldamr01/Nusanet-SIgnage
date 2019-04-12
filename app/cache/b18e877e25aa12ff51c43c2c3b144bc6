@@ -16,7 +16,7 @@
 
     <meta name="theme-color" content="#4C7FF0">
     
-    <title>Nusanet RouterView Login</title>
+    <title>Nusanet Signage</title>
 
     <!-- page stylesheets -->
     <!-- end page stylesheets -->

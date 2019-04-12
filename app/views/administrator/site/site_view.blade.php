@@ -766,6 +766,7 @@ Site {{$site['name']}}
     </div>
 </form>
 
+
 @foreach ($template as $val)
     {!!form_open_multipart('API/TemplateEdit')!!}
         <div class="modal fade template{{$val['id']}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -786,8 +787,11 @@ Site {{$site['name']}}
                     </div>
                     @if ($val['type']==1)
                         <div class="form-group">
-                            <label for="exampleInputPassword1">Weather Widget Color</label>
-                            <input class="form-control" type="color" value="{{$val['weather']}}" id="example-color-input" name="weather">
+                            <label for="exampleInputPassword1">Weather Widget Color</label>                            
+                            <input name="weather" class="form-control" type='text' id="full"/>
+                            <br>
+                            <label for="">Current Color : </label>
+                            <input class="form-control" type="color" value="{{$val['weather']}}" disabled="disabled">
                         </div>    
                         <div class="form-group">
                             <label for="exampleInputPassword1">Screen Background</label><br>
@@ -809,20 +813,32 @@ Site {{$site['name']}}
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Table Widget Color</label>
-                            <input class="form-control" type="color" value="{{$val['tabel']}}" id="example-color-input" name="table">
+                            <input name="table" value="rgba(255,0,0,0.3)" class="form-control" type='text' id="full"/>
+                            <br>
+                            <label for="">Current Color : </label>
+                            <input class="form-control" type="color" value="{{$val['table']}}" disabled="disabled">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Gradient Weather Background Color</label>
-                            <input class="form-control" type="color" value="{{$val['gradient_color']}}" id="example-color-input" name="gradient">
+                            <input name="gradient" value="rgba(255,0,0,0.3)" class="form-control" type='text' id="full"/>
+                            <br>
+                            <label for="">Current Color : </label>
+                            <input class="form-control" type="color" value="{{$val['gradient_color']}}" disabled="disabled">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Weather Background Color</label>
-                            <input class="form-control" type="color" value="{{$val['center_color']}}" id="example-color-input" name="center">
+                            <input name="center" value="rgba(255,0,0,0.3)" class="form-control" type='text' id="full"/>
+                            <br>
+                            <label for="">Current Color : </label>
+                            <input class="form-control" type="color" value="{{$val['center_color']}}" disabled="disabled">
                         </div>
                     @elseif ($val['type']==2)                        
                         <div class="form-group">
                             <label for="exampleInputPassword1">Weather Widget Color</label>
-                            <input class="form-control" type="color" value="{{$val['weather']}}" id="example-color-input" name="weather">
+                            <input name="weather" value="rgba(255,0,0,0.3)" class="form-control" type='text' id="full"/>
+                            <br>
+                            <label for="">Current Color : </label>
+                            <input class="form-control" type="color" value="{{$val['weather']}}" disabled="disabled">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Screen Background</label><br>
@@ -857,7 +873,24 @@ Site {{$site['name']}}
                 </div>
             </div>
         </div>    
-    </form>    
+    </form>  
+    <script>
+            $("#full").spectrum({
+                color: "#ECC",
+                showInput: true,
+                className: "full-spectrum",
+                showInitial: true,
+                showPalette: true,
+                showSelectionPalette: true,
+                maxSelectionSize: 10,
+                preferredFormat: "hex",
+                showAlpha:true,
+                localStorageKey: "spectrum.demo"
+               
+                
+            });
+            
+    </script>   
 @endforeach
 
 @endsection
@@ -865,6 +898,8 @@ Site {{$site['name']}}
 
 @section('corejs')
     <!-- page scripts -->
+        
+        
         <script src="{{base_url('vendor/datatables/media/js/jquery.dataTables.js')}}"></script>
         <script src="{{base_url('vendor/datatables/media/js/dataTables.bootstrap4.js')}}"></script>
         <script>
@@ -872,6 +907,7 @@ Site {{$site['name']}}
                     $('.datatable').DataTable();
                 } );
         </script>
+        
     <!-- end page scripts -->
         <script>
             function cpyText() {

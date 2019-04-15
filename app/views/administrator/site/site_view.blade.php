@@ -788,10 +788,7 @@ Site {{$site['name']}}
                     @if ($val['type']==1)
                         <div class="form-group">
                             <label for="exampleInputPassword1">Weather Widget Color</label>                            
-                            <input name="weather" class="form-control" type='text' id="full"/>
-                            <br>
-                            <label for="">Current Color : </label>
-                            <input class="form-control" type="color" value="{{$val['weather']}}" disabled="disabled">
+                            <input value="{{$val['weather']}}" name="weather" class="full form-control" type='text' id="full"/>                            
                         </div>    
                         <div class="form-group">
                             <label for="exampleInputPassword1">Screen Background</label><br>
@@ -813,32 +810,20 @@ Site {{$site['name']}}
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Table Widget Color</label>
-                            <input name="table" value="rgba(255,0,0,0.3)" class="form-control" type='text' id="full"/>
-                            <br>
-                            <label for="">Current Color : </label>
-                            <input class="form-control" type="color" value="{{$val['table']}}" disabled="disabled">
+                            <input value="{{$val['tabel']}}" name="table" class="full form-control" type='text' id="full"/>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Gradient Weather Background Color</label>
-                            <input name="gradient" value="rgba(255,0,0,0.3)" class="form-control" type='text' id="full"/>
-                            <br>
-                            <label for="">Current Color : </label>
-                            <input class="form-control" type="color" value="{{$val['gradient_color']}}" disabled="disabled">
+                            <input value="{{$val['gradient_color']}}" name="gradient" class="full form-control" type='text' id="full"/>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Weather Background Color</label>
-                            <input name="center" value="rgba(255,0,0,0.3)" class="form-control" type='text' id="full"/>
-                            <br>
-                            <label for="">Current Color : </label>
-                            <input class="form-control" type="color" value="{{$val['center_color']}}" disabled="disabled">
+                            <input value="{{$val['center_color']}}" name="center" class="full form-control" type='text' id="full"/>
                         </div>
                     @elseif ($val['type']==2)                        
                         <div class="form-group">
                             <label for="exampleInputPassword1">Weather Widget Color</label>
-                            <input name="weather" value="rgba(255,0,0,0.3)" class="form-control" type='text' id="full"/>
-                            <br>
-                            <label for="">Current Color : </label>
-                            <input class="form-control" type="color" value="{{$val['weather']}}" disabled="disabled">
+                            <input name="weather" value="{{$val['weather']}}" class="full form-control" type='text' id="full"/>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Screen Background</label><br>
@@ -874,25 +859,26 @@ Site {{$site['name']}}
             </div>
         </div>    
     </form>  
-    <script>
-            $("#full").spectrum({
-                color: "#ECC",
-                showInput: true,
-                className: "full-spectrum",
-                showInitial: true,
-                showPalette: true,
-                showSelectionPalette: true,
-                maxSelectionSize: 10,
-                preferredFormat: "hex",
-                showAlpha:true,
-                localStorageKey: "spectrum.demo"
-               
-                
-            });
-            
-    </script>   
+    
 @endforeach
+<script>
+    var x = document.getElementsByClassName("full")
 
+    for (i = 0; i < x.length; i++) {
+        $(x[i]).spectrum({            
+            showInput: true,
+            className: "full-spectrum",
+            showInitial: false,
+            showPalette: true,
+            showSelectionPalette: true,
+            maxSelectionSize: 10,
+            preferredFormat: "rgb",
+            showAlpha:true,
+            localStorageKey: "spectrum.demo" ,                
+            change: true,                           
+        });            
+    }     
+</script>   
 @endsection
 
 

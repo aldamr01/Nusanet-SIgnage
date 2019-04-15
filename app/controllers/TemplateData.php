@@ -111,19 +111,20 @@ class TemplateData extends CI_Controller
             $update_template->background   =   $nbackground;
             $update_template->logo         =   $nlogo;
 
+           
             if ($update_template->save()) 
             {
                 if($this->session->userdata('auth_role')!= "Administrator")
-                    redirect(base_url('site/show/').$this->input->post('site_id')); 
-                else 
                     redirect(base_url('template/MyTemplate')); 
+                else                     
+                    redirect(base_url('site/show/').$this->input->post('site_id')); 
             }    
             else 
             {
                 if($this->session->userdata('auth_role')!= "Administrator")
-                    redirect(base_url('site/show/').$this->input->post('site_id')); 
-                else 
                     redirect(base_url('template/MyTemplate')); 
+                else                     
+                    redirect(base_url('site/show/').$this->input->post('site_id')); 
             }    
             
         }

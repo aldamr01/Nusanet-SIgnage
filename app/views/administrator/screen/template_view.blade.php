@@ -57,7 +57,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title" id="myModalLabel">Add a Tamplate</h4>
+                <h4 class="modal-title" id="myModalLabel">Add a Template</h4>
             </div>
             <div class="modal-body">
                 <div class="form-group">
@@ -111,7 +111,7 @@
                     @if ($val['type']==1)
                         <div class="form-group">
                             <label for="exampleInputPassword1">Weather Widget Color</label>
-                            <input class="form-control" type="color" value="{{$val['weather']}}" id="example-color-input" name="weather">
+                            <input class="form-control full" type="text" value="{{$val['weather']}}" id="full" name="weather">
                         </div>    
                         <div class="form-group">
                             <label for="exampleInputPassword1">Screen Background</label><br>
@@ -133,20 +133,20 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Table Widget Color</label>
-                            <input class="form-control" type="color" value="{{$val['tabel']}}" id="example-color-input" name="table">
+                            <input class="form-control full" type="text" value="{{$val['tabel']}}" id="full" name="table">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Gradient Weather Background Color</label>
-                            <input class="form-control" type="color" value="{{$val['gradient_color']}}" id="example-color-input" name="gradient">
+                            <input class="form-control full" type="text" value="{{$val['gradient_color']}}" id="full" name="gradient">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Weather Background Color</label>
-                            <input class="form-control" type="color" value="{{$val['center_color']}}" id="example-color-input" name="center">
+                            <input class="form-control full" type="text" value="{{$val['center_color']}}" id="full" name="center">
                         </div>
                     @elseif ($val['type']==2)                        
                         <div class="form-group">
                             <label for="exampleInputPassword1">Weather Widget Color</label>
-                            <input class="form-control" type="color" value="{{$val['weather']}}" id="example-color-input" name="weather">
+                            <input class="form-control full" type="text" value="{{$val['weather']}}" id="full" name="weather">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Screen Background</label><br>
@@ -183,6 +183,24 @@
         </div>    
     </form>    
 @endforeach
+<script>
+    var x = document.getElementsByClassName("full")
+
+    for (i = 0; i < x.length; i++) {
+        $(x[i]).spectrum({            
+            showInput: true,
+            className: "full-spectrum",
+            showInitial: false,
+            showPalette: true,
+            showSelectionPalette: true,
+            maxSelectionSize: 10,
+            preferredFormat: "rgb",
+            showAlpha:true,
+            localStorageKey: "spectrum.demo" ,                
+            change: true,                           
+        });            
+    }     
+</script>
 @endsection
 
 @section('corejs')

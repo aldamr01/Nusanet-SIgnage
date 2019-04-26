@@ -14,7 +14,7 @@ $route['screen/controller/(:num)/(:num)/(:any)']            =   'ScreenData/scre
 $route['site/list']                                         =   'SiteView/siteList';
 $route['site/create']                                       =   'SiteView/siteCreate';
 $route['site/change/(:num)']                                =   'SiteView/siteUpdate/$1';
-$route['site/drop/(:num)']                                  =   'SiteData/siteDelete/$1';
+//$route['site/drop/(:num)']                                  =   'SiteData/siteDelete/$1';
 $route['site/show/(:num)']                                  =   'SiteView/siteView/$1';
 
 $route['user/list']                                         =   'UserView/userList';

@@ -49,9 +49,9 @@ class SiteView extends CI_Controller
             $data['site']       =   Site::find($id);
             $data['user']       =   User::where('site_id',$id)->get();
             $data['screen']     =   Screen_Device::where('site_id',$id)->get();
-            $data['content']    =   Content::where('site_id',$id)->get();
+            $data['content']    =   Content::where('site_id',$id)->orderBy('created_at','DESC')->get();
             $data['template']   =   Template::where('site_id',$id)->get();
-            $data['schedule']   =   Schedule::where('site_id',$id)->get();
+            $data['schedule']   =   Schedule::where('site_id',$id)->orderBy('created_at','DESC')->get();
             $final  =   array(
                 'data'  => $data
             );

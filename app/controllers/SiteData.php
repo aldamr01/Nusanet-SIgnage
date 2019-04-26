@@ -30,7 +30,7 @@ class SiteData extends CI_Controller
 
         foreach ($site as $val) 
         {
-            $tmplink            =   "<a  title='Show' href='".base_url('site/show/').$val['id']."'><i class='material-icons'>slideshow</i></a>&nbsp;<a  title='Change' href='".base_url('site/change/').$val['id']."'><i class='material-icons'>update</i></a>"."&nbsp;<a onclick='return confirm()'  title='Delete' href='".base_url('site/drop/').$val['id']."'><i class='material-icons'>delete</i></a>";
+            $tmplink            =   "<a  title='Show' href='".base_url('site/show/').$val['id']."'><i class='material-icons'>slideshow</i></a>&nbsp;<a  title='Change' href='".base_url('site/change/').$val['id']."'><i class='material-icons'>update</i></a>"."&nbsp;";
 
             $data[$loop][0]     =   $val['name'];
             $data[$loop][1]     =   $val['location'];

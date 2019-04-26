@@ -8,8 +8,6 @@ Site {{$site['name']}}
 @section('content')
 
 
-
-
 <div class="main-content">
     <div class="content-view">
         <div class="row">
@@ -276,9 +274,9 @@ Site {{$site['name']}}
                         <select class="form-control" id="exampleSelect1" name="template"> 
                             @foreach ($template as $valx)   
                                 @if ($val['type']==$valx['type'])
-                                    <option value="{{$valx['type']}}" selected>Template {{$valx['type']}}</option>
+                                    <option value="{{$valx['type']}}" selected>Template {{$valx['name']}} (Type {{$valx['type']}})</option>
                                 @else
-                                    <option value="{{$valx['type']}}">Template {{$valx['type']}}</option>                            
+                                    <option value="{{$valx['type']}}">Template {{$valx['name']}} (Type {{$valx['type']}})</option>                            
                                 @endif                                    
                             @endforeach
                         </select>

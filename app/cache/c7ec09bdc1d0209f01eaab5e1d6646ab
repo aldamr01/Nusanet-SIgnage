@@ -6,8 +6,6 @@ Site <?php echo e($site['name']); ?>
 <?php $__env->startSection('content'); ?>
 
 
-
-
 <div class="main-content">
     <div class="content-view">
         <div class="row">
@@ -276,9 +274,9 @@ Site <?php echo e($site['name']); ?>
                         <select class="form-control" id="exampleSelect1" name="template"> 
                             <?php foreach($template as $valx): ?>   
                                 <?php if($val['type']==$valx['type']): ?>
-                                    <option value="<?php echo e($valx['type']); ?>" selected>Template <?php echo e($valx['type']); ?></option>
+                                    <option value="<?php echo e($valx['type']); ?>" selected>Template <?php echo e($valx['name']); ?> (Type <?php echo e($valx['type']); ?>)</option>
                                 <?php else: ?>
-                                    <option value="<?php echo e($valx['type']); ?>">Template <?php echo e($valx['type']); ?></option>                            
+                                    <option value="<?php echo e($valx['type']); ?>">Template <?php echo e($valx['name']); ?> (Type <?php echo e($valx['type']); ?>)</option>                            
                                 <?php endif; ?>                                    
                             <?php endforeach; ?>
                         </select>

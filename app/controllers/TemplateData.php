@@ -31,12 +31,12 @@ class TemplateData extends CI_Controller
         $template->type     =   $this->input->post('type');
 
         if($template->save())
-            if($this->session->userdata('auth_role')!= "Administrator")
+            if($this->session->userdata('auth_role')== "Administrator")
                 redirect(base_url('site/show/').$this->input->post('site_id')); 
             else 
                 redirect(base_url('template/MyTemplate')); 
         else 
-            if($this->session->userdata('auth_role')!= "Administrator")
+            if($this->session->userdata('auth_role')== "Administrator")
                 redirect(base_url('site/show/').$this->input->post('site_id')); 
             else 
                 redirect(base_url('template/MyTemplate')); 
@@ -101,7 +101,7 @@ class TemplateData extends CI_Controller
                 $extl           =   pathinfo($_FILES['logo']['name'], PATHINFO_EXTENSION);
                 $flogo          =   "file_logo".$this->input->post('id',TRUE)."_".md5($this->input->post('id',TRUE));
                 $logo           =   $this->ngupload($flogo,'logo');
-                $nlogo          =   $flogo.".".$extl;
+                $nlogo          =   $flogo.".".$extl;                
             }
             else 
             {
@@ -148,20 +148,17 @@ class TemplateData extends CI_Controller
                 $flight     = Template::find($id);        
 
                 if($flight->delete())                    
-                    redirect(base_url());
+                    redirect(base_url('template/MyTemplate'));
                 else
-                    redirect(base_url());
+                    redirect(base_url('template/MyTemplate'));
             }          
         }
         else 
         {
             $flight     = Template::find($id);        
 
-            if($flight->delete())
-                if($this->session->userdata('auth_role')== "Administrator")
-                    redirect(base_url('site/show/').$site);
-                else
-                    redirect(base_url());
+            if($flight->delete())            
+                redirect(base_url('site/show/').$site);                
             else
                 redirect(base_url('site/show/').$site);
         }        

@@ -74,7 +74,7 @@
                     
                     // Hide the previous
                     $imageEls.eq(index - 1).removeClass('show');
-                }, 3000);
+                }, 10000);
             };
             
             // Document Ready.

@@ -168,7 +168,7 @@
                 <div class="form-group">
                     <label for="exampleInputUsername1">Description</label>
                     <input type="text" class="form-control"
-                        id="exampleInputUsername1" placeholder="Username" name="desc" required/>
+                        id="exampleInputUsername1" placeholder="Description" name="desc" required/>
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Image / Video</label>
@@ -278,9 +278,9 @@
                     <select class="form-control" id="exampleSelect1" name="template"> 
                         @foreach ($template as $valx)   
                             @if ($screen['type']==$valx['type'])
-                                <option value="{{$valx['type']}}" selected>Template {{$valx['type']}}</option>
+                                <option value="{{$valx['type']}}" selected>Template {{$valx['name']}} (Type {{$valx['type']}})</option>
                             @else
-                                <option value="{{$valx['type']}}">Template {{$valx['type']}}</option>                            
+                                <option value="{{$valx['type']}}">Template {{$valx['name']}} (Type {{$valx['type']}})</option>                            
                             @endif                                    
                         @endforeach
                     </select>

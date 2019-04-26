@@ -33,7 +33,7 @@ Site <?php echo e($site['name']); ?>
                                                     <?php echo e($val['name']); ?>
 
                                                 </a>
-                                                <a style="float:right" title='Drop' href='<?php echo e(base_url('API/UserDrop/').$val['id']."/".$site['id']); ?>'><i class='material-icons'>delete</i></a>
+                                                <a onclick="return confirm('delete ?')" style="float:right" title='Drop' href='<?php echo e(base_url('API/UserDrop/').$val['id']."/".$site['id']); ?>'><i class='material-icons'>delete</i></a>
                                                 <a style="float:right" title='Change' href='#' data-toggle="modal" data-target=".edituser<?php echo e($val['id']); ?>"><i class='material-icons'>edit</i></a>                                        
                                             </h6>
                                         </div>
@@ -292,7 +292,7 @@ Site <?php echo e($site['name']); ?>
                     </div>                                            
                 </div>
                 <div class="modal-footer">
-                    <a style="float:left" class="btn btn-danger" title='Drop' href='<?php echo e(base_url("API/ScreenDrop/").$val["id"]."/".$site["id"]); ?>'><i class='material-icons'>delete</i>Drop</a>
+                    <a onclick="return confirm('delete ?')" style="float:left" class="btn btn-danger" title='Drop' href='<?php echo e(base_url("API/ScreenDrop/").$val["id"]."/".$site["id"]); ?>'><i class='material-icons'>delete</i>Drop</a>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary">Save Change</button>
                 </div>
@@ -858,7 +858,7 @@ Site <?php echo e($site['name']); ?>
                 <input type="hidden" name="id" value="<?php echo e($val['id']); ?>" hidden="hidden">
                 <input type="hidden" name="site_id" hidden="hidden" value="<?php echo e($site['id']); ?>">
                 <div class="modal-footer">
-                    <a style="float:left" class="btn btn-danger" title='Drop' href='<?php echo e(base_url("API/TemplateDrop/").$val["id"]."/".$site["id"]); ?>'><i class='material-icons'>delete</i>Drop</a>
+                    <a onclick="return confirm('delete ?')" style="float:left" class="btn btn-danger" title='Drop' href='<?php echo e(base_url("API/TemplateDrop/").$val["id"]."/".$site["id"]); ?>'><i class='material-icons'>delete</i>Drop</a>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary">Save Change</button>
                 </div>

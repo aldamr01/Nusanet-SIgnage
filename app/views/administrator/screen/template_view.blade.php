@@ -174,7 +174,7 @@
                 <input type="hidden" name="id" value="{{$val['id']}}" hidden="hidden">
                 <input type="hidden" name="site_id" hidden="hidden" value="{{$site['id']}}">
                 <div class="modal-footer">
-                    <a style="float:left" class="btn btn-danger" title='Drop' href='{{base_url("API/TemplateDrop/").$val["id"]."/".$site["id"]}}'><i class='material-icons'>delete</i>Drop</a>
+                    <a onclick="return confirm('delete ?')" style="float:left" class="btn btn-danger" title='Drop' href='{{base_url("API/TemplateDrop/").$val["id"]."/".$site["id"]}}'><i class='material-icons'>delete</i>Drop</a>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary">Save Change</button>
                 </div>

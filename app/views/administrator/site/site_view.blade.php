@@ -34,7 +34,7 @@ Site {{$site['name']}}
                                                     aria-expanded="true" aria-controls="collapseOne">
                                                     {{$val['name']}}
                                                 </a>
-                                                <a style="float:right" title='Drop' href='{{base_url('API/UserDrop/').$val['id']."/".$site['id']}}'><i class='material-icons'>delete</i></a>
+                                                <a onclick="return confirm('delete ?')" style="float:right" title='Drop' href='{{base_url('API/UserDrop/').$val['id']."/".$site['id']}}'><i class='material-icons'>delete</i></a>
                                                 <a style="float:right" title='Change' href='#' data-toggle="modal" data-target=".edituser{{$val['id']}}"><i class='material-icons'>edit</i></a>                                        
                                             </h6>
                                         </div>
@@ -292,7 +292,7 @@ Site {{$site['name']}}
                     </div>                                            
                 </div>
                 <div class="modal-footer">
-                    <a style="float:left" class="btn btn-danger" title='Drop' href='{{base_url("API/ScreenDrop/").$val["id"]."/".$site["id"]}}'><i class='material-icons'>delete</i>Drop</a>
+                    <a onclick="return confirm('delete ?')" style="float:left" class="btn btn-danger" title='Drop' href='{{base_url("API/ScreenDrop/").$val["id"]."/".$site["id"]}}'><i class='material-icons'>delete</i>Drop</a>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary">Save Change</button>
                 </div>
@@ -849,7 +849,7 @@ Site {{$site['name']}}
                 <input type="hidden" name="id" value="{{$val['id']}}" hidden="hidden">
                 <input type="hidden" name="site_id" hidden="hidden" value="{{$site['id']}}">
                 <div class="modal-footer">
-                    <a style="float:left" class="btn btn-danger" title='Drop' href='{{base_url("API/TemplateDrop/").$val["id"]."/".$site["id"]}}'><i class='material-icons'>delete</i>Drop</a>
+                    <a onclick="return confirm('delete ?')" style="float:left" class="btn btn-danger" title='Drop' href='{{base_url("API/TemplateDrop/").$val["id"]."/".$site["id"]}}'><i class='material-icons'>delete</i>Drop</a>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary">Save Change</button>
                 </div>

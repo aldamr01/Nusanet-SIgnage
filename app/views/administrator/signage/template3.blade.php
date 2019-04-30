@@ -1,6 +1,6 @@
 <html>
     <head>
-        <meta http-equiv="refresh" content="10" >
+        {{--  <meta http-equiv="refresh" content="10" >  --}}
         <style>
             .container {
                 width: 100%;

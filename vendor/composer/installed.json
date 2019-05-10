@@ -219,32 +219,36 @@
     },
     {
         "name": "dompdf/dompdf",
-        "version": "v0.8.2",
-        "version_normalized": "0.8.2.0",
+        "version": "v0.8.3",
+        "version_normalized": "0.8.3.0",
         "source": {
             "type": "git",
             "url": "https://github.com/dompdf/dompdf.git",
-            "reference": "5113accd9ae5d466077cce5208dcf3fb871bf8f6"
+            "reference": "75f13c700009be21a1965dc2c5b68a8708c22ba2"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/dompdf/dompdf/zipball/5113accd9ae5d466077cce5208dcf3fb871bf8f6",
-            "reference": "5113accd9ae5d466077cce5208dcf3fb871bf8f6",
+            "url": "https://api.github.com/repos/dompdf/dompdf/zipball/75f13c700009be21a1965dc2c5b68a8708c22ba2",
+            "reference": "75f13c700009be21a1965dc2c5b68a8708c22ba2",
             "shasum": ""
         },
         "require": {
             "ext-dom": "*",
-            "ext-gd": "*",
             "ext-mbstring": "*",
             "phenx/php-font-lib": "0.5.*",
             "phenx/php-svg-lib": "0.3.*",
             "php": ">=5.4.0"
         },
         "require-dev": {
-            "phpunit/phpunit": "4.8.*",
+            "phpunit/phpunit": "^4.8|^5.5|^6.5",
             "squizlabs/php_codesniffer": "2.*"
         },
-        "time": "2017-11-26T14:49:08+00:00",
+        "suggest": {
+            "ext-gd": "Needed to process images",
+            "ext-gmagick": "Improves image processing performance",
+            "ext-imagick": "Improves image processing performance"
+        },
+        "time": "2018-12-14T02:40:31+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -634,17 +638,17 @@
     },
     {
         "name": "league/flysystem",
-        "version": "1.0.48",
-        "version_normalized": "1.0.48.0",
+        "version": "1.0.51",
+        "version_normalized": "1.0.51.0",
         "source": {
             "type": "git",
             "url": "https://github.com/thephpleague/flysystem.git",
-            "reference": "a6ded5b2f6055e2db97b4b859fdfca2b952b78aa"
+            "reference": "755ba7bf3fb9031e6581d091db84d78275874396"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/a6ded5b2f6055e2db97b4b859fdfca2b952b78aa",
-            "reference": "a6ded5b2f6055e2db97b4b859fdfca2b952b78aa",
+            "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/755ba7bf3fb9031e6581d091db84d78275874396",
+            "reference": "755ba7bf3fb9031e6581d091db84d78275874396",
             "shasum": ""
         },
         "require": {
@@ -674,7 +678,7 @@
             "spatie/flysystem-dropbox": "Allows you to use Dropbox storage",
             "srmklive/flysystem-dropbox-v2": "Allows you to use Dropbox storage for PHP 5 applications"
         },
-        "time": "2018-10-15T13:53:10+00:00",
+        "time": "2019-03-30T13:22:34+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -724,12 +728,12 @@
         "version_normalized": "1.1.0.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/mikey179/vfsStream.git",
+            "url": "https://github.com/bovigo/vfsStream.git",
             "reference": "fc0fe8f4d0b527254a2dc45f0c265567c881d07e"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/mikey179/vfsStream/zipball/fc0fe8f4d0b527254a2dc45f0c265567c881d07e",
+            "url": "https://api.github.com/repos/bovigo/vfsStream/zipball/fc0fe8f4d0b527254a2dc45f0c265567c881d07e",
             "reference": "fc0fe8f4d0b527254a2dc45f0c265567c881d07e",
             "shasum": ""
         },
@@ -752,17 +756,17 @@
     },
     {
         "name": "nesbot/carbon",
-        "version": "1.35.1",
-        "version_normalized": "1.35.1.0",
+        "version": "1.37.1",
+        "version_normalized": "1.37.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/briannesbitt/Carbon.git",
-            "reference": "5c05a2be472b22f63291d192410df9f0e0de3b19"
+            "reference": "5be4fdf97076a685b23efdedfc2b73ad0c5eab70"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/5c05a2be472b22f63291d192410df9f0e0de3b19",
-            "reference": "5c05a2be472b22f63291d192410df9f0e0de3b19",
+            "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/5be4fdf97076a685b23efdedfc2b73ad0c5eab70",
+            "reference": "5be4fdf97076a685b23efdedfc2b73ad0c5eab70",
             "shasum": ""
         },
         "require": {
@@ -776,7 +780,7 @@
             "friendsofphp/php-cs-fixer": "Needed for the `composer phpcs` command. Allow to automatically fix code style.",
             "phpstan/phpstan": "Needed for the `composer phpstan` command. Allow to detect potential errors."
         },
-        "time": "2018-11-14T21:55:58+00:00",
+        "time": "2019-04-19T10:27:42+00:00",
         "type": "library",
         "extra": {
             "laravel": {
@@ -1539,7 +1543,8 @@
         "keywords": [
             "mock",
             "xunit"
-        ]
+        ],
+        "abandoned": true
     },
     {
         "name": "sabberworm/php-css-parser",
@@ -2027,17 +2032,17 @@
     },
     {
         "name": "symfony/polyfill-ctype",
-        "version": "v1.10.0",
-        "version_normalized": "1.10.0.0",
+        "version": "v1.11.0",
+        "version_normalized": "1.11.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/polyfill-ctype.git",
-            "reference": "e3d826245268269cd66f8326bd8bc066687b4a19"
+            "reference": "82ebae02209c21113908c229e9883c419720738a"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/e3d826245268269cd66f8326bd8bc066687b4a19",
-            "reference": "e3d826245268269cd66f8326bd8bc066687b4a19",
+            "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/82ebae02209c21113908c229e9883c419720738a",
+            "reference": "82ebae02209c21113908c229e9883c419720738a",
             "shasum": ""
         },
         "require": {
@@ -2046,11 +2051,11 @@
         "suggest": {
             "ext-ctype": "For best performance"
         },
-        "time": "2018-08-06T14:22:27+00:00",
+        "time": "2019-02-06T07:57:58+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "1.9-dev"
+                "dev-master": "1.11-dev"
             }
         },
         "installation-source": "dist",
@@ -2087,17 +2092,17 @@
     },
     {
         "name": "symfony/polyfill-mbstring",
-        "version": "v1.10.0",
-        "version_normalized": "1.10.0.0",
+        "version": "v1.11.0",
+        "version_normalized": "1.11.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/polyfill-mbstring.git",
-            "reference": "c79c051f5b3a46be09205c73b80b346e4153e494"
+            "reference": "fe5e94c604826c35a32fa832f35bd036b6799609"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/c79c051f5b3a46be09205c73b80b346e4153e494",
-            "reference": "c79c051f5b3a46be09205c73b80b346e4153e494",
+            "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/fe5e94c604826c35a32fa832f35bd036b6799609",
+            "reference": "fe5e94c604826c35a32fa832f35bd036b6799609",
             "shasum": ""
         },
         "require": {
@@ -2106,11 +2111,11 @@
         "suggest": {
             "ext-mbstring": "For best performance"
         },
-        "time": "2018-09-21T13:07:52+00:00",
+        "time": "2019-02-06T07:57:58+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "1.9-dev"
+                "dev-master": "1.11-dev"
             }
         },
         "installation-source": "dist",
@@ -2148,17 +2153,17 @@
     },
     {
         "name": "symfony/translation",
-        "version": "v3.4.18",
-        "version_normalized": "3.4.18.0",
+        "version": "v3.4.27",
+        "version_normalized": "3.4.27.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/translation.git",
-            "reference": "94bc3a79008e6640defedf5e14eb3b4f20048352"
+            "reference": "301a5d627220a1c4ee522813b0028653af6c4f54"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/translation/zipball/94bc3a79008e6640defedf5e14eb3b4f20048352",
-            "reference": "94bc3a79008e6640defedf5e14eb3b4f20048352",
+            "url": "https://api.github.com/repos/symfony/translation/zipball/301a5d627220a1c4ee522813b0028653af6c4f54",
+            "reference": "301a5d627220a1c4ee522813b0028653af6c4f54",
             "shasum": ""
         },
         "require": {
@@ -2175,7 +2180,9 @@
             "symfony/config": "~2.8|~3.0|~4.0",
             "symfony/dependency-injection": "~3.4|~4.0",
             "symfony/finder": "~2.8|~3.0|~4.0",
+            "symfony/http-kernel": "~3.4|~4.0",
             "symfony/intl": "^2.8.18|^3.2.5|~4.0",
+            "symfony/var-dumper": "~3.4|~4.0",
             "symfony/yaml": "~3.4|~4.0"
         },
         "suggest": {
@@ -2183,7 +2190,7 @@
             "symfony/config": "",
             "symfony/yaml": ""
         },
-        "time": "2018-10-02T16:33:53+00:00",
+        "time": "2019-05-01T11:10:09+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -2218,17 +2225,17 @@
     },
     {
         "name": "symfony/yaml",
-        "version": "v3.4.18",
-        "version_normalized": "3.4.18.0",
+        "version": "v3.4.27",
+        "version_normalized": "3.4.27.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/yaml.git",
-            "reference": "640b6c27fed4066d64b64d5903a86043f4a4de7f"
+            "reference": "212a27b731e5bfb735679d1ffaac82bd6a1dc996"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/yaml/zipball/640b6c27fed4066d64b64d5903a86043f4a4de7f",
-            "reference": "640b6c27fed4066d64b64d5903a86043f4a4de7f",
+            "url": "https://api.github.com/repos/symfony/yaml/zipball/212a27b731e5bfb735679d1ffaac82bd6a1dc996",
+            "reference": "212a27b731e5bfb735679d1ffaac82bd6a1dc996",
             "shasum": ""
         },
         "require": {
@@ -2244,7 +2251,7 @@
         "suggest": {
             "symfony/console": "For validating YAML files using the lint command"
         },
-        "time": "2018-10-02T16:33:53+00:00",
+        "time": "2019-03-25T07:48:46+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -2331,17 +2338,17 @@
     },
     {
         "name": "vlucas/valitron",
-        "version": "v1.4.3",
-        "version_normalized": "1.4.3.0",
+        "version": "v1.4.5",
+        "version_normalized": "1.4.5.0",
         "source": {
             "type": "git",
             "url": "https://github.com/vlucas/valitron.git",
-            "reference": "3c5463315bfa23b17f8949b100a960d035234e43"
+            "reference": "c3b4dac8586291990e6398961852e972600ac7b5"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/vlucas/valitron/zipball/3c5463315bfa23b17f8949b100a960d035234e43",
-            "reference": "3c5463315bfa23b17f8949b100a960d035234e43",
+            "url": "https://api.github.com/repos/vlucas/valitron/zipball/c3b4dac8586291990e6398961852e972600ac7b5",
+            "reference": "c3b4dac8586291990e6398961852e972600ac7b5",
             "shasum": ""
         },
         "require": {
@@ -2353,7 +2360,7 @@
         "suggest": {
             "ext-mbstring": "It can support the multiple bytes string length."
         },
-        "time": "2018-05-06T10:45:26+00:00",
+        "time": "2019-03-21T20:12:22+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -2382,27 +2389,28 @@
     },
     {
         "name": "webmozart/assert",
-        "version": "1.3.0",
-        "version_normalized": "1.3.0.0",
+        "version": "1.4.0",
+        "version_normalized": "1.4.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/webmozart/assert.git",
-            "reference": "0df1908962e7a3071564e857d86874dad1ef204a"
+            "reference": "83e253c8e0be5b0257b881e1827274667c5c17a9"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/webmozart/assert/zipball/0df1908962e7a3071564e857d86874dad1ef204a",
-            "reference": "0df1908962e7a3071564e857d86874dad1ef204a",
+            "url": "https://api.github.com/repos/webmozart/assert/zipball/83e253c8e0be5b0257b881e1827274667c5c17a9",
+            "reference": "83e253c8e0be5b0257b881e1827274667c5c17a9",
             "shasum": ""
         },
         "require": {
-            "php": "^5.3.3 || ^7.0"
+            "php": "^5.3.3 || ^7.0",
+            "symfony/polyfill-ctype": "^1.8"
         },
         "require-dev": {
             "phpunit/phpunit": "^4.6",
             "sebastian/version": "^1.0.1"
         },
-        "time": "2018-01-29T19:49:41+00:00",
+        "time": "2018-12-25T11:19:39+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {

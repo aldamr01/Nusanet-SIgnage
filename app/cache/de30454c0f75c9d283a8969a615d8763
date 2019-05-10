@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+    <link href="<?php echo e(base_url('styles/snackmarquee.css')); ?>" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.4.0.min.js" integrity="sha384-JUMjoW8OzDJw4oFpWIB2Bu/c6768ObEthBMVSiIx4ruBIEdyNSUQAjJNFqT5pnJ6" crossorigin="anonymous"></script>
+    <script src="<?php echo e(base_url('scripts/snackmarquee.js')); ?>"></script>
+
+
+    <script>
+        function deferVideo() {
+
+            //defer html5 video loading
+            $("video source").each(function() {
+            var sourceFile = $(this).attr("data-src");
+            $(this).attr("src", sourceFile);
+            var video = this.parentElement;
+            video.load();
+            // uncomment if video is not autoplay
+            //video.play();
+            });
+
+        }
+        window.onload = deferVideo;
+    </script>
+    <script>
+        let slider;    
+        $(document).ready(function () {
+            slider = new SnackMarquee({
+                selector: '.slider',
+                mode: 'right',
+                speed: 100,
+                space: 20,
+                font: '"Times New Roman",Arial, Helvetica, sans-serif',
+                size: 40    ,   
+                color: 'black',
+                background: '#4e5056',
+                width: 0,
+                height: 0,
+                children: [
+                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse egestas tortor et ante varius faucibus id at tellus.'
+                ]
+            });
+            slider.start()
+        });
+        
+    </script>
+    <style>
+        html,body,.maxw{
+            padding:0;
+            margin:0;
+            height:98%;
+            width:100%;
+            overflow:hidden;
+            background:black;
+            
+        }
+
+        .schedule{
+            position: relative;
+            overflow: hidden;
+            background-size:cover;
+            height:70%;
+            min-height:90%;
+            background: url(<?php echo e(base_url('rep.png')); ?>);
+            background-position:center;
+            background-size:cover;
+            background-repeat:repeat;
+            background-attachment:center;  
+        }
+
+       .rey {
+            position: inherit;
+            overflow: hidden;
+            /* background-color:black; */
+            height:90%;
+            min-height:90%;
+            width:90%;
+        }
+               
+        .rey video {            
+            max-width:100%;
+            min-height:100%;                        
+        }        
+
+        .slider{
+            margin-top:-20px;
+        }
+
+        .borderless td, .borderless th {
+                border: none;
+                
+        }
+        .roundedt {
+            border: none;
+        }
+        .roundedt thead th {
+            background-color: <?php echo e($config['tabel']); ?>;
+            border: none;
+        }
+        .roundedt thead th:first-child {
+            border-radius: 10px 0 0 0;
+        }
+        .roundedt thead th:last-child {
+            border-radius: 0 10px 0 0;
+        }
+        .roundedt tbody td {
+            border: none;
+            background-color: <?php echo e($config['tabel']); ?>;
+            /*border-top: solid 1px #957030;*/
+        }
+        .tdhead{
+            border: none;
+            background-color: <?php echo e($config['tabel']); ?>;
+            border-top: solid 1px #957030;
+        }
+        .roundedt tbody tr:last-child td:first-child {
+            border-radius: 0 0 0 10px;
+        }
+        .roundedt tbody tr:last-child td:last-child {
+            border-radius: 0 0 10px 0;
+        }
+
+    </style>
+</head>
+<body>
+    
+    <div class="maxw">
+        <div class="row" style="padding:0;height:100%;margin:0;">
+            <div class="rey col-md-8" style="padding:0">
+                <video autoplay muted loop poster="https://dummyimage.com/900x400/000/fff">    
+                    <source src="" data-src="<?php echo e(base_url('onandon.mp4')); ?>" type="video/mp4">
+                </video>
+            </div>
+            <div class="schedule col-md-4" style="padding:0;">
+                <div class="row" style="padding:0;margin:0;">
+                    <div class="col-md-12"style="padding:0;height:100%;margin:0;">                       
+                        <a class="weatherwidget-io" href="https://forecast7.com/en/n7d26112d75/surabaya/" data-label_1="SURABAYA" data-label_2="WEATHER" data-icons="Climacons Animated" data-mode="Current" data-days="3" data-theme="random_grey" data-textcolor="#fdfdfd" >SURABAYA WEATHER</a>
+                        <script>
+                        !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
+                        </script>      
+                    </div>                
+                </div>
+                <hr>
+                <div class="row" style="padding:0;margin:0;">
+                    <div class="col-md-12"style="padding:0;height:100%;margin:0;">
+                        <div class="col-md-10 offset-1" style="padding:0;">
+                            <table class="table  table-striped borderless roundedt" style="text-align:center;margin:0;font-size:18px;color:white;font-style:bold">
+                                <thead >
+                                    <th style="text-align:left">Group / Event</th>
+                                    <th style="text-align:left">Room</th>
+                                    <th style="text-align:left">Start/End</th>
+                                </thead>
+                                <tbody>
+                                    <?php $var="heads"; ?>
+                                    <?php foreach($schedule as $val): ?>
+                                    <?php
+                                        
+                                        if($var!=$val['title'])
+                                        {                                        
+                                            $temp="head";
+                                        }
+                                        else
+                                        {
+                                            $temp="nohead";
+                                        }
+                                        $var = $val['title'];
+                                        
+                                    ?>
+                                        <?php if($temp=='head'): ?>
+                                            <tr class="tdhead">
+                                                <td colspan="3" style="text-align:left;">
+                                                    <b style="font-size:24px;"><?php echo e($val['title']); ?></b>
+                                                </td>
+                                            </tr> 
+                                            <tr style="border-top:solid 0px white;">
+                                                <td style="text-align:left;"><b><?php echo e($val['description']); ?></b></td>
+                                                <td style="text-align:left;"><b><?php echo e($val['room']); ?></b></td>
+                                                <td style="text-align:center;"><?php echo e($val['start']); ?> <br> <?php echo e($val['end']); ?></td>
+                                            </tr>       
+                                        <?php else: ?>
+                                            <tr style="border-top:solid 0px white;">
+                                                <td style="text-align:left;"><b><?php echo e($val['description']); ?></b></td>
+                                                <td style="text-align:left;"><b><?php echo e($val['room']); ?></b></td>
+                                                <td style="text-align:center;"><?php echo e($val['start']); ?> <br> <?php echo e($val['end']); ?></td>
+                                            </tr>  
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>                                                                
+                                </tbody>
+                            </table>  
+                        </div>
+                    </div>
+                </div>
+            </div>                            
+            <div class="slider" style="width:100%;height:20%;border-top:10px solid #957030;z-index:999;"></div>        
+        </div>                
+    </div>
+</body>
+</html>

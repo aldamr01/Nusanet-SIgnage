@@ -46,13 +46,17 @@
                     @if ($val['type']!='video')
                         <div class="slide" style="background-image: url('{{base_url("files/").$val["filename"]}}');"></div>        
                     @else
-                        
+                        <video autoplay muted loop poster="https://dummyimage.com/900x400/000/fff">    
+                            <source src="" data-src="{{base_url('files/').$val['filename']}}" type="video/mp4">
+                        </video>
                     @endif                    
                 @else
                     @if ($val['type']!='video')
                         <div class="slide show" style="background-image: url('{{base_url("files/").$val["filename"]}}');"></div>        
                     @else
-                        
+                        <video autoplay muted loop poster="https://dummyimage.com/900x400/000/fff">    
+                            <source src="" data-src="{{base_url('files/').$val['filename']}}" type="video/mp4">
+                        </video>
                     @endif                    
                 @endif
                 <?php $loop++ ?>

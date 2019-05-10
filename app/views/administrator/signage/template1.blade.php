@@ -25,6 +25,7 @@
                 border: none;
             }
             .roundedt thead th {
+                padding-top:40px;
                 background-color: {{$config['tabel']}};
                 border: none;
             }
@@ -38,17 +39,20 @@
                 border: none;
                 background-color: {{$config['tabel']}};
                 /*border-top: solid 1px #957030;*/
+                
             }
             .tdhead{
                 border: none;
                 background-color: {{$config['tabel']}};
                 border-top: solid 1px #957030;
+                
             }
             .roundedt tbody tr:last-child td:first-child {
-                border-radius: 0 0 0 10px;
+                border-radius: 0 0 0 10px;                
             }
             .roundedt tbody tr:last-child td:last-child {
-                border-radius: 0 0 10px 0;
+                border-radius: 0 0 10px 0;    
+                padding-bottom:60px;            
             }
 
             .footer {
@@ -86,7 +90,7 @@
             </div>
             <div class="row">
                 <div class="col-md-12">                    
-                    <div class="col-md-6 offset-3" style="padding:0;">
+                    <div class="col-md-12 " style="padding:0;">
                         <table class="table  table-striped borderless roundedt" style="text-align:center;margin:0">
                             <thead >
                                 <th style="text-align:center">Group / Event</th>
@@ -110,21 +114,23 @@
                                     
                                 ?>
                                     @if ($temp=='head')
-                                        <tr class="tdhead">
-                                            <td colspan="3" style="text-align:left;">
-                                                <b style="margin-left:37px">{{$val['title']}}</b>
+                                        <tr class="tdhead" >
+                                            <td  style="text-align:center;padding-top:40px;">
+                                                <b >{{$val['title']}}</b>
                                             </td>
+                                            <td></td>
+                                            <td></td>
                                         </tr> 
                                         <tr style="border-top:solid 0px white;">
-                                            <td style="text-align:left;margin-left:37px">{{$val['description']}}</td>
-                                            <td style="text-align:left;margin-left:37px">{{$val['room']}}</td>
-                                            <td style="text-align:left;margin-left:37px">{{$val['start']}} - {{$val['end']}}</td>
+                                            <td style="text-align:center;">{{$val['description']}}</td>
+                                            <td style="text-align:center;">{{$val['room']}}</td>
+                                            <td style="text-align:center;">{{$val['start']}} - {{$val['end']}}</td>
                                         </tr>       
                                     @else
                                         <tr style="border-top:solid 0px white;">
-                                            <td style="text-align:left;margin-left:37px">{{$val['description']}}</td>
-                                            <td style="text-align:left;margin-left:37px">{{$val['room']}}</td>
-                                            <td style="text-align:left;margin-left:37px">{{$val['start']}} - {{$val['end']}}</td>
+                                            <td style="text-align:center;">{{$val['description']}}</td>
+                                            <td style="text-align:center;">{{$val['room']}}</td>
+                                            <td style="text-align:center;">{{$val['start']}} - {{$val['end']}}</td>
                                         </tr>  
                                     @endif
                                 @endforeach                                                                

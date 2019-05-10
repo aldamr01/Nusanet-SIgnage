@@ -87,7 +87,7 @@ Site {{$site['name']}}
                     @foreach ($template as $val)
                         <div class="col-md-6 table-bordered" >
                             <a href="#" data-toggle="modal" data-target=".template{{$val['id']}}">
-                                <span style="float:left; margin-top:4px;" class="tag tag-success">{{$val['name']}} template-{{$val['type']}}</span>
+                                <span style="float:left; margin-top:4px;" class="tag tag-success">{{$val['name']}} (Type {{$val['type']}})</span>
                                 <br>                                   
                                 <p align="center" >
                                     <i  class='material-icons' style="font-size:50px;">photo</i>                                    
@@ -272,11 +272,11 @@ Site {{$site['name']}}
                             Template
                         </label>
                         <select class="form-control" id="exampleSelect1" name="template"> 
-                            @foreach ($template as $valx)   
+                            @foreach ($type as $valx)   
                                 @if ($val['type']==$valx['type'])
                                     <option value="{{$valx['type']}}" selected>Template {{$valx['name']}} (Type {{$valx['type']}})</option>
                                 @else
-                                    <option value="{{$valx['type']}}">Template {{$valx['name']}} (Type {{$valx['type']}})</option>                            
+                                    <option value="{{$valx['id']}}">Template {{$valx['name']}} (Type {{$valx['type']}})</option>                            
                                 @endif                                    
                             @endforeach
                         </select>
@@ -462,7 +462,7 @@ Site {{$site['name']}}
                         </div>
                         <div class="col-md-6">
                             <label for="exampleInputUsername1">End time</label>
-                            <input type="time" class="form-control" id="exampleInputUsername1" placeholder="End time" name="end" required/>
+                        <input value="" type="time" class="form-control" id="exampleInputUsername1" placeholder="End time" name="end" required/>
                         </div>      
                     </div>                                      
                 </div>
@@ -604,7 +604,7 @@ Site {{$site['name']}}
                         Template
                     </label>
                     <select class="form-control" id="exampleSelect1" name="type"> 
-                        @foreach ($template as $val)                                                    
+                        @foreach ($type as $val)                                                    
                             <option name="type" value="{{$val['type']}}">Template {{$val['type']}}</option>                                                        
                         @endforeach
                     </select>

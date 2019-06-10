@@ -12,6 +12,7 @@ class ScreenView extends CI_Controller
         $this->load->model('Schedule');
         $this->load->model('Template');
         $this->load->model('Site');
+        $this->load->model('RunningText');
     }
 
     function screenMe()
@@ -32,6 +33,7 @@ class ScreenView extends CI_Controller
         $data['thisuser']       =   $this->session->all_userdata();        
         $data['template']       =   Template::where('site_id',$this->session->userdata('auth_site'))->get();
         $data['screen_url']     =   Screen_Device::find($id);
+        $data['marquee']        =   RunningText::where('site_id',$this->session->userdata('auth_site'))->get();
         $data['screen']         =   Screen_Device::where($where)->first();
         $data['schedule']       =   Schedule::where('device_id',$id)->get();
         $data['content']        =   Content::where('device_id',$id)->get();

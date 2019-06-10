@@ -13,6 +13,7 @@ class Signage extends CI_Controller
         $this->load->model('Content');
         $this->load->model('Schedule');
         $this->load->model('Template');
+        $this->load->model('RunningText');
     }
 
     public function index()
@@ -43,29 +44,32 @@ class Signage extends CI_Controller
         echo $this->blade->stream('administrator.404',$data);
     }
 
-    function screenView($site_id,$screen_id,$token)
+    function screenView($site_id,$screen_id,$token,$broadcast=null)
     {
-        
-        $where              =   array(
-            'device_id'     =>  $screen_id,
-            'for_date'      =>  $this->amirrule_lib->today()
-        );        
+        if($broadcast=='null')
+            $where              =   array(
+                'device_id'     =>  $screen_id,
+                'for_date'      =>  $this->amirrule_lib->today()
+            );
+        else 
+            $where              =   array(
+                'device_id'     =>  $broadcast,
+                'for_date'      =>  $this->amirrule_lib->today()
+            );
 
         $site               =   Site::find($site_id);
         $screen             =   Screen_Device::find($screen_id);
 
         $where2             =   array(
-            'type'          =>  $screen['type'],
+            'id'            =>  $screen['template_id'],
             'site_id'       =>  $site_id
         );
 
-        $data['content']    =   Content::where('device_id',$screen_id)->orderBy('created_at','DESC')->get();
-        $data['schedule']   =   Schedule::where($where)->orderBy('start','ASC')->get();
-        $data['config']     =   Template::where($where2)->first();
-
-        // header('Content-Type:Application/json');
-        // echo json_encode($data)       ;
-        // die();
+        $data['content']    =   Content::where('device_id',$screen_id)->orderBy('created_at','ASC')->get();
+        
+        $data['schedule']       =   Schedule::where($where)->orderBy('start','ASC')->get();
+        $data['config']         =   Template::where($where2)->first();
+        $data['running_text']   =   RunningText::where('site_id',$site_id)->get();
         
         if($site->token == $token)
         {
@@ -84,8 +88,13 @@ class Signage extends CI_Controller
                         echo $this->blade->stream('administrator.signage.template3',$data);
                         break;
 
+                    case '4':
+                        echo $this->blade->stream('administrator.signage.template4',$data);
+                        break;
+                        
                     default:
                         # code...
+                        echo"s";
                         break;
                 }
                 

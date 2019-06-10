@@ -124,6 +124,41 @@
                         </table>
                     </div>
                 </div>
+                <?php if($screen['type'] == 2): ?>
+                    <div class="card">
+                        <div class="card-header no-bg b-a-0">
+                            <b>Marquee Bottom</b>
+                            <a href="" data-toggle="modal" data-target=".addmarquee"> 
+                                <i style="float:right" class='material-icons'>add</i>
+                            </a>
+                        </div>
+                        <hr>
+                        <div class="card-block">
+                            <table class="table  table-bordered datatable">
+                                <thead align="center">   
+                                    <tr>
+                                        <th>No.</th>
+                                        <th>Marquee Content</th>                                        
+                                        <th>Action</th>
+                                    </tr>                                                                                             
+                                </thead>
+                                <tbody align="center">
+                                    <?php $loop=1;?>
+                                    <?php foreach($marquee as $val): ?>                                                                    
+                                        <tr>
+                                            <td><?php echo e($loop); ?></td>
+                                            <td><?php echo e($val['text']); ?></td>                                            
+                                            <td>
+                                                <a class="btn btn-danger" title='Drop' href='<?php echo e(base_url("API/MarqueeDrop/").$val["id"]."/".$site["id"]); ?>' onclick="return confirm('Want to Delete it ?')"><i class='material-icons'>delete</i></a>
+                                            </td>
+                                        </tr>
+                                        <?php $loop++?>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                <?php endif; ?>
             </div>
             </div>
         </div>
@@ -131,7 +166,38 @@
     <?php echo $__env->make('administrator.template.footer', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 </div>
 
+<?php echo form_open_multipart('API/MarqueeNew'); ?>
 
+    <div class="modal fade addmarquee" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Add New Content</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="exampleInputName1">Site</label>
+                    <input type="text" class="form-control"
+                        id="exampleInputName1" placeholder="id" value="<?php echo e($site['name']); ?>" disabled="disabled"/>
+                </div>                
+                <div class="form-group">
+                    <label for="exampleInputName1">Marquee Content</label>
+                    <textarea name="text" id="" class="form-control" placeholder="content here"></textarea>
+                </div>                             
+                <input type="hidden" name="site_id" hidden="hidden" value="<?php echo e($site['id']); ?>">
+                <input type="hidden" name="screen<?php echo e($screen['id']); ?>"  value="<?php echo e($screen['name']); ?>" hidden="hidden">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Create a New One</button>
+            </div>
+            </div>
+        </div>
+    </div>
+</form>
 
 <?php echo form_open_multipart('API/ContentNew'); ?>
 
@@ -279,6 +345,7 @@
                         <?php foreach($template as $valx): ?>   
                             <?php if($screen['type']==$valx['type']): ?>
                                 <option value="<?php echo e($valx['type']); ?>" selected>Template <?php echo e($valx['name']); ?> (Type <?php echo e($valx['type']); ?>)</option>
+                                <?php $temp= $valx['id']?>
                             <?php else: ?>
                                 <option value="<?php echo e($valx['type']); ?>">Template <?php echo e($valx['name']); ?> (Type <?php echo e($valx['type']); ?>)</option>                            
                             <?php endif; ?>                                    
@@ -290,6 +357,7 @@
                     <input type="text" class="form-control"
                         name="description" id="exampleInputName1" placeholder="id" value="<?php echo e($screen['description']); ?>" />
                 </div> 
+                <input type="hidden" name="template_id" hidden="hidden" id="" value="<?php echo e($temp); ?>">
                 <input type="hidden" name="id" value="<?php echo e($screen['id']); ?>" hidden="hidden">
             </div>
             <div class="modal-footer">

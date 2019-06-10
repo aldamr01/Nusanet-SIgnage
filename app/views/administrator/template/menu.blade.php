@@ -33,7 +33,13 @@
 				</li>							
 			</ul>
 		</li>
-		<!-- /apps -->		       
+		<!-- /apps -->	
+		<li>
+			<a href="{{base_url('font/list')}}">
+				<i class="material-icons text-danger">font_download</i>
+				<span>Font</span>
+			</a>
+		</li>	       
         <!-- Logout -->
 		<li>
 			<a href="{{base_url('Logoff')}}">

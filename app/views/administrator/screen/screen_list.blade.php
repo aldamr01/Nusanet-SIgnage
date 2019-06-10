@@ -26,11 +26,27 @@
                             <br>
                             <div class="row">
                                 @if ($val['url'] && ping_url($val['url']))
-                                    <a target="_blank" href="{{base_url('screen/').$thisuser['auth_site'].'/'.$val['id'].'/'.$site_id}}" class="col-md-12 bg-info" style="text-align:center">View Screen</a>
+                                    <a target="_blank" href="{{base_url('screen/').$thisuser['auth_site'].'/'.$val['id'].'/'.$site_id}}/0" class="col-md-12 bg-info" style="text-align:center">View Screen</a>
                                 @else
                                     <a class="col-md-12 bg-default text-muted" style="text-align:center">View Screen</a>
                                 @endif
-                            </div>                                                       
+                            </div>
+                            <br>
+
+                            @if($val['type'] == 2 )                                
+                                <div class="row">
+                                    <select name="" id="" class="col-md-12 bg-success" onchange="window.location.href=this.value;">                                        
+                                        <option value="">Get data from another screen</option>
+                                        @foreach ($screen as $valz)
+                                            @if($vals['type'] == 1)
+                                                @if ($valz['id'] != $val['id'])
+                                                    <option value="{{base_url().'screen/'.$site['id'].'/'.$val['id'].'/'.$site['token'].'/'.$valz['id']}}">Get Data From Screen {{$valz['name']}}</option>                                                
+                                                @endif   
+                                            @endif                                            
+                                        @endforeach                                        
+                                    </select>
+                                </div>                                         
+                            @endif
                         </div>                            
                       </div>
                       <div class="card-footer">

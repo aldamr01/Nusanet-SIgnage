@@ -19,6 +19,7 @@ class SiteView extends CI_Controller
         $this->load->model('Content');
         $this->load->model('Template');
         $this->load->model('TemplateType');
+        $this->load->model('Fonts');
         $this->load->model('Schedule');
     }
 
@@ -49,14 +50,16 @@ class SiteView extends CI_Controller
             $data['site']       =   Site::find($id);
             $data['user']       =   User::where('site_id',$id)->get();
             $data['screen']     =   Screen_Device::where('site_id',$id)->get();
-            $data['content']    =   Content::where('site_id',$id)->orderBy('created_at','DESC')->get();
-            $data['template']   =   Template::where('site_id',$id)->get();
+            $data['content']    =   Content::where('site_id',$id)->orderBy('created_at','ASC')->get();
+            $data['template']   =   Template::with('datatype')->where('site_id',$id)->get();
             $data['schedule']   =   Schedule::where('site_id',$id)->orderBy('created_at','DESC')->get();
+            $data['fonts']      =   Fonts::all();
+
             $final  =   array(
                 'data'  => $data
             );
             $data['thisuser']   = $this->session->all_userdata();
-            
+           
             echo $this->blade->stream('administrator.site.site_view',$data);
         }            
         else        

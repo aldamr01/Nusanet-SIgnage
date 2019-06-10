@@ -75,6 +75,12 @@
                  {{$config['center_color']}} 88%, 
                  {{$config['gradient_color']}} 100%);
               }
+
+              .font1{
+                  font-family: "{{$config['font_type_1']}}";
+                  font-size:{{$config['font_size_1']}};
+                  color:{{$config['font_color_1']}};
+              }
             </head>
 
         </style>
@@ -83,7 +89,7 @@
         <div class="container">                    
             <div class="row">
                 <div class="col-lg-12" style="margin-top:20px;margin-bottom:40px">
-                    <p align="center">
+                    <p align="center">                        
                         <img src="{{base_url('files/').$config['logo']}}" alt="" style="width:100px;height:100px">
                     </p>
                 </div>
@@ -93,9 +99,9 @@
                     <div class="col-md-12 " style="padding:0;">
                         <table class="table  table-striped borderless roundedt" style="text-align:center;margin:0">
                             <thead >
-                                <th style="text-align:center">Group / Event</th>
-                                <th style="text-align:center">Room</th>
-                                <th style="text-align:center">Start / End</th>
+                                <th style="text-align:center" class="font1">Group / Event</th>
+                                <th style="text-align:center" class="font1">Room</th>
+                                <th style="text-align:center" class="font1">Start / End</th>
                             </thead>
                             <tbody>
                                 <?php $var="heads"; ?>
@@ -116,21 +122,21 @@
                                     @if ($temp=='head')
                                         <tr class="tdhead" >
                                             <td  style="text-align:center;padding-top:40px;">
-                                                <b >{{$val['title']}}</b>
+                                                <b class="font1">{{$val['title']}}</b>
                                             </td>
                                             <td></td>
                                             <td></td>
                                         </tr> 
                                         <tr style="border-top:solid 0px white;">
-                                            <td style="text-align:center;">{{$val['description']}}</td>
-                                            <td style="text-align:center;">{{$val['room']}}</td>
-                                            <td style="text-align:center;">{{$val['start']}} - {{$val['end']}}</td>
+                                            <td style="text-align:center" class="font1">{{$val['description']}}</td>
+                                            <td style="text-align:center" class="font1">{{$val['room']}}</td>
+                                            <td style="text-align:center" class="font1">{{$val['start']}} - {{$val['end']}}</td>
                                         </tr>       
                                     @else
                                         <tr style="border-top:solid 0px white;">
-                                            <td style="text-align:center;">{{$val['description']}}</td>
-                                            <td style="text-align:center;">{{$val['room']}}</td>
-                                            <td style="text-align:center;">{{$val['start']}} - {{$val['end']}}</td>
+                                            <td style="text-align:center" class="font1">{{$val['description']}}</td>
+                                            <td style="text-align:center" class="font1">{{$val['room']}}</td>
+                                            <td style="text-align:center" class="font1">{{$val['start']}} - {{$val['end']}}</td>
                                         </tr>  
                                     @endif
                                 @endforeach                                                                

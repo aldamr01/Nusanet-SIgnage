@@ -33,7 +33,7 @@
 
         }
         window.onload = deferVideo;
-    </script>
+    </script>    
     <script>
         let slider;    
         $(document).ready(function () {
@@ -41,15 +41,17 @@
                 selector: '.slider',
                 mode: 'right',
                 speed: 100,
-                space: 20,
-                font: '"Times New Roman",Arial, Helvetica, sans-serif',
-                size: 40    ,   
-                color: 'black',
-                background: '#4e5056',
+                space: 100,
+                font: '{{$config["font_type_2"]}}',
+                size: {{$config["font_size_2"]}},   
+                color: '{{$config["font_color_2"]}}',
+                background: '{{$config["background_marquee"]}}',
                 width: 0,
                 height: 0,
                 children: [
-                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse egestas tortor et ante varius faucibus id at tellus.'
+                    @foreach($running_text as $val)
+                        '{{$val["text"]}}',
+                    @endforeach
                 ]
             });
             slider.start()
@@ -63,7 +65,7 @@
             height:98%;
             width:100%;
             overflow:hidden;
-            background:black;
+            background:{{$config["background_video"]}};
             
         }
 
@@ -73,7 +75,7 @@
             background-size:cover;
             height:70%;
             min-height:90%;
-            background: url({{base_url('rep.png')}});
+            background: url({{base_url('rep.png')}}); // KURANG IKI TOK , LEK SEMISAL AREP DI TEST , TOLONG IKI DI GAWE DINAMIS
             background-position:center;
             background-size:cover;
             background-repeat:repeat;
@@ -132,6 +134,12 @@
             border-radius: 0 0 10px 0;
         }
 
+        .font1{
+                  font-family: "{{$config['font_type_1']}}";
+                  font-size:{{$config['font_size_1']}};
+                  color:{{$config['font_color_1']}};
+        }        
+
     </style>
 </head>
 <body>
@@ -140,7 +148,11 @@
         <div class="row" style="padding:0;height:100%;margin:0;">
             <div class="rey col-md-8" style="padding:0">
                 <video autoplay muted loop poster="https://dummyimage.com/900x400/000/fff">    
-                    <source src="" data-src="{{base_url('onandon.mp4')}}" type="video/mp4">
+                    @foreach ($content as $val)                
+                        @if ($val['type']=='video') 
+                            <source class="active" src="{{base_url('files/').$val['filename']}}" data-src="{{base_url('files/').$val['filename']}}" type="video/mp4">
+                        @endif
+                    @endforeach
                 </video>
             </div>
             <div class="schedule col-md-4" style="padding:0;">
@@ -158,9 +170,9 @@
                         <div class="col-md-10 offset-1" style="padding:0;">
                             <table class="table  table-striped borderless roundedt" style="text-align:center;margin:0;font-size:18px;color:white;font-style:bold">
                                 <thead >
-                                    <th style="text-align:left">Group / Event</th>
-                                    <th style="text-align:left">Room</th>
-                                    <th style="text-align:left">Start/End</th>
+                                    <th style="text-align:left" class="font1">Group / Event</th>
+                                    <th style="text-align:left" class="font1">Room</th>
+                                    <th style="text-align:left" class="font1">Start/End</th>
                                 </thead>
                                 <tbody>
                                     <?php $var="heads"; ?>
@@ -181,19 +193,19 @@
                                         @if ($temp=='head')
                                             <tr class="tdhead">
                                                 <td colspan="3" style="text-align:left;">
-                                                    <b style="font-size:24px;">{{$val['title']}}</b>
+                                                    <b style="font-size:24px;" class="font1">{{$val['title']}}</b>
                                                 </td>
                                             </tr> 
                                             <tr style="border-top:solid 0px white;">
-                                                <td style="text-align:left;"><b>{{$val['description']}}</b></td>
-                                                <td style="text-align:left;"><b>{{$val['room']}}</b></td>
-                                                <td style="text-align:center;">{{$val['start']}} <br> {{$val['end']}}</td>
+                                                <td style="text-align:left;" class="font1"><b>{{$val['description']}}</b></td>
+                                                <td style="text-align:left;" class="font1"><b>{{$val['room']}}</b></td>
+                                                <td style="text-align:center;" class="font1">{{$val['start']}} <br> {{$val['end']}}</td>
                                             </tr>       
                                         @else
                                             <tr style="border-top:solid 0px white;">
-                                                <td style="text-align:left;"><b>{{$val['description']}}</b></td>
-                                                <td style="text-align:left;"><b>{{$val['room']}}</b></td>
-                                                <td style="text-align:center;">{{$val['start']}} <br> {{$val['end']}}</td>
+                                                <td style="text-align:left;" class="font1"><b>{{$val['description']}}</b></td>
+                                                <td style="text-align:left;" class="font1"><b>{{$val['room']}}</b></td>
+                                                <td style="text-align:center;" class="font1">{{$val['start']}} <br> {{$val['end']}}</td>
                                             </tr>  
                                         @endif
                                     @endforeach                                                                
@@ -203,7 +215,7 @@
                     </div>
                 </div>
             </div>                            
-            <div class="slider" style="width:100%;height:20%;border-top:10px solid #957030;z-index:999;"></div>        
+            <div class="slider" style="width:100%;height:20%;border-top:10px solid {{$config['slider_color']}};z-index:999;"></div>        
         </div>                
     </div>
 </body>

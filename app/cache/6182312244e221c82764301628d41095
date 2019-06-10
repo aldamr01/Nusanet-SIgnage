@@ -83,10 +83,10 @@ Site <?php echo e($site['name']); ?>
                     </div>
                     <hr>
                     <div class="card-block">                                           
-                    <?php foreach($template as $val): ?>
+                    <?php foreach($template as $val ): ?>
                         <div class="col-md-6 table-bordered" >
                             <a href="#" data-toggle="modal" data-target=".template<?php echo e($val['id']); ?>">
-                                <span style="float:left; margin-top:4px;" class="tag tag-success"><?php echo e($val['name']); ?> (Type <?php echo e($val['type']); ?>)</span>
+                                <span style="float:left; margin-top:4px;" class="tag tag-success"><?php echo e($val['name']); ?></span>
                                 <br>                                   
                                 <p align="center" >
                                     <i  class='material-icons' style="font-size:50px;">photo</i>                                    
@@ -256,11 +256,18 @@ Site <?php echo e($site['name']); ?>
                     </div>            
                     <div class="form-group">
                         <label for="exampleInputName1">Screen Url</label>
-                        <input type="text" class="form-control"
-                            id="texturl" placeholder="Name" readonly="readonly" value="<?php echo e(base_url().'screen/'.$site['id'].'/'.$val['id'].'/'.$site['token']); ?>"/>                            
+                        <input type="text" class="form-control" id="texturl" placeholder="Name" readonly="readonly" value="<?php echo e(base_url().'screen/'.$site['id'].'/'.$val['id'].'/'.$site['token'].'/null'); ?>"/>                            
+                        <select name="" id="" class="btn btn-success" onchange="window.location.href=this.value;">
+                            <option value="">Get data from another screen</option>
+                            <?php foreach($screen as $valz): ?>
+                                <?php if($valz['id'] != $val['id']): ?>
+                                    <option value="<?php echo e(base_url().'screen/'.$site['id'].'/'.$val['id'].'/'.$site['token'].'/'.$valz['id']); ?>">Get Data From Screen <?php echo e($valz['name']); ?></option>
+                                <?php endif; ?>                                
+                            <?php endforeach; ?>                            
+                        </select>
                         <a href="<?php echo e(base_url().'screen/controller/'.$site['id'].'/'.$val['id'].'/'.$site['token']); ?>" class="btn btn-warning" target="_blank">Screen Controller</a>
-                        <a href="<?php echo e(base_url().'screen/'.$site['id'].'/'.$val['id'].'/'.$site['token']); ?>" class="btn btn-info" target="_blank">View Screen</a>
-                        <a onclick="cpyText()" class="btn btn-default">Copy Address</a>
+                        <a href="<?php echo e(base_url().'screen/'.$site['id'].'/'.$val['id'].'/'.$site['token'].'/null'); ?>" class="btn btn-info" target="_blank">View Screen</a>
+                        <a onclick="cpyText()" class="btn btn-default">Copy Address</a>                        
                     </div>
                     <div class="form-group">
                         <label for="exampleInputName1">Device Controller URL</label>
@@ -270,20 +277,22 @@ Site <?php echo e($site['name']); ?>
                     <div class="form-group">
                         <label for="exampleSelect1">
                             Template
-                        </label>
+                        </label><?php $temp=null?>
                         <select class="form-control" id="exampleSelect1" name="template"> 
-                            <?php foreach($type as $valx): ?>   
+                            <?php foreach($template as $valx): ?>   
                                 <?php if($val['type']==$valx['type']): ?>
-                                    <option value="<?php echo e($valx['type']); ?>" selected>Template <?php echo e($valx['name']); ?> (Type <?php echo e($valx['type']); ?>)</option>
+                                    <?php $temp= $valx['id']?>
+                                    <option value="<?php echo e($valx['type']); ?>" selected>Template <?php echo e($valx['name']); ?> </option>
                                 <?php else: ?>
-                                    <option value="<?php echo e($valx['id']); ?>">Template <?php echo e($valx['name']); ?> (Type <?php echo e($valx['type']); ?>)</option>                            
-                                <?php endif; ?>                                    
+                                    <option value="<?php echo e($valx['type']); ?>"><a href=#>Template</a> <?php echo e($valx['name']); ?></option>                            
+                                <?php endif; ?>                                             
                             <?php endforeach; ?>
                         </select>
                     </div>
 
                         <input type="hidden" name="id" hidden="hidden" id="" value="<?php echo e($val['id']); ?>">
                         <input type="hidden" name="site_id" hidden="hidden" id="" value="<?php echo e($site['id']); ?>">
+                        <input type="hidden" name="template_id" hidden="hidden" id="" value="<?php echo e($temp); ?>">
 
                     <div class="form-group">
                         <label for="exampleInputUsername1">Description</label>
@@ -325,7 +334,7 @@ Site <?php echo e($site['name']); ?>
                     </label>
                     <select class="form-control" id="exampleSelect1" name="screen_id"> 
                         <?php foreach($screen as $val): ?>    
-                            <?php if($val['type']!=1): ?>
+                            <?php if($val['type']==3 || $val['type']==4): ?>
                                 <option name="screen_id" value="<?php echo e($val['id']); ?>"><?php echo e($val['name']); ?></option>                            
                             <?php endif; ?>                                                    
                         <?php endforeach; ?>
@@ -384,7 +393,7 @@ Site <?php echo e($site['name']); ?>
                         </label>
                         <select class="form-control" id="exampleSelect1" name="screen_id"> 
                             <?php foreach($screen as $valx): ?>   
-                                <?php if($valx['type']!=1): ?>    
+                                <?php if($valx['type']==3 || $val['type']==4): ?>    
                                     <?php if($val['device_id']==$valx['id']): ?>
                                         <option name="screen_id" value="<?php echo e($valx['id']); ?>" selected><?php echo e($valx['name']); ?></option>
                                     <?php else: ?>
@@ -480,7 +489,7 @@ Site <?php echo e($site['name']); ?>
                     </label>
                     <select class="form-control" id="exampleSelect1" name="screen_id"> 
                         <?php foreach($screen as $val): ?>   
-                            <?php if($val['type']==1): ?>                         
+                            <?php if($val['type']!=3 || $val['type']!=4): ?>                         
                                 <option name="screen_id" value="<?php echo e($val['id']); ?>"><?php echo e($val['name']); ?></option>                            
                             <?php endif; ?>
                         <?php endforeach; ?>
@@ -551,7 +560,7 @@ Site <?php echo e($site['name']); ?>
                         </label>
                         <select class="form-control" id="exampleSelect1" name="screen_id"> 
                             <?php foreach($screen as $valx): ?>   
-                                <?php if($valx['type']==1): ?>    
+                                <?php if($valx['type']!=3 || $val['type']!=4): ?>     
                                     <?php if($val['device_id']==$valx['id']): ?>
                                         <option name="screen_id" value="<?php echo e($valx['id']); ?>" selected><?php echo e($valx['name']); ?></option>
                                     <?php else: ?>
@@ -608,9 +617,10 @@ Site <?php echo e($site['name']); ?>
                     <label for="exampleSelect1">
                         Template
                     </label>
+                    <?php $temp=null;?>
                     <select class="form-control" id="exampleSelect1" name="type"> 
-                        <?php foreach($type as $val): ?>                                                    
-                            <option name="type" value="<?php echo e($val['type']); ?>">Template <?php echo e($val['type']); ?></option>                                                        
+                        <?php foreach($template as $val): ?>                                                    
+                            <option name="type" value="<?php echo e($val['type']); ?>">Template <?php echo e($val['name']); ?></option>                           
                         <?php endforeach; ?>
                     </select>
                 </div>
@@ -620,6 +630,7 @@ Site <?php echo e($site['name']); ?>
                         id="exampleInputUsername1" placeholder="Description" name="description" required/>
                 </div>                                            
                 <input type="hidden" name="site_id" hidden="hidden" value="<?php echo e($site['id']); ?>">
+                <input type="hidden" name="template_id" hidden="hidden" value="0">
                 <input type="hidden" name="status" hidden="hidden" value="0">
             </div>
             <div class="modal-footer">
@@ -756,7 +767,7 @@ Site <?php echo e($site['name']); ?>
                     <label for="name1">Template Type</label>
                     <select class="form-control" name="type" id="">
                         <?php foreach($type as $val): ?>
-                            <option value="<?php echo e($val['type']); ?>">Template Type <?php echo e($val['type']); ?></option>
+                            <option value="<?php echo e($val['type']); ?>">Type <?php echo e($val['type']); ?> : Template <?php echo e($val['title']); ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
@@ -783,7 +794,7 @@ Site <?php echo e($site['name']); ?>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
-                    <h4 class="modal-title" id="myModalLabel"><?php echo e($val['name']); ?> template-<?php echo e($val['type']); ?></h4>
+                    <h4 class="modal-title" id="myModalLabel">Template type <?php echo e($val['type']); ?> : <?php echo e($val['name']); ?> </h4>
                 </div>
 
                 <?php /*  TEMPLATE MENU PART  */ ?>
@@ -827,30 +838,87 @@ Site <?php echo e($site['name']); ?>
                             <label for="exampleInputPassword1">Weather Background Color</label>
                             <input value="<?php echo e($val['center_color']); ?>" name="center" class="full form-control" type='text' id="full"/>
                         </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Font Type</label>
+                            <select name="font_type_1" id="" class="form-control">
+                                <?php foreach($fonts as $vals): ?>
+                                    <?php if($vals['font'] == $val['font_type_1']): ?>
+                                        <option value="<?php echo e($vals['font']); ?>" style="font-family:'<?php echo e($vals['font']); ?>'" selected><?php echo e($vals['font_name']); ?></option>
+                                    <?php else: ?>
+                                        <option value="<?php echo e($vals['font']); ?>" style="font-family:'<?php echo e($vals['font']); ?>'"><?php echo e($vals['font_name']); ?></option>    
+                                    <?php endif; ?>                                    
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Font Size</label>
+                            <input value="<?php echo e($val['font_size_1']); ?>" name="font_size_1" class="form-control" type='number'/>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Font Color</label>
+                            <input value="<?php echo e($val['font_color_1']); ?>" name="font_color_1" class="form-control" type='color'/>
+                        </div>
                     <?php elseif($val['type']==2): ?>                        
                         <div class="form-group">
-                            <label for="exampleInputPassword1">Weather Widget Color</label>
-                            <input name="weather" value="<?php echo e($val['weather']); ?>" class="full form-control" type='text' id="full"/>
+                            <label for="exampleInputPassword1">Font Type</label>
+                            <select name="font_type_1" id="" class="form-control">
+                                <?php foreach($fonts as $vals): ?>
+                                    <?php if($vals['font'] == $val['font_type_1']): ?>
+                                        <option value="<?php echo e($vals['font']); ?>" style="font-family:'<?php echo e($vals['font']); ?>'" selected><?php echo e($vals['font_name']); ?></option>
+                                    <?php else: ?>
+                                        <option value="<?php echo e($vals['font']); ?>" style="font-family:'<?php echo e($vals['font']); ?>'"><?php echo e($vals['font_name']); ?></option>    
+                                    <?php endif; ?>                                    
+                                <?php endforeach; ?>
+                            </select>
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputPassword1">Screen Background</label><br>
-                            <?php if(!$val['background']): ?>
-                                <input class="form-control" type="file" value="<?php echo e($val['background']); ?>" id="example-file-input" name="background">                                
+                            <label for="exampleInputPassword1">Font Size</label>
+                            <input value="<?php echo e($val['font_size_1']); ?>" name="font_size_1" class="form-control" type='number'/>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Font Color</label>
+                            <input value="<?php echo e($val['font_color_1']); ?>" name="font_color_1" class="form-control" type='color'/>
+                        </div>
+                        <hr>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Font Type Marquee</label>
+                            <select name="font_type_2" id="" class="form-control">
+                                <?php foreach($fonts as $vals): ?>
+                                    <?php if($vals['font'] == $val['font_type_2']): ?>
+                                        <option value="<?php echo e($vals['font']); ?>" style="font-family:'<?php echo e($vals['font']); ?>'" selected><?php echo e($vals['font_name']); ?></option>
+                                    <?php else: ?>
+                                        <option value="<?php echo e($vals['font']); ?>" style="font-family:'<?php echo e($vals['font']); ?>'"><?php echo e($vals['font_name']); ?></option>    
+                                    <?php endif; ?>                                    
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Font Size Marquee</label>
+                            <input value="<?php echo e($val['font_size_2']); ?>" name="font_size_2" class="form-control" type='number'/>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Font Color Marquee</label>
+                            <input value="<?php echo e($val['font_color_2']); ?>" name="font_color_2" class="form-control" type='color'/>
+                        </div>
+                        <hr>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Background Color Marquee</label>
+                            <input value="<?php echo e($val['background_marquee']); ?>" name="background_marquee" class="form-control" type='color'/>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Background Color Video</label>
+                            <input value="<?php echo e($val['background_video']); ?>" name="background_video" class="form-control" type='color'/>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Background Schedule</label><br>
+                            <?php if(!$val['background_schedule']): ?>
+                                <input class="form-control" type="file" value="<?php echo e($val['background_schedule']); ?>" id="example-file-input" name="background_schedule">                                
                             <?php else: ?>
-                                <img src="<?php echo e(base_url('/files/').$val['background']); ?>" alt="" class="img-rounded" style="width:10%;geight:10%;">
-                                <input class="form-control" type="file" value="<?php echo e($val['background']); ?>" id="example-file-input" name="background">
+                                <img src="<?php echo e(base_url('/files/').$val['background_schedule']); ?>" alt="" class="img-rounded" style="width:10%;geight:10%;">
+                                <input class="form-control" type="file" value="<?php echo e($val['background_schedule']); ?>" id="example-file-input" name="background_schedule">
                             <?php endif; ?>                                                        
                         </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">Screen Logo</label><br>
-                            <?php if(!$val['logo']): ?>
-                                <input class="form-control" type="file" value="<?php echo e($val['logo']); ?>" id="example-file-input" name="logo">                                
-                            <?php else: ?>
-                                <img src="<?php echo e(base_url('/files/').$val['logo']); ?>" alt="" class="img-rounded" style="width:10%;geight:10%;">
-                                <input class="form-control" type="file" value="<?php echo e($val['logo']); ?>" id="example-file-input" name="logo">
-                            <?php endif; ?>          
-                        </div> 
-                    <?php elseif($val['type']==3): ?>
+                    <?php elseif($val['type']==3 || $val['type']==4): ?>
                         no configuration needed...
                     <?php endif; ?>                          
                 </div>

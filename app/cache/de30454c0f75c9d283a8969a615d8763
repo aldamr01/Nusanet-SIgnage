@@ -33,7 +33,7 @@
 
         }
         window.onload = deferVideo;
-    </script>
+    </script>    
     <script>
         let slider;    
         $(document).ready(function () {
@@ -41,15 +41,17 @@
                 selector: '.slider',
                 mode: 'right',
                 speed: 100,
-                space: 20,
-                font: '"Times New Roman",Arial, Helvetica, sans-serif',
-                size: 40    ,   
-                color: 'black',
-                background: '#4e5056',
+                space: 100,
+                font: '<?php echo e($config["font_type_2"]); ?>',
+                size: <?php echo e($config["font_size_2"]); ?>,   
+                color: '<?php echo e($config["font_color_2"]); ?>',
+                background: '<?php echo e($config["background_marquee"]); ?>',
                 width: 0,
                 height: 0,
                 children: [
-                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse egestas tortor et ante varius faucibus id at tellus.'
+                    <?php foreach($running_text as $val): ?>
+                        '<?php echo e($val["text"]); ?>',
+                    <?php endforeach; ?>
                 ]
             });
             slider.start()
@@ -63,7 +65,7 @@
             height:98%;
             width:100%;
             overflow:hidden;
-            background:black;
+            background:<?php echo e($config["background_video"]); ?>;
             
         }
 
@@ -73,7 +75,7 @@
             background-size:cover;
             height:70%;
             min-height:90%;
-            background: url(<?php echo e(base_url('rep.png')); ?>);
+            background: url(<?php echo e(base_url('rep.png')); ?>); // KURANG IKI TOK , LEK SEMISAL AREP DI TEST , TOLONG IKI DI GAWE DINAMIS
             background-position:center;
             background-size:cover;
             background-repeat:repeat;
@@ -132,6 +134,12 @@
             border-radius: 0 0 10px 0;
         }
 
+        .font1{
+                  font-family: "<?php echo e($config['font_type_1']); ?>";
+                  font-size:<?php echo e($config['font_size_1']); ?>;
+                  color:<?php echo e($config['font_color_1']); ?>;
+        }        
+
     </style>
 </head>
 <body>
@@ -140,7 +148,11 @@
         <div class="row" style="padding:0;height:100%;margin:0;">
             <div class="rey col-md-8" style="padding:0">
                 <video autoplay muted loop poster="https://dummyimage.com/900x400/000/fff">    
-                    <source src="" data-src="<?php echo e(base_url('onandon.mp4')); ?>" type="video/mp4">
+                    <?php foreach($content as $val): ?>                
+                        <?php if($val['type']=='video'): ?> 
+                            <source class="active" src="<?php echo e(base_url('files/').$val['filename']); ?>" data-src="<?php echo e(base_url('files/').$val['filename']); ?>" type="video/mp4">
+                        <?php endif; ?>
+                    <?php endforeach; ?>
                 </video>
             </div>
             <div class="schedule col-md-4" style="padding:0;">
@@ -158,9 +170,9 @@
                         <div class="col-md-10 offset-1" style="padding:0;">
                             <table class="table  table-striped borderless roundedt" style="text-align:center;margin:0;font-size:18px;color:white;font-style:bold">
                                 <thead >
-                                    <th style="text-align:left">Group / Event</th>
-                                    <th style="text-align:left">Room</th>
-                                    <th style="text-align:left">Start/End</th>
+                                    <th style="text-align:left" class="font1">Group / Event</th>
+                                    <th style="text-align:left" class="font1">Room</th>
+                                    <th style="text-align:left" class="font1">Start/End</th>
                                 </thead>
                                 <tbody>
                                     <?php $var="heads"; ?>
@@ -181,19 +193,19 @@
                                         <?php if($temp=='head'): ?>
                                             <tr class="tdhead">
                                                 <td colspan="3" style="text-align:left;">
-                                                    <b style="font-size:24px;"><?php echo e($val['title']); ?></b>
+                                                    <b style="font-size:24px;" class="font1"><?php echo e($val['title']); ?></b>
                                                 </td>
                                             </tr> 
                                             <tr style="border-top:solid 0px white;">
-                                                <td style="text-align:left;"><b><?php echo e($val['description']); ?></b></td>
-                                                <td style="text-align:left;"><b><?php echo e($val['room']); ?></b></td>
-                                                <td style="text-align:center;"><?php echo e($val['start']); ?> <br> <?php echo e($val['end']); ?></td>
+                                                <td style="text-align:left;" class="font1"><b><?php echo e($val['description']); ?></b></td>
+                                                <td style="text-align:left;" class="font1"><b><?php echo e($val['room']); ?></b></td>
+                                                <td style="text-align:center;" class="font1"><?php echo e($val['start']); ?> <br> <?php echo e($val['end']); ?></td>
                                             </tr>       
                                         <?php else: ?>
                                             <tr style="border-top:solid 0px white;">
-                                                <td style="text-align:left;"><b><?php echo e($val['description']); ?></b></td>
-                                                <td style="text-align:left;"><b><?php echo e($val['room']); ?></b></td>
-                                                <td style="text-align:center;"><?php echo e($val['start']); ?> <br> <?php echo e($val['end']); ?></td>
+                                                <td style="text-align:left;" class="font1"><b><?php echo e($val['description']); ?></b></td>
+                                                <td style="text-align:left;" class="font1"><b><?php echo e($val['room']); ?></b></td>
+                                                <td style="text-align:center;" class="font1"><?php echo e($val['start']); ?> <br> <?php echo e($val['end']); ?></td>
                                             </tr>  
                                         <?php endif; ?>
                                     <?php endforeach; ?>                                                                
@@ -203,7 +215,7 @@
                     </div>
                 </div>
             </div>                            
-            <div class="slider" style="width:100%;height:20%;border-top:10px solid #957030;z-index:999;"></div>        
+            <div class="slider" style="width:100%;height:20%;border-top:10px solid <?php echo e($config['slider_color']); ?>;z-index:999;"></div>        
         </div>                
     </div>
 </body>

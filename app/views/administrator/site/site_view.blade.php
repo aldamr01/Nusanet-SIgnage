@@ -84,10 +84,10 @@ Site {{$site['name']}}
                     </div>
                     <hr>
                     <div class="card-block">                                           
-                    @foreach ($template as $val)
+                    @foreach ($template as $val )
                         <div class="col-md-6 table-bordered" >
                             <a href="#" data-toggle="modal" data-target=".template{{$val['id']}}">
-                                <span style="float:left; margin-top:4px;" class="tag tag-success">{{$val['name']}} (Type {{$val['type']}})</span>
+                                <span style="float:left; margin-top:4px;" class="tag tag-success">{{$val['name']}}</span>
                                 <br>                                   
                                 <p align="center" >
                                     <i  class='material-icons' style="font-size:50px;">photo</i>                                    
@@ -256,11 +256,18 @@ Site {{$site['name']}}
                     </div>            
                     <div class="form-group">
                         <label for="exampleInputName1">Screen Url</label>
-                        <input type="text" class="form-control"
-                            id="texturl" placeholder="Name" readonly="readonly" value="{{base_url().'screen/'.$site['id'].'/'.$val['id'].'/'.$site['token']}}"/>                            
+                        <input type="text" class="form-control" id="texturl" placeholder="Name" readonly="readonly" value="{{base_url().'screen/'.$site['id'].'/'.$val['id'].'/'.$site['token'].'/null'}}"/>                            
+                        <select name="" id="" class="btn btn-success" onchange="window.location.href=this.value;">
+                            <option value="">Get data from another screen</option>
+                            @foreach ($screen as $valz)
+                                @if ($valz['id'] != $val['id'])
+                                    <option value="{{base_url().'screen/'.$site['id'].'/'.$val['id'].'/'.$site['token'].'/'.$valz['id']}}">Get Data From Screen {{$valz['name']}}</option>
+                                @endif                                
+                            @endforeach                            
+                        </select>
                         <a href="{{base_url().'screen/controller/'.$site['id'].'/'.$val['id'].'/'.$site['token']}}" class="btn btn-warning" target="_blank">Screen Controller</a>
-                        <a href="{{base_url().'screen/'.$site['id'].'/'.$val['id'].'/'.$site['token']}}" class="btn btn-info" target="_blank">View Screen</a>
-                        <a onclick="cpyText()" class="btn btn-default">Copy Address</a>
+                        <a href="{{base_url().'screen/'.$site['id'].'/'.$val['id'].'/'.$site['token'].'/null'}}" class="btn btn-info" target="_blank">View Screen</a>
+                        <a onclick="cpyText()" class="btn btn-default">Copy Address</a>                        
                     </div>
                     <div class="form-group">
                         <label for="exampleInputName1">Device Controller URL</label>
@@ -270,20 +277,22 @@ Site {{$site['name']}}
                     <div class="form-group">
                         <label for="exampleSelect1">
                             Template
-                        </label>
+                        </label><?php $temp=null?>
                         <select class="form-control" id="exampleSelect1" name="template"> 
-                            @foreach ($type as $valx)   
+                            @foreach ($template as $valx)   
                                 @if ($val['type']==$valx['type'])
-                                    <option value="{{$valx['type']}}" selected>Template {{$valx['name']}} (Type {{$valx['type']}})</option>
+                                    <?php $temp= $valx['id']?>
+                                    <option value="{{$valx['type']}}" selected>Template {{$valx['name']}} </option>
                                 @else
-                                    <option value="{{$valx['id']}}">Template {{$valx['name']}} (Type {{$valx['type']}})</option>                            
-                                @endif                                    
+                                    <option value="{{$valx['type']}}"><a href=#>Template</a> {{$valx['name']}}</option>                            
+                                @endif                                             
                             @endforeach
                         </select>
                     </div>
 
                         <input type="hidden" name="id" hidden="hidden" id="" value="{{$val['id']}}">
                         <input type="hidden" name="site_id" hidden="hidden" id="" value="{{$site['id']}}">
+                        <input type="hidden" name="template_id" hidden="hidden" id="" value="{{$temp}}">
 
                     <div class="form-group">
                         <label for="exampleInputUsername1">Description</label>
@@ -324,7 +333,7 @@ Site {{$site['name']}}
                     </label>
                     <select class="form-control" id="exampleSelect1" name="screen_id"> 
                         @foreach ($screen as $val)    
-                            @if ($val['type']!=1)
+                            @if ($val['type']==3 || $val['type']==4)
                                 <option name="screen_id" value="{{$val['id']}}">{{$val['name']}}</option>                            
                             @endif                                                    
                         @endforeach
@@ -382,7 +391,7 @@ Site {{$site['name']}}
                         </label>
                         <select class="form-control" id="exampleSelect1" name="screen_id"> 
                             @foreach ($screen as $valx)   
-                                @if($valx['type']!=1)    
+                                @if($valx['type']==3 || $val['type']==4)    
                                     @if ($val['device_id']==$valx['id'])
                                         <option name="screen_id" value="{{$valx['id']}}" selected>{{$valx['name']}}</option>
                                     @else
@@ -477,7 +486,7 @@ Site {{$site['name']}}
                     </label>
                     <select class="form-control" id="exampleSelect1" name="screen_id"> 
                         @foreach ($screen as $val)   
-                            @if($val['type']==1)                         
+                            @if($val['type']!=3 || $val['type']!=4)                         
                                 <option name="screen_id" value="{{$val['id']}}">{{$val['name']}}</option>                            
                             @endif
                         @endforeach
@@ -547,7 +556,7 @@ Site {{$site['name']}}
                         </label>
                         <select class="form-control" id="exampleSelect1" name="screen_id"> 
                             @foreach ($screen as $valx)   
-                                @if($valx['type']==1)    
+                                @if($valx['type']!=3 || $val['type']!=4)     
                                     @if ($val['device_id']==$valx['id'])
                                         <option name="screen_id" value="{{$valx['id']}}" selected>{{$valx['name']}}</option>
                                     @else
@@ -603,9 +612,10 @@ Site {{$site['name']}}
                     <label for="exampleSelect1">
                         Template
                     </label>
+                    <?php $temp=null;?>
                     <select class="form-control" id="exampleSelect1" name="type"> 
-                        @foreach ($type as $val)                                                    
-                            <option name="type" value="{{$val['type']}}">Template {{$val['type']}}</option>                                                        
+                        @foreach ($template as $val)                                                    
+                            <option name="type" value="{{$val['type']}}">Template {{$val['name']}}</option>                           
                         @endforeach
                     </select>
                 </div>
@@ -615,6 +625,7 @@ Site {{$site['name']}}
                         id="exampleInputUsername1" placeholder="Description" name="description" required/>
                 </div>                                            
                 <input type="hidden" name="site_id" hidden="hidden" value="{{$site['id']}}">
+                <input type="hidden" name="template_id" hidden="hidden" value="0">
                 <input type="hidden" name="status" hidden="hidden" value="0">
             </div>
             <div class="modal-footer">
@@ -748,7 +759,7 @@ Site {{$site['name']}}
                     <label for="name1">Template Type</label>
                     <select class="form-control" name="type" id="">
                         @foreach ($type as $val)
-                            <option value="{{$val['type']}}">Template Type {{$val['type']}}</option>
+                            <option value="{{$val['type']}}">Type {{$val['type']}} : Template {{$val['title']}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -774,7 +785,7 @@ Site {{$site['name']}}
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
-                    <h4 class="modal-title" id="myModalLabel">{{$val['name']}} template-{{$val['type']}}</h4>
+                    <h4 class="modal-title" id="myModalLabel">Template type {{$val['type']}} : {{$val['name']}} </h4>
                 </div>
 
                 {{--  TEMPLATE MENU PART  --}}
@@ -818,30 +829,87 @@ Site {{$site['name']}}
                             <label for="exampleInputPassword1">Weather Background Color</label>
                             <input value="{{$val['center_color']}}" name="center" class="full form-control" type='text' id="full"/>
                         </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Font Type</label>
+                            <select name="font_type_1" id="" class="form-control">
+                                @foreach ($fonts as $vals)
+                                    @if ($vals['font'] == $val['font_type_1'])
+                                        <option value="{{$vals['font']}}" style="font-family:'{{$vals['font']}}'" selected>{{$vals['font_name']}}</option>
+                                    @else
+                                        <option value="{{$vals['font']}}" style="font-family:'{{$vals['font']}}'">{{$vals['font_name']}}</option>    
+                                    @endif                                    
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Font Size</label>
+                            <input value="{{$val['font_size_1']}}" name="font_size_1" class="form-control" type='number'/>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Font Color</label>
+                            <input value="{{$val['font_color_1']}}" name="font_color_1" class="form-control" type='color'/>
+                        </div>
                     @elseif ($val['type']==2)                        
                         <div class="form-group">
-                            <label for="exampleInputPassword1">Weather Widget Color</label>
-                            <input name="weather" value="{{$val['weather']}}" class="full form-control" type='text' id="full"/>
+                            <label for="exampleInputPassword1">Font Type</label>
+                            <select name="font_type_1" id="" class="form-control">
+                                @foreach ($fonts as $vals)
+                                    @if ($vals['font'] == $val['font_type_1'])
+                                        <option value="{{$vals['font']}}" style="font-family:'{{$vals['font']}}'" selected>{{$vals['font_name']}}</option>
+                                    @else
+                                        <option value="{{$vals['font']}}" style="font-family:'{{$vals['font']}}'">{{$vals['font_name']}}</option>    
+                                    @endif                                    
+                                @endforeach
+                            </select>
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputPassword1">Screen Background</label><br>
-                            @if (!$val['background'])
-                                <input class="form-control" type="file" value="{{$val['background']}}" id="example-file-input" name="background">                                
+                            <label for="exampleInputPassword1">Font Size</label>
+                            <input value="{{$val['font_size_1']}}" name="font_size_1" class="form-control" type='number'/>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Font Color</label>
+                            <input value="{{$val['font_color_1']}}" name="font_color_1" class="form-control" type='color'/>
+                        </div>
+                        <hr>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Font Type Marquee</label>
+                            <select name="font_type_2" id="" class="form-control">
+                                @foreach ($fonts as $vals)
+                                    @if ($vals['font'] == $val['font_type_2'])
+                                        <option value="{{$vals['font']}}" style="font-family:'{{$vals['font']}}'" selected>{{$vals['font_name']}}</option>
+                                    @else
+                                        <option value="{{$vals['font']}}" style="font-family:'{{$vals['font']}}'">{{$vals['font_name']}}</option>    
+                                    @endif                                    
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Font Size Marquee</label>
+                            <input value="{{$val['font_size_2']}}" name="font_size_2" class="form-control" type='number'/>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Font Color Marquee</label>
+                            <input value="{{$val['font_color_2']}}" name="font_color_2" class="form-control" type='color'/>
+                        </div>
+                        <hr>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Background Color Marquee</label>
+                            <input value="{{$val['background_marquee']}}" name="background_marquee" class="form-control" type='color'/>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Background Color Video</label>
+                            <input value="{{$val['background_video']}}" name="background_video" class="form-control" type='color'/>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Background Schedule</label><br>
+                            @if (!$val['background_schedule'])
+                                <input class="form-control" type="file" value="{{$val['background_schedule']}}" id="example-file-input" name="background_schedule">                                
                             @else
-                                <img src="{{base_url('/files/').$val['background']}}" alt="" class="img-rounded" style="width:10%;geight:10%;">
-                                <input class="form-control" type="file" value="{{$val['background']}}" id="example-file-input" name="background">
+                                <img src="{{base_url('/files/').$val['background_schedule']}}" alt="" class="img-rounded" style="width:10%;geight:10%;">
+                                <input class="form-control" type="file" value="{{$val['background_schedule']}}" id="example-file-input" name="background_schedule">
                             @endif                                                        
                         </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">Screen Logo</label><br>
-                            @if (!$val['logo'])
-                                <input class="form-control" type="file" value="{{$val['logo']}}" id="example-file-input" name="logo">                                
-                            @else
-                                <img src="{{base_url('/files/').$val['logo']}}" alt="" class="img-rounded" style="width:10%;geight:10%;">
-                                <input class="form-control" type="file" value="{{$val['logo']}}" id="example-file-input" name="logo">
-                            @endif          
-                        </div> 
-                    @elseif ($val['type']==3)
+                    @elseif ($val['type']==3 || $val['type']==4)
                         no configuration needed...
                     @endif                          
                 </div>

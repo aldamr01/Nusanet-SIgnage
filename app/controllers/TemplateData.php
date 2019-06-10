@@ -47,28 +47,73 @@ class TemplateData extends CI_Controller
     {
         $this->form_validation->set_rules('id', 'id', 'required');
         $this->form_validation->set_rules('site_id', 'sid', 'required');        
-             
+        $update_template                    =   Template::find($this->input->post('id',TRUE));
+
         if ($this->input->post('weather',TRUE))         
-             $a = $this->input->post('weather',TRUE);        
+             $weather = $this->input->post('weather',TRUE);        
         else 
-             $a = NULL;        
+             $weather = $update_template->weather;        
         
         if ($this->input->post('table',TRUE))         
-             $b = $this->input->post('table',TRUE);        
+             $tabel = $this->input->post('table',TRUE);        
         else 
-             $b = NULL;
+             $tabel = $update_template->table;
         
         if ($this->input->post('gradient',TRUE))         
-             $c = $this->input->post('gradient',TRUE);        
+             $gradient_color = $this->input->post('gradient',TRUE);        
         else 
-             $c = NULL;
+             $gradient_color = $update_template->gradient_color;
 
         if ($this->input->post('center',TRUE))         
-             $d = $this->input->post('center',TRUE);        
+             $center_color = $this->input->post('center',TRUE);        
         else 
-             $d = NULL;
+             $center_color = $update_template->center_color;
         
+        if ($this->input->post('font_type_1',TRUE))         
+             $font_type_1 = $this->input->post('font_type_1',TRUE);        
+        else 
+             $font_type_1 = $update_template->font_type_1;
 
+        if ($this->input->post('font_size_1',TRUE))         
+             $font_size_1 = $this->input->post('font_size_1',TRUE);        
+        else 
+             $font_size_1 = $update_template->font_size_1;
+
+        if ($this->input->post('font_color_1',TRUE))         
+             $font_color_1 = $this->input->post('font_color_1',TRUE);        
+        else 
+             $font_color_1 = $update_template->font_color_1;
+
+        if ($this->input->post('font_type_2',TRUE))         
+             $font_type_2 = $this->input->post('font_type_2',TRUE);        
+        else 
+             $font_type_2 = $update_template->font_type_2;
+
+        if ($this->input->post('font_size_2',TRUE))         
+             $font_size_2 = $this->input->post('font_size_2',TRUE);        
+        else 
+             $font_size_2 = $update_template->font_size_2;
+
+        if ($this->input->post('font_color_2',TRUE))         
+             $font_color_2 = $this->input->post('font_color_2',TRUE);        
+        else 
+             $font_color_2 = $update_template->font_color_2;
+
+        if ($this->input->post('background_video',TRUE))         
+             $background_video = $this->input->post('background_video',TRUE);        
+        else 
+             $background_video = $update_template->background_video;
+
+        if ($this->input->post('slider_color',TRUE))         
+             $slider_color = $this->input->post('slider_color',TRUE);        
+        else 
+             $slider_color = $update_template->slider_color;
+
+        if ($this->input->post('background_marquee',TRUE))         
+             $background_marquee = $this->input->post('background_marquee',TRUE);        
+        else 
+             $background_marquee = $update_template->background_marquee;
+     
                 
         if($this->form_validation->run()== FALSE)
         {                     
@@ -76,18 +121,38 @@ class TemplateData extends CI_Controller
         }
         else
         {              
-            $update_template                    =   Template::find($this->input->post('id',TRUE));
-            $update_template->weather           =   $a;
-            $update_template->tabel             =   $b;
-            $update_template->gradient_color    =   $c;
-            $update_template->center_color      =   $d;
+            
+            $update_template->weather           =   $weather;
+            $update_template->tabel             =   $tabel;
+            $update_template->gradient_color    =   $gradient_color;
+            $update_template->center_color      =   $center_color;
+            $update_template->font_type_1       =   $font_type_1;
+            $update_template->font_size_1       =   $font_size_1;
+            $update_template->font_color_1      =   $font_color_1;
+            $update_template->font_type_2       =   $font_type_2;
+            $update_template->font_size_2       =   $font_size_2;
+            $update_template->font_color_2      =   $font_color_2;
+            $update_template->background_video  =   $background_video;
+            $update_template->slider_color      =   $slider_color;
+            $update_template->background_marquee=   $background_marquee;
             $update_template->name              =   $this->input->post('name',TRUE);
             
+            if (isset($_FILES['background_schedule']) && $_FILES['background_schedule']['name'] != '')
+            {
+                $extbs           =   pathinfo($_FILES['background_schedule']['name'], PATHINFO_EXTENSION);
+                $fbackgrounds    =   "file_backgrounds".$this->input->post('id',TRUE)."_".md5($this->input->post('id',TRUE)).date('d-m-Y');
+                $backgrounds     =   $this->ngupload($fbackgrounds,'background_schedule');
+                $sbackgrounds    =   $fbackgrounds.".".$extbs;
+            }
+            else
+            {
+                $sbackgrounds    =   $update_template->background_schedule;
+            }
 
             if (isset($_FILES['background']) && $_FILES['background']['name'] != '')
             {
                 $extb           =   pathinfo($_FILES['background']['name'], PATHINFO_EXTENSION);
-                $fbackground    =   "file_background".$this->input->post('id',TRUE)."_".md5($this->input->post('id',TRUE));
+                $fbackground    =   "file_background".$this->input->post('id',TRUE)."_".md5($this->input->post('id',TRUE)).date('d-m-Y');
                 $background     =   $this->ngupload($fbackground,'background');
                 $nbackground    =   $fbackground.".".$extb;
             }
@@ -99,7 +164,7 @@ class TemplateData extends CI_Controller
             if (isset($_FILES['logo']) && $_FILES['logo']['name'] != '')
             {
                 $extl           =   pathinfo($_FILES['logo']['name'], PATHINFO_EXTENSION);
-                $flogo          =   "file_logo".$this->input->post('id',TRUE)."_".md5($this->input->post('id',TRUE));
+                $flogo          =   "file_logo".$this->input->post('id',TRUE)."_".md5($this->input->post('id',TRUE)).date('d-m-Y');
                 $logo           =   $this->ngupload($flogo,'logo');
                 $nlogo          =   $flogo.".".$extl;                
             }
@@ -108,8 +173,9 @@ class TemplateData extends CI_Controller
                 $nlogo          =   $update_template->logo;                
             }  
 
-            $update_template->background   =   $nbackground;
-            $update_template->logo         =   $nlogo;
+            $update_template->background            =   $nbackground;
+            $update_template->logo                  =   $nlogo;
+            $update_template->background_schedule   =   $sbackgrounds;
 
            
             if ($update_template->save()) 

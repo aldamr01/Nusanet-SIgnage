@@ -5,7 +5,15 @@
 @endsection
 
 @section('content')
-	<!-- main area -->
+    <!-- main area -->
+    <div class="alert alert-info alert-dismissable fade in ">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <p><u>Template Information </u></p>
+        <strong>Type 1 :</strong> Template Schedule <br>
+        <strong>Type 2 :</strong> Template Schedule with Promotion Video<br>
+        <strong>Type 3 :</strong> Template Image Slideshow <br>
+        <strong>Type 4 :</strong> Template Video
+    </div>
 	<div class="main-content">
 		<div class="content-view">
 		    <div class="row">
@@ -74,7 +82,7 @@
                     <label for="name1">Template Type</label>
                     <select class="form-control" name="type" id="">
                         @foreach ($type as $val)
-                            <option value="{{$val['type']}}">Template Type {{$val['type']}}</option>
+                            <option value="{{$val['type']}}">Type {{$val['type']}} : Template {{$val['title']}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -99,7 +107,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
-                    <h4 class="modal-title" id="myModalLabel">{{$val['name']}} template-{{$val['type']}}</h4>
+                    <h4 class="modal-title" id="myModalLabel">Template type {{$val['type']}} : {{$val['name']}} </h4>
                 </div>
 
                 {{--  TEMPLATE MENU PART  --}}
@@ -110,8 +118,8 @@
                     </div>
                     @if ($val['type']==1)
                         <div class="form-group">
-                            <label for="exampleInputPassword1">Weather Widget Color</label>
-                            <input class="form-control full" type="text" value="{{$val['weather']}}" id="full" name="weather">
+                            <label for="exampleInputPassword1">Weather Widget Color</label>                            
+                            <input value="{{$val['weather']}}" name="weather" class="full form-control" type='text' id="full"/>                            
                         </div>    
                         <div class="form-group">
                             <label for="exampleInputPassword1">Screen Background</label><br>
@@ -133,42 +141,103 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Table Widget Color</label>
-                            <input class="form-control full" type="text" value="{{$val['tabel']}}" id="full" name="table">
+                            <input value="{{$val['tabel']}}" name="table" class="full form-control" type='text' id="full"/>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Gradient Weather Background Color</label>
-                            <input class="form-control full" type="text" value="{{$val['gradient_color']}}" id="full" name="gradient">
+                            <input value="{{$val['gradient_color']}}" name="gradient" class="full form-control" type='text' id="full"/>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Weather Background Color</label>
-                            <input class="form-control full" type="text" value="{{$val['center_color']}}" id="full" name="center">
+                            <input value="{{$val['center_color']}}" name="center" class="full form-control" type='text' id="full"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1" style="font-family:'{{$val['font_type_1']}}'">Font Type</label>
+                            <select name="font_type_1" id="" class="form-control">
+                                @foreach ($fonts as $vals)
+                                    @if ($vals['font_name'] == $val['font_type_1'])
+                                        <option value="{{$vals['font_name']}}" style="font-family:'{{$vals['font_name']}}'" selected>{{$vals['font_name']}}</option>
+                                    @else
+                                        <option value="{{$vals['font_name']}}" style="font-family:'{{$vals['font_name']}}'">{{$vals['font_name']}}</option>    
+                                    @endif                                    
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Font Size</label>
+                            <input value="{{$val['font_size_1']}}" name="font_size_1" class="form-control" type='number'/>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Font Color</label>
+                            <input value="{{$val['font_color_1']}}" name="font_color_1" class="form-control" type='color'/>
                         </div>
                     @elseif ($val['type']==2)                        
                         <div class="form-group">
-                            <label for="exampleInputPassword1">Weather Widget Color</label>
-                            <input class="form-control full" type="text" value="{{$val['weather']}}" id="full" name="weather">
+                            <label for="exampleInputPassword1" style="font-family:'{{$val['font_type_1']}}'">Font Type</label>
+                            <select name="font_type_1" id="" class="form-control">
+                                @foreach ($fonts as $vals)
+                                    @if ($vals['font_name'] == $val['font_type_1'])
+                                        <option value="{{$vals['font_name']}}" style="font-family:'{{$vals['font_name']}}'" selected>{{$vals['font_name']}}</option>
+                                    @else
+                                        <option value="{{$vals['font_name']}}" style="font-family:'{{$vals['font_name']}}'">{{$vals['font_name']}}</option>    
+                                    @endif                                    
+                                @endforeach
+                            </select>
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputPassword1">Screen Background</label><br>
-                            @if (!$val['background'])
-                                <input class="form-control" type="file" value="{{$val['background']}}" id="example-file-input" name="background">                                
+                            <label for="exampleInputPassword1">Font Size</label>
+                            <input value="{{$val['font_size_1']}}" name="font_size_1" class="form-control" type='number'/>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Font Color</label>
+                            <input value="{{$val['font_color_1']}}" name="font_color_1" class="form-control" type='color'/>
+                        </div>
+                        <hr>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1" style="font-family:'{{$val['font_type_2']}}'">Font Type Marquee</label>
+                            <select name="font_type_2" id="" class="form-control">
+                                @foreach ($fonts as $vals)
+                                    @if ($vals['font_name'] == $val['font_type_2'])
+                                        <option value="{{$vals['font_name']}}" style="font-family:'{{$vals['font_name']}}'" selected>{{$vals['font_name']}}</option>
+                                    @else
+                                        <option value="{{$vals['font_name']}}" style="font-family:'{{$vals['font_name']}}'">{{$vals['font_name']}}</option>    
+                                    @endif                                    
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Font Size Marquee</label>
+                            <input value="{{$val['font_size_2']}}" name="font_size_2" class="form-control" type='number'/>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Font Color Marquee</label>
+                            <input value="{{$val['font_color_2']}}" name="font_color_2" class="form-control" type='color'/>
+                        </div>
+                        <hr>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Background Color Marquee</label>
+                            <input value="{{$val['background_marquee']}}" name="background_marquee" class="full form-control" type='text' id="full"/>                            
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Background Color Video</label>
+                            <input value="{{$val['background_video']}}" name="background_video" class="full form-control" type='text' id="full"/>                            
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Slider Color</label>
+                            <input value="{{$val['slider_color']}}" name="slider_color" class="full form-control" type='text' id="full"/>                            
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Background Schedule</label><br>
+                            @if (!$val['background_schedule'])
+                                <input class="form-control" type="file" value="{{$val['background_schedule']}}" id="example-file-input" name="background_schedule">                                
                             @else
-                                <img src="{{base_url('/files/').$val['background']}}" alt="" class="img-rounded" style="width:10%;geight:10%;">
-                                <input class="form-control" type="file" value="{{$val['background']}}" id="example-file-input" name="background">
+                                <img src="{{base_url('/files/').$val['background_schedule']}}" alt="" class="img-rounded" style="width:10%;geight:10%;">
+                                <input class="form-control" type="file" value="{{$val['background_schedule']}}" id="example-file-input" name="background_schedule">
                             @endif                                                        
                         </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">Screen Logo</label><br>
-                            @if (!$val['logo'])
-                                <input class="form-control" type="file" value="{{$val['logo']}}" id="example-file-input" name="logo">                                
-                            @else
-                                <img src="{{base_url('/files/').$val['logo']}}" alt="" class="img-rounded" style="width:10%;geight:10%;">
-                                <input class="form-control" type="file" value="{{$val['logo']}}" id="example-file-input" name="logo">
-                            @endif          
-                        </div> 
-                    @elseif ($val['type']==3)
+                    @elseif ($val['type']==3 || $val['type']==4)
                         no configuration needed...
-                    @endif                          
+                    @endif                        
                 </div>
                 {{--  END MENU TEMPLATE  --}}
                 <input type="hidden" name="id" value="{{$val['id']}}" hidden="hidden">

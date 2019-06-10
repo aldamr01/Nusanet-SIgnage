@@ -127,6 +127,41 @@
                         </table>
                     </div>
                 </div>
+                @if ($screen['type'] == 2)
+                    <div class="card">
+                        <div class="card-header no-bg b-a-0">
+                            <b>Marquee Bottom</b>
+                            <a href="" data-toggle="modal" data-target=".addmarquee"> 
+                                <i style="float:right" class='material-icons'>add</i>
+                            </a>
+                        </div>
+                        <hr>
+                        <div class="card-block">
+                            <table class="table  table-bordered datatable">
+                                <thead align="center">   
+                                    <tr>
+                                        <th>No.</th>
+                                        <th>Marquee Content</th>                                        
+                                        <th>Action</th>
+                                    </tr>                                                                                             
+                                </thead>
+                                <tbody align="center">
+                                    <?php $loop=1;?>
+                                    @foreach ($marquee as $val)                                                                    
+                                        <tr>
+                                            <td>{{$loop}}</td>
+                                            <td>{{$val['text']}}</td>                                            
+                                            <td>
+                                                <a class="btn btn-danger" title='Drop' href='{{base_url("API/MarqueeDrop/").$val["id"]."/".$site["id"]}}' onclick="return confirm('Want to Delete it ?')"><i class='material-icons'>delete</i></a>
+                                            </td>
+                                        </tr>
+                                        <?php $loop++?>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                @endif
             </div>
             </div>
         </div>
@@ -134,7 +169,37 @@
     @include('administrator.template.footer')
 </div>
 
-
+{!!form_open_multipart('API/MarqueeNew')!!}
+    <div class="modal fade addmarquee" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Add New Content</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="exampleInputName1">Site</label>
+                    <input type="text" class="form-control"
+                        id="exampleInputName1" placeholder="id" value="{{$site['name']}}" disabled="disabled"/>
+                </div>                
+                <div class="form-group">
+                    <label for="exampleInputName1">Marquee Content</label>
+                    <textarea name="text" id="" class="form-control" placeholder="content here"></textarea>
+                </div>                             
+                <input type="hidden" name="site_id" hidden="hidden" value="{{$site['id']}}">
+                <input type="hidden" name="screen{{$screen['id']}}"  value="{{$screen['name']}}" hidden="hidden">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Create a New One</button>
+            </div>
+            </div>
+        </div>
+    </div>
+</form>
 
 {!!form_open_multipart('API/ContentNew')!!}
     <div class="modal fade addcontent" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -279,6 +344,7 @@
                         @foreach ($template as $valx)   
                             @if ($screen['type']==$valx['type'])
                                 <option value="{{$valx['type']}}" selected>Template {{$valx['name']}} (Type {{$valx['type']}})</option>
+                                <?php $temp= $valx['id']?>
                             @else
                                 <option value="{{$valx['type']}}">Template {{$valx['name']}} (Type {{$valx['type']}})</option>                            
                             @endif                                    
@@ -290,6 +356,7 @@
                     <input type="text" class="form-control"
                         name="description" id="exampleInputName1" placeholder="id" value="{{$screen['description']}}" />
                 </div> 
+                <input type="hidden" name="template_id" hidden="hidden" id="" value="{{$temp}}">
                 <input type="hidden" name="id" value="{{$screen['id']}}" hidden="hidden">
             </div>
             <div class="modal-footer">

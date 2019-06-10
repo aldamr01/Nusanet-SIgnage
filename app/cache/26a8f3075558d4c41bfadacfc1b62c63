@@ -25,11 +25,27 @@
                             <br>
                             <div class="row">
                                 <?php if($val['url'] && ping_url($val['url'])): ?>
-                                    <a target="_blank" href="<?php echo e(base_url('screen/').$thisuser['auth_site'].'/'.$val['id'].'/'.$site_id); ?>" class="col-md-12 bg-info" style="text-align:center">View Screen</a>
+                                    <a target="_blank" href="<?php echo e(base_url('screen/').$thisuser['auth_site'].'/'.$val['id'].'/'.$site_id); ?>/0" class="col-md-12 bg-info" style="text-align:center">View Screen</a>
                                 <?php else: ?>
                                     <a class="col-md-12 bg-default text-muted" style="text-align:center">View Screen</a>
                                 <?php endif; ?>
-                            </div>                                                       
+                            </div>
+                            <br>
+
+                            <?php if($val['type'] == 2 ): ?>                                
+                                <div class="row">
+                                    <select name="" id="" class="col-md-12 bg-success" onchange="window.location.href=this.value;">                                        
+                                        <option value="">Get data from another screen</option>
+                                        <?php foreach($screen as $valz): ?>
+                                            <?php if($vals['type'] == 1): ?>
+                                                <?php if($valz['id'] != $val['id']): ?>
+                                                    <option value="<?php echo e(base_url().'screen/'.$site['id'].'/'.$val['id'].'/'.$site['token'].'/'.$valz['id']); ?>">Get Data From Screen <?php echo e($valz['name']); ?></option>                                                
+                                                <?php endif; ?>   
+                                            <?php endif; ?>                                            
+                                        <?php endforeach; ?>                                        
+                                    </select>
+                                </div>                                         
+                            <?php endif; ?>
                         </div>                            
                       </div>
                       <div class="card-footer">

@@ -37,6 +37,7 @@ class ScreenData extends CI_Controller
         $register_screen->name              =   $this->input->post('name');
         $register_screen->description       =   $this->input->post('description');
         $register_screen->type              =   $this->input->post('type');
+        $register_screen->template_id       =   $this->input->post('template_id');
         
                 
         if ($this->form_validation->run())
@@ -79,6 +80,7 @@ class ScreenData extends CI_Controller
         $update_screen->description     =  $this->input->post('description');        
         $update_screen->url             =  $this->input->post('url');
         $update_screen->type            =  $this->input->post('template'); 
+        $update_screen->template_id     =  $this->input->post('template_id');  
    
        
         if ($this->form_validation->run())

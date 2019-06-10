@@ -26,24 +26,24 @@ class ContentData extends CI_Controller
         $fimage =   "file_".$this->input->post('site_id',TRUE)."_".$this->input->post('screen_id',TRUE)."_".md5($this->input->post('name',TRUE));
              
         
-        if($this->form_validation->run()== FALSE)
-        {     
-            if($this->session->userdata('auth_role')== "Administrator") 
-                redirect(base_url('site/show/').$this->input->post('site_id'));     
-            else
-                redirect(base_url());                
-        }
-        else
-        {              
-            $varx   =   "screen".$this->input->post('screen_id');  
-            $register_content = new Content;
+        // if($this->form_validation->run()== FALSE)
+        // {     
+        //     if($this->session->userdata('auth_role')== "Administrator") 
+        //         redirect(base_url('site/show/').$this->input->post('site_id'));     
+        //     else
+        //         redirect(base_url());                
+        // }
+        // else
+        // {              
+            $varx               =   "screen".$this->input->post('screen_id');  
+            $register_content   = new Content;
 
             $register_content->site_id           =  $this->input->post('site_id');
             $register_content->device_id         =  $this->input->post('screen_id');
             $register_content->name              =  $this->input->post('name');
             $register_content->screen            =  $this->input->post($varx);
             $register_content->description       =  $this->input->post('desc');
-
+            
             $config = [
                 'upload_path'   => 'files/',
                 'file_name'     => $fimage,
@@ -51,7 +51,7 @@ class ContentData extends CI_Controller
                 'max_size'      => 1024000,
                 'overwrite'     => TRUE,              
             ];
-
+           
             $this->upload->initialize($config);
 
             if (!$this->upload->do_upload('file'))
@@ -76,7 +76,7 @@ class ContentData extends CI_Controller
                 else
                     redirect(base_url());    
             }
-        }
+        // }
     }
 
     function contentUpdate()

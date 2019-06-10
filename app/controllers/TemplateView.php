@@ -13,6 +13,7 @@ class TemplateView extends CI_Controller
         $this->load->model('Template');
         $this->load->model('TemplateType');
         $this->load->model('Site');
+        $this->load->model('Fonts');
     }
 
     function screenMe()
@@ -26,10 +27,11 @@ class TemplateView extends CI_Controller
 			redirect(base_url('Authentication'));
         }
                                
-        $data['thisuser']       =   $this->session->all_userdata();        
-        $data['template']       =   Template::where('site_id',$this->session->userdata('auth_site'))->get();
-        $data['type']           =   TemplateType::all();
-        $data['site']           =   Site::find($this->session->userdata('auth_site'));
+        $data['thisuser']   =   $this->session->all_userdata();        
+        $data['template']   =   Template::where('site_id',$this->session->userdata('auth_site'))->get();
+        $data['type']       =   TemplateType::all();
+        $data['site']       =   Site::find($this->session->userdata('auth_site'));
+        $data['fonts']      =   Fonts::all();
         
         echo $this->blade->stream('administrator.screen.template_view',$data); 
     }

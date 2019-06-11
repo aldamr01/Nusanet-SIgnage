@@ -40,6 +40,9 @@ class Signage extends CI_Controller
 
     public function er404()
     {
+        if(!$this->session->userdata('auth_status'))
+            redirect(base_url('Authentication'));
+            
         $data['thisuser']   = $this->session->all_userdata();
         echo $this->blade->stream('administrator.404',$data);
     }

@@ -43,7 +43,7 @@
                 speed: 100,
                 space: 100,
                 font: '{{$config["font_type_2"]}}',
-                size: {{$config["font_size_2"]}},   
+                size: {{$config["font_size_2"]}}px,   
                 color: '{{$config["font_color_2"]}}',
                 background: '{{$config["background_marquee"]}}',
                 width: 0,

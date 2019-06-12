@@ -43,7 +43,7 @@
                 speed: 100,
                 space: 100,
                 font: '{{$config["font_type_2"]}}',
-                size: {{$config["font_size_2"]}}px,   
+                size: {{$config["font_size_2"]}},   
                 color: '{{$config["font_color_2"]}}',
                 background: '{{$config["background_marquee"]}}',
                 width: 0,
@@ -135,9 +135,9 @@
         }
 
         .font1{
-                  font-family: "{{$config['font_type_1']}}";
-                  font-size:{{$config['font_size_1']}};
-                  color:{{$config['font_color_1']}};
+            font-family: "{{$config['font_type_1']}}";
+            font-size:{{$config['font_size_1']}};
+            color:{{$config['font_color_1']}};
         }        
 
     </style>

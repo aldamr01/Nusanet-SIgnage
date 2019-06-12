@@ -163,7 +163,7 @@ class SnackMarquee {
     }
 
     initialPosition() {
-        let top = (this.height - this.size) / 2 - 1;
+        let top = ((this.height - this.size) / 2 - 1) - (this.height / 5);
         for (let i = 0; i < 2; i++) {
             if (this.mode === 'left') {
                 this.textBox[i].css({

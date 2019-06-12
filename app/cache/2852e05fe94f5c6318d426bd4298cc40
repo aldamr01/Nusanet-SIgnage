@@ -96,7 +96,8 @@
             min-height:100%;    
             max-height: 100%;  
             min-width: 100%;
-            position: fixed;                  
+            position: fixed;
+            top: -30px;                  
         }        
 
         .slider{

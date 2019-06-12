@@ -86,18 +86,21 @@
             position: inherit;
             overflow: hidden;
             /* background-color:black; */
-            height:97%;
-            min-height:97%;
+            height:95%;
+            min-height:95%;
             width:90%;
         }
                
         .rey video {            
             max-width:100%;
-            min-height:100%;                        
+            min-height:100%;    
+            max-height: 100%;  
+            min-width: 100%;
+            position: fixed;                  
         }        
 
         .slider{
-            margin-top:-30px;
+            margin-top:0px;
         }
 
         .borderless td, .borderless th {
@@ -138,7 +141,11 @@
             font-family: "{{$config['font_type_1']}}";
             font-size:{{$config['font_size_1']}};
             color:{{$config['font_color_1']}};
-        }        
+        }  
+        
+        .slider-viewport{
+            background:url({{base_url('rep.png')}});
+        }
 
     </style>
 </head>
@@ -155,7 +162,7 @@
                     @endforeach
                 </video>
             </div>                                      
-            <div class="slider" style="width:100%;height:15%;border-top:10px solid {{$config['slider_color']}};z-index:999;"></div>        
+            <div class="slider" style="width:100%;height:20%;border-top:5px solid {{$config['slider_color']}};z-index:999;"></div>        
         </div>                
     </div>
 </body>

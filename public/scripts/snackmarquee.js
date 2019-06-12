@@ -163,7 +163,7 @@ class SnackMarquee {
     }
 
     initialPosition() {
-        let top = ((this.height - this.size) / 2 - 1) - (this.height / 5);
+        let top = 10; //((this.height - this.size) / 2 - 1) - (this.height / 10);
         for (let i = 0; i < 2; i++) {
             if (this.mode === 'left') {
                 this.textBox[i].css({
@@ -235,7 +235,7 @@ class SnackMarquee {
             width: this.width,
             height: this.height,
             color: this.color,
-            backgroundColor: this.background,
+            background: this.background,
         });
         this.viewport.append(textBox);
         this.textBox = [this.viewport.children('.slide0'), this.viewport.children('.slide1')];

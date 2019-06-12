@@ -150,12 +150,11 @@
 
     </style>
 </head>
-<body>
-    
+<body>    
     <div class="maxw">
         <div class="row" style="padding:0;height:100%;margin:0;">
             <div class="rey col-md-12" style="padding:0">
-                <video autoplay muted loop poster="https://dummyimage.com/900x400/000/fff">    
+                <video loop autoplay  poster="https://dummyimage.com/900x400/000/fff">    
                     @foreach ($content as $val)                
                         @if ($val['type']=='video') 
                             <source class="active" src="{{base_url('files/').$val['filename']}}" data-src="{{base_url('files/').$val['filename']}}" type="video/mp4">

@@ -75,7 +75,7 @@
             background-size:cover;
             height:70%;
             min-height:90%;
-            background: url(<?php echo e(base_url('rep.png')); ?>); // KURANG IKI TOK , LEK SEMISAL AREP DI TEST , TOLONG IKI DI GAWE DINAMIS
+            background: url(<?php echo e(base_url('rep.png')); ?>); /* KURANG IKI TOK , LEK SEMISAL AREP DI TEST , TOLONG IKI DI GAWE DINAMIS*/
             background-position:center;
             background-size:cover;
             background-repeat:repeat;
@@ -146,8 +146,8 @@
     
     <div class="maxw">
         <div class="row" style="padding:0;height:100%;margin:0;">
-            <div class="rey col-md-8" style="padding:0">
-                <video autoplay muted loop poster="https://dummyimage.com/900x400/000/fff">    
+            <div class="rey col-xs-8" style="padding:0;width:70%">
+                <video autoplay loop poster="https://dummyimage.com/900x400/000/fff">    
                     <?php foreach($content as $val): ?>                
                         <?php if($val['type']=='video'): ?> 
                             <source class="active" src="<?php echo e(base_url('files/').$val['filename']); ?>" data-src="<?php echo e(base_url('files/').$val['filename']); ?>" type="video/mp4">
@@ -155,15 +155,15 @@
                     <?php endforeach; ?>
                 </video>
             </div>
-            <div class="schedule col-md-4" style="padding:0;">
-                <div class="row" style="padding:0;margin:0;">
+            <div class="schedule col-xs-4" style="padding:0;width:30%;">
+                <?php /*<div class="row" style="padding:0;margin:0;">
                     <div class="col-md-12"style="padding:0;height:100%;margin:0;">                       
                         <a class="weatherwidget-io" href="https://forecast7.com/en/n7d26112d75/surabaya/" data-label_1="SURABAYA" data-label_2="WEATHER" data-icons="Climacons Animated" data-mode="Current" data-days="3" data-theme="random_grey" data-textcolor="#fdfdfd" >SURABAYA WEATHER</a>
                         <script>
                         !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
                         </script>      
                     </div>                
-                </div>
+                </div>-*/ ?>
                 <hr>
                 <div class="row" style="padding:0;margin:0;">
                     <div class="col-md-12"style="padding:0;height:100%;margin:0;">

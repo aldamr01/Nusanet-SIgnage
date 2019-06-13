@@ -178,18 +178,15 @@
                                 <tbody>
                                     <?php $var="heads"; ?>
                                     @foreach ($schedule as $val)
-                                    <?php
-                                        
-                                        if($var!=$val['title'])
-                                        {                                        
+                                    <?php                                        
+                                        if($var!=$val['title']){
                                             $temp="head";
                                         }
-                                        else
-                                        {
+                                        else{
                                             $temp="nohead";
                                         }
-                                        $var = $val['title'];
-                                        
+
+                                        $var = $val['title'];                                        
                                     ?>
                                         @if ($temp=='head')
                                             <tr class="tdhead">

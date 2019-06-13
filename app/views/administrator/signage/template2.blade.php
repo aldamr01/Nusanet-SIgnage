@@ -136,7 +136,7 @@
 
         .font1{
             font-family: "{{$config['font_type_1']}}";
-            font-size:{{$config['font_size_1']}};
+            font-size:{{$config['font_size_1']}}px;
             color:{{$config['font_color_1']}};
         }        
 
@@ -146,8 +146,8 @@
     
     <div class="maxw">
         <div class="row" style="padding:0;height:100%;margin:0;">
-            <div class="rey col-xs-8" style="padding:0;width:70%">
-                <video autoplay loop poster="https://dummyimage.com/900x400/000/fff">    
+            <div class="rey col-xs-7" style="padding:0;width:70%;max-width:70%">
+                <video autoplay loop poster="https://dummyimage.com/640x480/000/fff">    
                     @foreach ($content as $val)                
                         @if ($val['type']=='video') 
                             <source class="active" src="{{base_url('files/').$val['filename']}}" data-src="{{base_url('files/').$val['filename']}}" type="video/mp4">
@@ -155,7 +155,7 @@
                     @endforeach
                 </video>
             </div>
-            <div class="schedule col-xs-4" style="padding:0;width:30%;">
+            <div class="schedule col-xs-5" style="padding:0;max-width:30%;width:30%">
                 {{--<div class="row" style="padding:0;margin:0;">
                     <div class="col-md-12"style="padding:0;height:100%;margin:0;">                       
                         <a class="weatherwidget-io" href="https://forecast7.com/en/n7d26112d75/surabaya/" data-label_1="SURABAYA" data-label_2="WEATHER" data-icons="Climacons Animated" data-mode="Current" data-days="3" data-theme="random_grey" data-textcolor="#fdfdfd" >SURABAYA WEATHER</a>
@@ -165,7 +165,7 @@
                     </div>                
                 </div>---}}
                 <hr>
-                <div class="row" style="padding:0;margin:0;">
+                <div class="row" style="padding:0;margin:0;max-width:100%;width:100%">
                     <div class="col-md-12"style="padding:0;height:100%;margin:0;">
                         <div class="col-md-10 offset-1" style="padding:0;">
                             <table class="table  table-striped borderless roundedt" style="text-align:center;margin:0;font-size:18px;color:white;font-style:bold">
@@ -193,7 +193,7 @@
                                         @if ($temp=='head')
                                             <tr class="tdhead">
                                                 <td colspan="3" style="text-align:left;">
-                                                    <b style="font-size:24px;" class="font1">{{$val['title']}}</b>
+                                                    <b class="font1">{{$val['title']}}</b>
                                                 </td>
                                             </tr> 
                                             <tr style="border-top:solid 0px white;">
@@ -215,7 +215,7 @@
                     </div>
                 </div>
             </div>                            
-            <div class="slider" style="width:100%;height:20%;border-top:10px solid {{$config['slider_color']}};z-index:999;"></div>        
+            <div class="slider" style="width:100%;height:15%;border-top:10px solid {{$config['slider_color']}};z-index:999;"></div>        
         </div>                
     </div>
 </body>

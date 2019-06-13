@@ -49,7 +49,7 @@ class Signage extends CI_Controller
 
     function screenView($site_id,$screen_id,$token,$broadcast=null)
     {
-        if($broadcast=='null')
+        if($broadcast=='null' || $broadcast==0 )
             $where              =   array(
                 'device_id'     =>  $screen_id,
                 'for_date'      =>  $this->amirrule_lib->today()

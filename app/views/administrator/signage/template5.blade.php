@@ -140,7 +140,7 @@
 
         .font1{
             font-family: "{{$config['font_type_1']}}";
-            font-size:{{$config['font_size_1']}};
+            font-size:{{$config['font_size_1']}}px;
             color:{{$config['font_color_1']}};
         }  
         

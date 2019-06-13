@@ -138,6 +138,7 @@
             font-family: "{{$config['font_type_1']}}";
             font-size:{{$config['font_size_1']}}px;
             color:{{$config['font_color_1']}};
+            vertical-align: middle;
         }        
 
     </style>
@@ -164,8 +165,8 @@
                         </script>      
                     </div>                
                 </div>---}}
-                <hr>
-                <div class="row" style="padding:0;margin:0;max-width:100%;width:100%">
+                <br>
+                <div class="row" style="max-width:100%;width:100%">
                     <div class="col-md-12"style="padding:0;height:100%;margin:0;">
                         <div class="col-md-10 offset-1" style="padding:0;">
                             <table class="table  table-striped borderless roundedt" style="text-align:center;margin:0;font-size:18px;color:white;font-style:bold">
@@ -192,20 +193,20 @@
                                     ?>
                                         @if ($temp=='head')
                                             <tr class="tdhead">
-                                                <td colspan="3" style="text-align:left;">
+                                                <td colspan="3" style="text-align:left;padding-top:0px;padding-bottom:0px">
                                                     <b class="font1">{{$val['title']}}</b>
                                                 </td>
                                             </tr> 
-                                            <tr style="border-top:solid 0px white;">
-                                                <td style="text-align:left;" class="font1"><b>{{$val['description']}}</b></td>
-                                                <td style="text-align:left;" class="font1"><b>{{$val['room']}}</b></td>
-                                                <td style="text-align:center;" class="font1">{{$val['start']}} <br> {{$val['end']}}</td>
+                                            <tr style="border-top:solid 0px white;padding-top:0px;padding-bottom:0px;">
+                                                <td style="text-align:left;padding-top:0px;padding-bottom:5px;vertical-align: middle;" class="font1">{{$val['description']}}</td>
+                                                <td style="text-align:left;padding-top:0px;padding-bottom:5px;vertical-align: middle;" class="font1">{{$val['room']}}</td>
+                                                <td style="text-align:center;padding-top:0px;padding-bottom:5px;" class="font1">{{strtoupper($val['start'])}} <br> {{strtoupper($val['end'])}}</td>
                                             </tr>       
                                         @else
-                                            <tr style="border-top:solid 0px white;">
-                                                <td style="text-align:left;" class="font1"><b>{{$val['description']}}</b></td>
-                                                <td style="text-align:left;" class="font1"><b>{{$val['room']}}</b></td>
-                                                <td style="text-align:center;" class="font1">{{$val['start']}} <br> {{$val['end']}}</td>
+                                            <tr style="border-top:solid 0px white;padding-top:10px;padding-bottom:5px;">
+                                                <td style="text-align:left;padding-top:0px;padding-bottom:5px;vertical-align: middle;" class="font1">{{$val['description']}}</td>
+                                                <td style="text-align:left;padding-top:0px;padding-bottom:5px;vertical-align: middle;" class="font1">{{$val['room']}}</td>
+                                                <td style="text-align:center;padding-top:0px;padding-bottom:5px;" class="font1">{{strtoupper($val['start'])}}<br>{{strtoupper($val['end'])}}</td>
                                             </tr>  
                                         @endif
                                     @endforeach                                                                

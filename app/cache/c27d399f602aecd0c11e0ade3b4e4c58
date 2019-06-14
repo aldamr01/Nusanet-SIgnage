@@ -228,6 +228,10 @@
                             <input value="<?php echo e($val['slider_color']); ?>" name="slider_color" class="full form-control" type='text' id="full"/>                            
                         </div>
                         <div class="form-group">
+                            <label for="exampleInputPassword1">Schedule Border Color</label>
+                            <input value="<?php echo e($val['border_table_color']); ?>" name="border_table_color" class="full form-control" type='text' id="full"/>
+                        </div>
+                        <div class="form-group">
                             <label for="exampleInputPassword1">Background Schedule</label><br>
                             <?php if(!$val['background_schedule']): ?>
                                 <input class="form-control" type="file" value="<?php echo e($val['background_schedule']); ?>" id="example-file-input" name="background_schedule">                                

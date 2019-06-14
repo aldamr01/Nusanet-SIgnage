@@ -65,8 +65,7 @@
             height:100%;
             width:100%;
             overflow:hidden;
-            background:<?php echo e($config["background_video"]); ?>;
-            
+            background:<?php echo e($config["background_video"]); ?>;            
         }
 
         .schedule{
@@ -74,7 +73,7 @@
             overflow: hidden;
             background-size:cover;
             height:70%;
-            min-height:90%;
+            min-height:95%;
             background: url(<?php echo e(base_url('rep.png')); ?>); /* KURANG IKI TOK , LEK SEMISAL AREP DI TEST , TOLONG IKI DI GAWE DINAMIS*/
             background-position:center;
             background-size:cover;
@@ -86,9 +85,9 @@
             position: inherit;
             overflow: hidden;
             /* background-color:black; */
-            height:90%;
-            min-height:90%;
-            width:90%;
+            height:95%;
+            min-height:95%;
+            width:95%;
         }
                
         .rey video {            
@@ -101,8 +100,7 @@
         }
 
         .borderless td, .borderless th {
-                border: none;
-                
+            border: none;                
         }
         .roundedt {
             border: none;
@@ -125,7 +123,7 @@
         .tdhead{
             border: none;
             background-color: <?php echo e($config['tabel']); ?>;
-            border-top: solid 1px #957030;
+            border-top: solid 1px <?php echo e($config['border_table_color']); ?>/*#957030*/;
         }
         .roundedt tbody tr:last-child td:first-child {
             border-radius: 0 0 0 10px;
@@ -143,7 +141,7 @@
 
     </style>
 </head>
-<body>
+<body> 
     
     <div class="maxw">
         <div class="row" style="padding:0;height:100%;margin:0;">
@@ -213,7 +211,7 @@
                     </div>
                 </div>
             </div>                            
-            <div class="slider" style="width:100%;height:15%;border-top:10px solid <?php echo e($config['slider_color']); ?>;z-index:999;"></div>        
+            <div class="slider" style="width:100%;height:10%;border-top:10px solid <?php echo e($config['slider_color']); ?>;z-index:999;"></div>        
         </div>                
     </div>
 </body>

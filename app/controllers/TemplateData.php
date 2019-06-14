@@ -113,6 +113,11 @@ class TemplateData extends CI_Controller
              $background_marquee = $this->input->post('background_marquee',TRUE);        
         else 
              $background_marquee = $update_template->background_marquee;
+
+        if ($this->input->post('border_table_color',TRUE))         
+             $border_table_color = $this->input->post('border_table_color',TRUE);        
+        else 
+             $border_table_color = $update_template->border_table_color;
      
                 
         if($this->form_validation->run()== FALSE)
@@ -135,6 +140,7 @@ class TemplateData extends CI_Controller
             $update_template->background_video  =   $background_video;
             $update_template->slider_color      =   $slider_color;
             $update_template->background_marquee=   $background_marquee;
+            $update_template->border_table_color=   $border_table_color;
             $update_template->name              =   $this->input->post('name',TRUE);
             
             if (isset($_FILES['background_schedule']) && $_FILES['background_schedule']['name'] != '')

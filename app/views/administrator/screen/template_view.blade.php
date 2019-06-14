@@ -223,8 +223,12 @@
                             <input value="{{$val['background_video']}}" name="background_video" class="full form-control" type='text' id="full"/>                            
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputPassword1">Slider Color</label>
+                            <label for="exampleInputPassword1">Margin Color</label>
                             <input value="{{$val['slider_color']}}" name="slider_color" class="full form-control" type='text' id="full"/>                            
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Schedule Border Color</label>
+                            <input value="{{$val['border_table_color']}}" name="border_table_color" class="full form-control" type='text' id="full"/>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Background Schedule</label><br>

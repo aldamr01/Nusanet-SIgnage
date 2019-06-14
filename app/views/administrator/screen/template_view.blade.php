@@ -173,7 +173,7 @@
                         </div>
                     @elseif ($val['type']==2)                        
                         <div class="form-group">
-                            <label for="exampleInputPassword1" style="font-family:'{{$val['font_type_1']}}'">Font Type</label>
+                            <label for="exampleInputPassword1" style="font-family:'{{$val['font_type_1']}}'">Schedule font type</label>
                             <select name="font_type_1" id="" class="form-control">
                                 @foreach ($fonts as $vals)
                                     @if ($vals['font_name'] == $val['font_type_1'])
@@ -185,16 +185,49 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputPassword1">Font Size</label>
-                            <input value="{{$val['font_size_1']}}" name="font_size_1" class="form-control" type='number'/>
+                            <label for="exampleInputPassword1">Schedule background image</label><br>
+                            @if (!$val['background_schedule'])
+                                <input class="form-control" type="file" value="{{$val['background_schedule']}}" id="example-file-input" name="background_schedule">                                
+                            @else
+                                <img src="{{base_url('/files/').$val['background_schedule']}}" alt="" class="img-rounded" style="width:10%;geight:10%;">
+                                <input class="form-control" type="file" value="{{$val['background_schedule']}}" id="example-file-input" name="background_schedule">
+                            @endif                                                        
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputPassword1">Font Color</label>
-                            <input value="{{$val['font_color_1']}}" name="font_color_1" class="form-control" type='color'/>
+                            <label for="exampleInputPassword1">Schedule border color</label>
+                            <input value="{{$val['border_table_color']}}" name="border_table_color" class="full form-control" type='text' id="full"/>
                         </div>
-                        <hr>
+                        <div class="col-md-12">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Schedule-title font Size</label>
+                                    <input value="{{$val['font_size_1h']}}" name="font_size_1h" class="form-control" type='number'/>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Schedule font size</label>
+                                    <input value="{{$val['font_size_1']}}" name="font_size_1" class="form-control" type='number'/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Schedule-title font color</label>
+                                    <input value="{{$val['font_color_1h']}}" name="font_color_1h" class="form-control" type='color'/>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Schedule font color</label>
+                                    <input value="{{$val['font_color_1']}}" name="font_color_1" class="form-control" type='color'/>
+                                </div>
+                            </div>                            
+                        </div>                                                                 
+                        
                         <div class="form-group">
-                            <label for="exampleInputPassword1" style="font-family:'{{$val['font_type_2']}}'">Font Type Marquee</label>
+                            <label for="exampleInputPassword1" style="font-family:'{{$val['font_type_2']}}'">Marquee font type</label>
                             <select name="font_type_2" id="" class="form-control">
                                 @foreach ($fonts as $vals)
                                     @if ($vals['font_name'] == $val['font_type_2'])
@@ -206,39 +239,28 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputPassword1">Font Size Marquee</label>
+                            <label for="exampleInputPassword1">Marquee font size</label>
                             <input value="{{$val['font_size_2']}}" name="font_size_2" class="form-control" type='number'/>
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputPassword1">Font Color Marquee</label>
+                            <label for="exampleInputPassword1">Marquee font color</label>
                             <input value="{{$val['font_color_2']}}" name="font_color_2" class="form-control" type='color'/>
                         </div>
                         <hr>
                         <div class="form-group">
-                            <label for="exampleInputPassword1">Background Color Marquee</label>
+                            <label for="exampleInputPassword1">Marquee background color</label>
                             <input value="{{$val['background_marquee']}}" name="background_marquee" class="full form-control" type='text' id="full"/>                            
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputPassword1">Background Color Video</label>
+                            <label for="exampleInputPassword1">Video background color</label>
                             <input value="{{$val['background_video']}}" name="background_video" class="full form-control" type='text' id="full"/>                            
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputPassword1">Margin Color</label>
+                            <label for="exampleInputPassword1">Margin color</label>
                             <input value="{{$val['slider_color']}}" name="slider_color" class="full form-control" type='text' id="full"/>                            
                         </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">Schedule Border Color</label>
-                            <input value="{{$val['border_table_color']}}" name="border_table_color" class="full form-control" type='text' id="full"/>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">Background Schedule</label><br>
-                            @if (!$val['background_schedule'])
-                                <input class="form-control" type="file" value="{{$val['background_schedule']}}" id="example-file-input" name="background_schedule">                                
-                            @else
-                                <img src="{{base_url('/files/').$val['background_schedule']}}" alt="" class="img-rounded" style="width:10%;geight:10%;">
-                                <input class="form-control" type="file" value="{{$val['background_schedule']}}" id="example-file-input" name="background_schedule">
-                            @endif                                                        
-                        </div>
+                        
+                        
                     @elseif ($val['type']==3 || $val['type']==4)
                         no configuration needed...
                     @endif                        

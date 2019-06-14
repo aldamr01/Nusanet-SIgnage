@@ -137,6 +137,11 @@
             font-size:{{$config['font_size_1']}}px;
             color:{{$config['font_color_1']}};
             vertical-align: middle;
+        }
+        .fonthead{
+            font-family: "{{$config['font_type_1']}}";
+            font-size:{{$config['font_size_1h']}}px;
+            color:{{$config['font_color_1h']}};
         }        
 
     </style>
@@ -169,9 +174,9 @@
                         <div class="col-md-10 offset-1" style="padding:0;">
                             <table class="table  table-striped borderless roundedt" style="text-align:center;margin:0;font-size:18px;color:white;font-style:bold">
                                 <thead >
-                                    <th style="text-align:left" class="font1">Group / Event</th>
-                                    <th style="text-align:left" class="font1">Room</th>
-                                    <th style="text-align:left" class="font1">Start/End</th>
+                                    <th style="text-align:left" class="fonthead">Group / Event</th>
+                                    <th style="text-align:left" class="fonthead">Room</th>
+                                    <th style="text-align:left" class="fonthead">Start/End</th>
                                 </thead>
                                 <tbody>
                                     <?php $var="heads"; ?>

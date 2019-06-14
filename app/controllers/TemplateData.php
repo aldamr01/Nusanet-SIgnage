@@ -119,6 +119,15 @@ class TemplateData extends CI_Controller
         else 
              $border_table_color = $update_template->border_table_color;
      
+        if ($this->input->post('font_size_1h',TRUE))         
+             $font_size_1h = $this->input->post('font_size_1h',TRUE);        
+        else 
+             $font_size_1h = $update_template->font_size_1h;
+
+        if ($this->input->post('font_color_1h',TRUE))         
+             $font_color_1h = $this->input->post('font_color_1h',TRUE);        
+        else 
+             $font_color_1h = $update_template->font_color_1h;
                 
         if($this->form_validation->run()== FALSE)
         {                     
@@ -141,6 +150,8 @@ class TemplateData extends CI_Controller
             $update_template->slider_color      =   $slider_color;
             $update_template->background_marquee=   $background_marquee;
             $update_template->border_table_color=   $border_table_color;
+            $update_template->font_size_1h      =   $font_size_1h;
+            $update_template->font_color_1h      =   $font_color_1h;
             $update_template->name              =   $this->input->post('name',TRUE);
             
             if (isset($_FILES['background_schedule']) && $_FILES['background_schedule']['name'] != '')

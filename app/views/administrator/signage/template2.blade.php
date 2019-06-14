@@ -45,8 +45,8 @@
                 font: '{{$config["font_type_2"]}}',
                 size: {{$config["font_size_2"]}},   
                 color: '{{$config["font_color_2"]}}',
-                background: '{{$config["background_marquee"]}}',
-                width: 0,
+                background: '',
+                width: 0,                
                 height: 0,
                 children: [
                     @foreach($running_text as $val)
@@ -70,13 +70,12 @@
 
         .schedule{
             position: relative;
-            overflow: hidden;
-            background-size:cover;
+            overflow: hidden;            
             height:70%;
-            min-height:95%;
+            min-height:92%;
             background: linear-gradient( {{$config['background_color_schedule']}},{{$config['background_color_schedule']}} ), url({{base_url('files/').$config['background_schedule']}}); /* KURANG IKI TOK , LEK SEMISAL AREP DI TEST , TOLONG IKI DI GAWE DINAMIS*/            
             background-position:center;
-            background-size:cover;
+            background-size:contain;
             background-repeat:repeat;
             background-attachment:center;
         }
@@ -97,6 +96,14 @@
 
         .slider{
             margin-top:-20px;
+            size: cover;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient({{$config["background_marquee"]}},{{$config["background_marquee"]}}),url({{base_url("files/").$config["background_image_marquee"]}});
+            background-position:center;
+            background-size:contain;
+            background-repeat:repeat;
+            background-attachment:center;
         }
 
         .borderless td, .borderless th {
@@ -143,7 +150,7 @@
             font-size:{{$config['font_size_1h']}}px;
             color:{{$config['font_color_1h']}};
         }        
-
+        
     </style>
 </head>
 <body> 

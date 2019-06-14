@@ -250,6 +250,15 @@
                             <label for="exampleInputPassword1">Marquee font color</label>
                             <input value="{{$val['font_color_2']}}" name="font_color_2" class="form-control" type='color'/>
                         </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Marquee background image</label><br>
+                            @if (!$val['background_image_marquee'])
+                                <input class="form-control" type="file" value="{{$val['background_image_marquee']}}" id="example-file-input" name="background_image_marquee">                                
+                            @else
+                                <img src="{{base_url('/files/').$val['background_image_marquee']}}" alt="" class="img-rounded" style="width:10%;geight:10%;">
+                                <input class="form-control" type="file" value="{{$val['background_image_marquee']}}" id="example-file-input" name="background_image_marquee">
+                            @endif                                                        
+                        </div>
                         <hr>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Marquee background color</label>

@@ -236,6 +236,7 @@ class SnackMarquee {
             height: this.height,
             color: this.color,
             background: this.background,
+
         });
         this.viewport.append(textBox);
         this.textBox = [this.viewport.children('.slide0'), this.viewport.children('.slide1')];

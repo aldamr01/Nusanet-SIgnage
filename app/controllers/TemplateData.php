@@ -128,7 +128,12 @@ class TemplateData extends CI_Controller
              $font_color_1h = $this->input->post('font_color_1h',TRUE);        
         else 
              $font_color_1h = $update_template->font_color_1h;
-                
+
+        if ($this->input->post('background_color_schedule',TRUE))         
+             $background_color_schedule = $this->input->post('background_color_schedule',TRUE);        
+        else 
+             $background_color_schedule = $update_template->background_color_schedule;
+                             
         if($this->form_validation->run()== FALSE)
         {                     
             redirect(base_url('site/show/').$this->input->post('site_id')); 
@@ -151,13 +156,14 @@ class TemplateData extends CI_Controller
             $update_template->background_marquee=   $background_marquee;
             $update_template->border_table_color=   $border_table_color;
             $update_template->font_size_1h      =   $font_size_1h;
-            $update_template->font_color_1h      =   $font_color_1h;
+            $update_template->font_color_1h     =   $font_color_1h;        
             $update_template->name              =   $this->input->post('name',TRUE);
+            $update_template->background_color_schedule=    $background_color_schedule;
             
             if (isset($_FILES['background_schedule']) && $_FILES['background_schedule']['name'] != '')
             {
                 $extbs           =   pathinfo($_FILES['background_schedule']['name'], PATHINFO_EXTENSION);
-                $fbackgrounds    =   "file_backgrounds".$this->input->post('id',TRUE)."_".md5($this->input->post('id',TRUE)).date('d-m-Y');
+                $fbackgrounds    =   "file_background".$this->input->post('id',TRUE)."_".md5($this->input->post('id',TRUE)).date('d-m-Y');
                 $backgrounds     =   $this->ngupload($fbackgrounds,'background_schedule');
                 $sbackgrounds    =   $fbackgrounds.".".$extbs;
             }

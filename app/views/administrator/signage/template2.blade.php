@@ -74,11 +74,11 @@
             background-size:cover;
             height:70%;
             min-height:95%;
-            background: url({{base_url('rep.png')}}); /* KURANG IKI TOK , LEK SEMISAL AREP DI TEST , TOLONG IKI DI GAWE DINAMIS*/
+            background: linear-gradient( {{$config['background_color_schedule']}},{{$config['background_color_schedule']}} ), url({{base_url('files/').$config['background_schedule']}}); /* KURANG IKI TOK , LEK SEMISAL AREP DI TEST , TOLONG IKI DI GAWE DINAMIS*/            
             background-position:center;
             background-size:cover;
             background-repeat:repeat;
-            background-attachment:center;  
+            background-attachment:center;
         }
 
        .rey {

@@ -195,6 +195,10 @@
                             <?php endif; ?>                                                        
                         </div>
                         <div class="form-group">
+                            <label for="exampleInputPassword1">Schedule background color</label>
+                            <input value="<?php echo e($val['background_color_schedule']); ?>" name="background_color_schedule" class="full form-control" type='text' id="full"/>
+                        </div>
+                        <div class="form-group">
                             <label for="exampleInputPassword1">Schedule border color</label>
                             <input value="<?php echo e($val['border_table_color']); ?>" name="border_table_color" class="full form-control" type='text' id="full"/>
                         </div>

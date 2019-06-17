@@ -84,7 +84,7 @@ class Signage extends CI_Controller
                         break;
 
                     case '2':                      
-                        echo $this->blade->stream('administrator.signage.template2',$data);
+                        echo $this->blade->stream('administrator.signage.template5',$data);
                         break;
                     
                     case '3':
@@ -111,6 +111,45 @@ class Signage extends CI_Controller
         else
         {
             echo "x2";
+            //redirect(base_url('site/show/').$this->input->post('site_id'));
+        }
+
+    }
+
+    function screenView5($site_id,$screen_id,$token,$broadcast=null)
+    {
+        if($broadcast=='null' || $broadcast==0 )
+            $where              =   array(
+                'device_id'     =>  $screen_id,
+                'for_date'      =>  $this->amirrule_lib->today()
+            );
+        else 
+            $where              =   array(
+                'device_id'     =>  $broadcast,
+                'for_date'      =>  $this->amirrule_lib->today()
+            );
+
+        $site               =   Site::find($site_id);
+        $screen             =   Screen_Device::find($screen_id);
+
+        $where2             =   array(
+            'id'            =>  $screen['template_id'],
+            'site_id'       =>  $site_id
+        );
+
+        $data['content']    =   Content::where('device_id',$screen_id)->orderBy('created_at','ASC')->get();
+        
+        $data['schedule']       =   Schedule::where($where)->orderBy('start','ASC')->get();
+        $data['config']         =   Template::where($where2)->first();
+        $data['running_text']   =   RunningText::where('site_id',$site_id)->get();
+        
+        if($site->token == $token)
+        {            
+            echo $this->blade->stream('administrator.signage.template5',$data);            
+        }
+        else
+        {
+            echo "invalid token, access denied...";
             //redirect(base_url('site/show/').$this->input->post('site_id'));
         }
 

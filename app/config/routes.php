@@ -1,4 +1,4 @@
-<?php
+    <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 
@@ -8,6 +8,7 @@ $route['translate_uri_dashes']                              =   FALSE;
 
 //SCREEN URL
 $route['screen/(:num)/(:num)/(:any)/(:any)']                =   'Signage/screenView/$1/$2/$3/$4';
+$route['screen2/(:num)/(:num)/(:any)/(:any)']                =   'Signage/screenView/$1/$2/$3/$4';
 $route['screen/controller/(:num)/(:num)/(:any)']            =   'ScreenData/screenController/$1/$2/$3';
 
 //VIEW

@@ -74,7 +74,7 @@
             overflow: hidden;
             background-size:cover;
             height:70%;
-            min-height:90%;
+            min-height:95%;
             background: url({{base_url('rep.png')}}); // KURANG IKI TOK , LEK SEMISAL AREP DI TEST , TOLONG IKI DI GAWE DINAMIS
             background-position:center;
             background-size:cover;
@@ -162,7 +162,7 @@
                     @endforeach
                 </video>
             </div>                                      
-            <div class="slider" style="width:100%;height:20%;border-top:5px solid {{$config['slider_color']}};z-index:999;"></div>        
+            <div class="slider" style="width:100%;height:15%;border-top:5px solid {{$config['slider_color']}};z-index:999;"></div>        
         </div>                
     </div>
 </body>

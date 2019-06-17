@@ -74,7 +74,7 @@
             overflow: hidden;
             background-size:cover;
             height:70%;
-            min-height:90%;
+            min-height:95%;
             background: url(<?php echo e(base_url('rep.png')); ?>); // KURANG IKI TOK , LEK SEMISAL AREP DI TEST , TOLONG IKI DI GAWE DINAMIS
             background-position:center;
             background-size:cover;
@@ -140,7 +140,7 @@
 
         .font1{
             font-family: "<?php echo e($config['font_type_1']); ?>";
-            font-size:<?php echo e($config['font_size_1']); ?>;
+            font-size:<?php echo e($config['font_size_1']); ?>px;
             color:<?php echo e($config['font_color_1']); ?>;
         }  
         
@@ -150,8 +150,7 @@
 
     </style>
 </head>
-<body>
-    
+<body>    
     <div class="maxw">
         <div class="row" style="padding:0;height:100%;margin:0;">
             <div class="rey col-md-12" style="padding:0">
@@ -163,7 +162,7 @@
                     <?php endforeach; ?>
                 </video>
             </div>                                      
-            <div class="slider" style="width:100%;height:20%;border-top:5px solid <?php echo e($config['slider_color']); ?>;z-index:999;"></div>        
+            <div class="slider" style="width:100%;height:15%;border-top:5px solid <?php echo e($config['slider_color']); ?>;z-index:999;"></div>        
         </div>                
     </div>
 </body>

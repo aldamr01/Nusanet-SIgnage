@@ -33,7 +33,10 @@
                             </div>
                             <br>
 
-                            @if($val['type'] == 2 )                                
+                            @if($val['type'] == 2 )      
+                                <div class="row">
+                                    <a target="_blank" href="{{base_url('screen2/').$thisuser['auth_site'].'/'.$val['id'].'/'.$site_id}}/0" class="col-md-12 bg-info" style="text-align:center">View Screen Without Events</a>
+                                </div> <br>                                                        
                                 <div class="row">
                                     <select name="" id="" class="col-md-12 bg-success" onchange="window.location.href=this.value;">                                        
                                         <option value="">Get data from another screen</option>

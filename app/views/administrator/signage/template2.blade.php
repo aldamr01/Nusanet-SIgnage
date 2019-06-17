@@ -72,7 +72,7 @@
             position: relative;
             overflow: hidden;            
             height:70%;
-            min-height:92%;
+            min-height:90%;
             background: linear-gradient( {{$config['background_color_schedule']}},{{$config['background_color_schedule']}} ), url({{base_url('files/').$config['background_schedule']}}); /* KURANG IKI TOK , LEK SEMISAL AREP DI TEST , TOLONG IKI DI GAWE DINAMIS*/            
             background-position:center;
             background-size:contain;
@@ -84,9 +84,9 @@
             position: inherit;
             overflow: hidden;
             /* background-color:black; */
-            height:95%;
-            min-height:95%;
-            width:95%;
+            height:93%;
+            min-height:93%;
+            width:93%;
         }
                
         .rey video {            
@@ -223,7 +223,7 @@
                     </div>
                 </div>
             </div>                            
-            <div class="slider" style="width:100%;height:10%;border-top:10px solid {{$config['slider_color']}};z-index:999;"></div>        
+            <div class="slider" style="width:100%;height:15%;border-top:10px solid {{$config['slider_color']}};z-index:999;"></div>        
         </div>                
     </div>
 </body>

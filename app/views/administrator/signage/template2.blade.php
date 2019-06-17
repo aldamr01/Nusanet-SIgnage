@@ -166,7 +166,7 @@
                     @endforeach
                 </video>
             </div>
-            <div class="schedule col-xs-5" style="padding:0;max-width:30%;width:30%">
+            <div class="schedule col-xs-5" style="padding:0;border-left:10px solid {{$config['slider_color']}};max-width:30%;width:30%">
                 {{--<div class="row" style="padding:0;margin:0;">
                     <div class="col-md-12"style="padding:0;height:100%;margin:0;">                       
                         <a class="weatherwidget-io" href="https://forecast7.com/en/n7d26112d75/surabaya/" data-label_1="SURABAYA" data-label_2="WEATHER" data-icons="Climacons Animated" data-mode="Current" data-days="3" data-theme="random_grey" data-textcolor="#fdfdfd" >SURABAYA WEATHER</a>

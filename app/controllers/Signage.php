@@ -84,7 +84,7 @@ class Signage extends CI_Controller
                         break;
 
                     case '2':                      
-                        echo $this->blade->stream('administrator.signage.template5',$data);
+                        echo $this->blade->stream('administrator.signage.template2',$data);
                         break;
                     
                     case '3':

@@ -158,7 +158,7 @@
     <div class="maxw">
         <div class="row" style="padding:0;height:100%;margin:0;">
             <div class="rey col-xs-7" style="padding:0;width:70%;max-width:70%">
-                <video autoplay loop poster="https://dummyimage.com/640x480/000/fff">    
+                <video autoplay loop poster="https://dummyimage.com/600x400/000/000000">    
                     <?php foreach($content as $val): ?>                
                         <?php if($val['type']=='video'): ?> 
                             <source class="active" src="<?php echo e(base_url('files/').$val['filename']); ?>" data-src="<?php echo e(base_url('files/').$val['filename']); ?>" type="video/mp4">

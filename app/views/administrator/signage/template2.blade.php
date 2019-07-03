@@ -181,9 +181,9 @@
                         <div class="col-md-10 offset-1" style="padding:0;">
                             <table class="table  table-striped borderless roundedt" style="text-align:center;margin:0;font-size:18px;color:white;font-style:bold">
                                 <thead >
-                                    <th style="text-align:left" class="fonthead">Group / Event</th>
+                                    <th style="text-align:left" class="fonthead">Event</th>
                                     <th style="text-align:left" class="fonthead">Room</th>
-                                    <th style="text-align:left" class="fonthead">Start/End</th>
+                                    <th style="text-align:left" class="fonthead">Time</th>
                                 </thead>
                                 <tbody>
                                     <?php $var="heads"; ?>

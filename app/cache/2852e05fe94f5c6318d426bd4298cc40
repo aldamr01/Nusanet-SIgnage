@@ -45,7 +45,7 @@
                 font: '<?php echo e($config["font_type_2"]); ?>',
                 size: <?php echo e($config["font_size_2"]); ?>,   
                 color: '<?php echo e($config["font_color_2"]); ?>',
-                background: '<?php echo e($config["background_marquee"]); ?>',
+                background: <?php echo e($config["background_marquee"]); ?>,
                 width: 0,
                 height: 0,
                 children: [

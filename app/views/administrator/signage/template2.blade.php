@@ -185,37 +185,13 @@
                                     <th style="text-align:left" class="fonthead">Room</th>
                                     <th style="text-align:left" class="fonthead">Time</th>
                                 </thead>
-                                <tbody>
-                                    <?php $var="heads"; ?>
-                                    @foreach ($schedule as $val)
-                                    <?php                                        
-                                        if($var!=$val['title']){
-                                            $temp="head";
-                                        }
-                                        else{
-                                            $temp="nohead";
-                                        }
-
-                                        $var = $val['title'];                                        
-                                    ?>
-                                        @if ($temp=='head')
-                                            <tr class="tdhead">
-                                                <td colspan="3" style="text-align:left;padding-top:0px;padding-bottom:0px">
-                                                    <b class="font1">{{$val['title']}}</b>
-                                                </td>
-                                            </tr> 
-                                            <tr style="border-top:solid 0px white;padding-top:0px;padding-bottom:0px;">
-                                                <td style="text-align:left;padding-top:0px;padding-bottom:5px;vertical-align: middle;" class="font1">{{$val['description']}}</td>
-                                                <td style="text-align:left;padding-top:0px;padding-bottom:5px;vertical-align: middle;" class="font1">{{$val['room']}}</td>
-                                                <td style="text-align:center;padding-top:0px;padding-bottom:5px;" class="font1">{{strtoupper($val['start'])}} <br> {{strtoupper($val['end'])}}</td>
-                                            </tr>       
-                                        @else
-                                            <tr style="border-top:solid 0px white;padding-top:10px;padding-bottom:5px;">
-                                                <td style="text-align:left;padding-top:0px;padding-bottom:5px;vertical-align: middle;" class="font1">{{$val['description']}}</td>
-                                                <td style="text-align:left;padding-top:0px;padding-bottom:5px;vertical-align: middle;" class="font1">{{$val['room']}}</td>
-                                                <td style="text-align:center;padding-top:0px;padding-bottom:5px;" class="font1">{{strtoupper($val['start'])}}<br>{{strtoupper($val['end'])}}</td>
-                                            </tr>  
-                                        @endif
+                                <tbody>                                   
+                                    @foreach ($schedule as $val)                                    
+                                        <tr style="border-top:solid 0px white;padding-top:10px;padding-bottom:5px;">
+                                            <td style="text-align:left;padding-top:0px;padding-bottom:5px;vertical-align: middle;" class="font1">{{$val['description']}}</td>
+                                            <td style="text-align:left;padding-top:0px;padding-bottom:5px;vertical-align: middle;" class="font1">{{$val['room']}}</td>
+                                            <td style="text-align:center;padding-top:0px;padding-bottom:5px;" class="font1">{{strtoupper($val['start'])}}<br>{{strtoupper($val['end'])}}</td>
+                                        </tr>                                          
                                     @endforeach                                                                
                                 </tbody>
                             </table>  

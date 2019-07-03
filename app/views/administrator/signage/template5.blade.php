@@ -156,7 +156,7 @@
             <div class="rey col-md-12" style="padding:0">
                 <video loop autoplay  poster="https://dummyimage.com/600x400/000/000000">    
                     @foreach ($content as $val)                
-                        @if ($val['type']=='video') 
+                        @if ($val['type']=='video')
                             <source class="active" src="{{base_url('files/').$val['filename']}}" data-src="{{base_url('files/').$val['filename']}}" type="video/mp4">
                         @endif
                     @endforeach

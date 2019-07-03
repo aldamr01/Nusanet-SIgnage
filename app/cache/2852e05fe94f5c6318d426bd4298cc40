@@ -154,9 +154,9 @@
     <div class="maxw">
         <div class="row" style="padding:0;height:100%;margin:0;">
             <div class="rey col-md-12" style="padding:0">
-                <video loop autoplay  poster="hhttps://res.cloudinary.com/practicaldev/image/fetch/s--JUDOxQH3--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://user-images.githubusercontent.com/15229355/34257748-c9afcda8-e663-11e7-8b3b-c9a0e0bd9119.png">    
+                <video loop autoplay  poster="https://dummyimage.com/600x400/000/000000">    
                     <?php foreach($content as $val): ?>                
-                        <?php if($val['type']=='video'): ?> 
+                        <?php if($val['type']=='video'): ?>
                             <source class="active" src="<?php echo e(base_url('files/').$val['filename']); ?>" data-src="<?php echo e(base_url('files/').$val['filename']); ?>" type="video/mp4">
                         <?php endif; ?>
                     <?php endforeach; ?>

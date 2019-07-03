@@ -127,7 +127,7 @@
                         </table>
                     </div>
                 </div>
-                @if ($screen['type'] == 2)
+                @if ($screen['type'] == 2 || $screen['type'] == 5)
                     <div class="card">
                         <div class="card-header no-bg b-a-0">
                             <b>Marquee Bottom</b>

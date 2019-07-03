@@ -94,10 +94,14 @@ class Signage extends CI_Controller
                     case '4':
                         echo $this->blade->stream('administrator.signage.template4',$data);
                         break;
+
+                    case '5':
+                        echo $this->blade->stream('administrator.signage.template5',$data);
+                        break;
                         
                     default:
                         # code...
-                        echo"s";
+                        echo"s"."$screen->type";
                         break;
                 }
                 

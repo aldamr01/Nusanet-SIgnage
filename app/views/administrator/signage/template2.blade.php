@@ -144,11 +144,13 @@
             font-size:{{$config['font_size_1']}}px;
             color:{{$config['font_color_1']}};
             vertical-align: middle;
+            margin-bottom:0px;
         }
         .fonthead{
             font-family: "{{$config['font_type_1']}}";
             font-size:{{$config['font_size_1h']}}px;
             color:{{$config['font_color_1h']}};
+            margin-bottom:0px;
         }        
         
     </style>
@@ -166,7 +168,7 @@
                     @endforeach
                 </video>
             </div>
-            <div class="schedule col-xs-5" style="padding:0;border-left:10px solid {{$config['slider_color']}};max-width:30%;width:30%">
+            <div class="schedule col-xs-5" style="padding:0;border-left:5px solid {{$config['slider_color']}};max-width:30%;width:30%">
                 {{--<div class="row" style="padding:0;margin:0;">
                     <div class="col-md-12"style="padding:0;height:100%;margin:0;">                       
                         <a class="weatherwidget-io" href="https://forecast7.com/en/n7d26112d75/surabaya/" data-label_1="SURABAYA" data-label_2="WEATHER" data-icons="Climacons Animated" data-mode="Current" data-days="3" data-theme="random_grey" data-textcolor="#fdfdfd" >SURABAYA WEATHER</a>
@@ -176,10 +178,20 @@
                     </div>                
                 </div>---}}
                 <br>
-                <div class="row" style="max-width:100%;width:100%">
+                <div class="row" style="max-width:100%;width:100%;margin-left:0px;">
                     <div class="col-md-12"style="padding:0;height:100%;margin:0;">
                         <div class="col-md-10 offset-1" style="padding:0;">
-                            <table class="table  table-striped borderless roundedt" style="text-align:center;margin:0;font-size:18px;color:white;font-style:bold">
+                            <p align="center" class="fonthead" style="font-weight:900"><b>TODAY</b></p>
+                            <p align="center" class="fonthead">EVENT SCHEDULE</p>
+                            <br>
+                            <p class="font1" align="center">AICE YUMMY INDONESIA,PT </p>
+                            <p class="font1" align="center">08.00 – 19.00</p>
+                            <p class="font1" align="center" style="border-bottom:1px solid {{$config['slider_color']}}; padding-bottom:5px;width:100%;">At Merah Delima 1-2 “5” Floor</p>
+                            <br>
+                            <p class="font1" align="center">AICE YUMMY INDONESIA,PT </p>
+                            <p class="font1" align="center">08.00 – 19.00</p>
+                            <p class="font1" align="center" style="border-bottom:1px solid {{$config['slider_color']}}; padding-bottom:5px;width:100%;">At Merah Delima 1-2 “5” Floor</p>
+                            {{--- <table class="table  table-striped borderless roundedt" style="text-align:center;margin:0;font-size:18px;color:white;font-style:bold">
                                 <thead >
                                     <th style="text-align:left" class="fonthead">Event</th>
                                     <th style="text-align:left" class="fonthead">Room</th>
@@ -194,12 +206,12 @@
                                         </tr>                                          
                                     @endforeach                                                                
                                 </tbody>
-                            </table>  
+                            </table>  ---}}
                         </div>
                     </div>
                 </div>
             </div>                            
-            <div class="slider" style="width:100%;height:15%;border-top:10px solid {{$config['slider_color']}};z-index:999;"></div>        
+            <div class="slider" style="width:100%;height:15%;border-top:5px solid {{$config['slider_color']}};z-index:999;"></div>        
         </div>                
     </div>
 </body>

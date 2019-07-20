@@ -184,10 +184,12 @@
                             <p align="center" class="fonthead" style="font-weight:900"><b>TODAY</b></p>
                             <p align="center" class="fonthead">EVENT SCHEDULE</p>
                             
-                            <br>
-                            <p class="font1" align="center">AICE YUMMY INDONESIA,PT </p>
-                            <p class="font1" align="center">08.00 – 19.00</p>
-                            <p class="font1" align="center" style="border-bottom:1px solid {{$config['slider_color']}}; padding-bottom:5px;width:100%;">At Merah Delima 1-2 “5” Floor</p>
+                            @foreach($schedule as $val)
+                                <br>
+                                <p class="font1" align="center">{{$val['groupevent']}}</p>
+                                <p class="font1" align="center">{{$val['timeevent']}}</p>
+                                <p class="font1" align="center" style="border-bottom:1px solid {{$config['slider_color']}}; padding-bottom:5px;width:100%;">{{$val['locationevent']}}</p>
+                            @endforeach
                             
                             {{--- <table class="table  table-striped borderless roundedt" style="text-align:center;margin:0;font-size:18px;color:white;font-style:bold">
                                 <thead >

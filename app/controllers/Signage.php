@@ -70,7 +70,7 @@ class Signage extends CI_Controller
 
         $data['content']    =   Content::where('device_id',$screen_id)->orderBy('created_at','ASC')->get();
         
-        $data['schedule']       =   Schedule::where($where)->orderBy('start','ASC')->get();
+        $data['schedule']       =   Schedule::where($where)->get();
         $data['config']         =   Template::where($where2)->first();
         $data['running_text']   =   RunningText::where('site_id',$site_id)->get();
         

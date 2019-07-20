@@ -52,8 +52,10 @@
                                 <tr>
                                     <th>No.</th>
                                     <th>Group</th>
-                                    <th>Time</th>
-                                    <th>Location</th>                                   
+                                    <th>Event</th>
+                                    <th>Room</th>
+                                    <th>Start</th>
+                                    <th>Finish</th>
                                     <th>Display at</th>
                                     <th>Action</th>
                                 </tr>                                                                                             
@@ -63,9 +65,11 @@
                                 @foreach ($schedule as $val)                                                                    
                                     <tr>
                                         <td>{{$loop}}</td>
-                                        <td>{{$val['groupevent']}}</td>
-                                        <td>{{$val['timeevent']}}</td>
-                                        <td>{{$val['locationevent']}}</td>                                                                          
+                                        <td>{{$val['title']}}</td>
+                                        <td>{{$val['description']}}</td>
+                                        <td>{{$val['room']}}</td>
+                                        <td>{{$val['start']}}</td>
+                                        <td>{{$val['end']}}</td>                                        
                                         <td>{{$val['for_date']}}</td>
                                         <td>
                                             <a  class="btn btn-danger" title='Drop' href='{{base_url("API/ScheduleDrop/").$val["id"]."/".$site["id"]}}' onclick="return confirm('Want to Delete it ?')"><i class='material-icons'>delete</i></a>
@@ -262,18 +266,30 @@
                 <div class="form-group">
                     <label for="exampleInputName1">Group</label>
                     <input type="text" class="form-control"
-                        id="exampleInputName1" placeholder="Group Event" name="groupevent" required/>
+                        id="exampleInputName1" placeholder="Group" name="title" required/>
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputUsername1">Time</label>
+                    <label for="exampleInputUsername1">Event</label>
                     <input type="text" class="form-control"
-                        id="exampleInputUsername1" placeholder="Event Time" name="timeevent" required/>
+                        id="exampleInputUsername1" placeholder="Event Name" name="description" required/>
                 </div>                                
                 <div class="form-group">
-                    <label for="exampleInputUsername1">Location / Room</label>
+                    <label for="exampleInputUsername1">Room</label>
                     <input type="text" class="form-control"
-                        id="exampleInputUsername1" placeholder="Room / Location" name="locationevent" required/>
-                </div>                
+                        id="exampleInputUsername1" placeholder="Room / Location" name="room" required/>
+                </div>
+                <div class="form-group">                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="exampleInputUsername1">Start time</label>
+                            <input type="time" class="form-control" id="exampleInputUsername1" placeholder="Start time" name="start" required/>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="exampleInputUsername1">End time</label>
+                            <input type="time" class="form-control" id="exampleInputUsername1" placeholder="End time" name="end" required/>
+                        </div>      
+                    </div>                                      
+                </div>
                 <div class="form-group">
                     <label for="exampleInputUsername1">Display at</label>
                     <input type="date" class="form-control"

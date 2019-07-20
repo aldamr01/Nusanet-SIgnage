@@ -17,23 +17,30 @@ class ScheduleData extends CI_Controller
 
     function scheduleCreate()
     {
-        $this->form_validation->set_rules('title', 'title', 'required');
-        $this->form_validation->set_rules('description', 'description', 'required');
-        $this->form_validation->set_rules('room', 'room', 'required');
-        $this->form_validation->set_rules('start', 'start', 'required');
-        $this->form_validation->set_rules('end', 'end', 'required');
-        $this->form_validation->set_rules('for_date', 'for_data', 'required');        
-        $this->form_validation->set_rules('screen_id', 'foscreenr_data', 'required');
+        $this->form_validation->set_rules('groupevent', 'groupevent', 'required');
+        $this->form_validation->set_rules('timeevent', 'timeevent', 'required');
+        $this->form_validation->set_rules('locationevent', 'locationevent', 'required');
+        $this->form_validation->set_rules('for_date', 'for_data', 'required');
+        // $this->form_validation->set_rules('title', 'title', 'required');
+        // $this->form_validation->set_rules('description', 'description', 'required');
+        // $this->form_validation->set_rules('room', 'room', 'required');
+        // $this->form_validation->set_rules('start', 'start', 'required');
+        // $this->form_validation->set_rules('end', 'end', 'required');
+        // $this->form_validation->set_rules('for_date', 'for_data', 'required');        
+        $this->form_validation->set_rules('screen_id', 'screen_data', 'required');
         $this->form_validation->set_rules('site_id', 'site', 'required');
 
         $register_schedule                  =   new Schedule;
         $varx                               =   "screen".$this->input->post('screen_id');  
         
-        $register_schedule->title           =  $this->input->post('title');
-        $register_schedule->description     =  $this->input->post('description');
-        $register_schedule->room            =  $this->input->post('room');
-        $register_schedule->start           =  $this->amirrule_lib->time_converter($this->input->post('start'));
-        $register_schedule->end             =  $this->amirrule_lib->time_converter($this->input->post('end'));
+        // $register_schedule->title           =  $this->input->post('title');
+        // $register_schedule->description     =  $this->input->post('description');
+        // $register_schedule->room            =  $this->input->post('room');
+        // $register_schedule->start           =  $this->amirrule_lib->time_converter($this->input->post('start'));
+        // $register_schedule->end             =  $this->amirrule_lib->time_converter($this->input->post('end'));
+        $register_schedule->groupevent      =  $this->input->post('groupevent');        
+        $register_schedule->timeevent       =  $this->input->post('timeevent');        
+        $register_schedule->locationevent   =  $this->input->post('locationevent');        
         $register_schedule->for_date        =  $this->input->post('for_date');        
         $register_schedule->device_id       =  $this->input->post('screen_id');
         $register_schedule->target          =  $varx;
@@ -89,11 +96,14 @@ class ScheduleData extends CI_Controller
 
     function scheduleUpdate()
     {
-        $this->form_validation->set_rules('title', 'title', 'required');
-        $this->form_validation->set_rules('description', 'description', 'required');
-        $this->form_validation->set_rules('room', 'room', 'required');
-        $this->form_validation->set_rules('start', 'start', 'required');
-        $this->form_validation->set_rules('end', 'end', 'required');
+        // $this->form_validation->set_rules('title', 'title', 'required');
+        // $this->form_validation->set_rules('description', 'description', 'required');
+        // $this->form_validation->set_rules('room', 'room', 'required');
+        // $this->form_validation->set_rules('start', 'start', 'required');
+        // $this->form_validation->set_rules('end', 'end', 'required');
+        $this->form_validation->set_rules('groupevent', 'groupevent', 'required');
+        $this->form_validation->set_rules('timeevent', 'timeevent', 'required');
+        $this->form_validation->set_rules('locationevent', 'locationevent', 'required');
         $this->form_validation->set_rules('for_date', 'for_data', 'required');        
         $this->form_validation->set_rules('screen_id', 'foscreenr_data', 'required');
         $this->form_validation->set_rules('site_id', 'site', 'required');
@@ -101,11 +111,14 @@ class ScheduleData extends CI_Controller
         $register_schedule                  =   Schedule::find($this->input->post('sch_id'));
         $varx                               =   "screen".$this->input->post('screen_id');  
         
-        $register_schedule->title           =  $this->input->post('title');
-        $register_schedule->description     =  $this->input->post('description');
-        $register_schedule->room            =  $this->input->post('room');
-        $register_schedule->start           =  $this->amirrule_lib->time_converter($this->input->post('start'));
-        $register_schedule->end             =  $this->amirrule_lib->time_converter($this->input->post('end'));
+        // $register_schedule->title           =  $this->input->post('title');
+        // $register_schedule->description     =  $this->input->post('description');
+        // $register_schedule->room            =  $this->input->post('room');
+        // $register_schedule->start           =  $this->amirrule_lib->time_converter($this->input->post('start'));
+        // $register_schedule->end             =  $this->amirrule_lib->time_converter($this->input->post('end'));
+        $register_schedule->groupevent      =  $this->input->post('groupevent');        
+        $register_schedule->timeevent       =  $this->input->post('timeevent');        
+        $register_schedule->locationevent   =  $this->input->post('locationevent'); 
         $register_schedule->for_date        =  $this->input->post('for_date');        
         $register_schedule->device_id       =  $this->input->post('screen_id');
         $register_schedule->target          =  $varx;

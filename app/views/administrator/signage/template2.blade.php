@@ -40,7 +40,7 @@
             slider = new SnackMarquee({
                 selector: '.slider',
                 mode: 'right',
-                speed: 100,
+                speed: 50,
                 space: 100,
                 font: '{{$config["font_type_2"]}}',
                 size: {{$config["font_size_2"]}},   

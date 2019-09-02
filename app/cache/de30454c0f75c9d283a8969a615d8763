@@ -40,13 +40,13 @@
             slider = new SnackMarquee({
                 selector: '.slider',
                 mode: 'right',
-                speed: 100,
+                speed: 50,
                 space: 100,
                 font: '<?php echo e($config["font_type_2"]); ?>',
                 size: <?php echo e($config["font_size_2"]); ?>,   
                 color: '<?php echo e($config["font_color_2"]); ?>',
-                background: '<?php echo e($config["background_marquee"]); ?>',
-                width: 0,
+                background: '',
+                width: 0,                
                 height: 0,
                 children: [
                     <?php foreach($running_text as $val): ?>
@@ -62,33 +62,31 @@
         html,body,.maxw{
             padding:0;
             margin:0;
-            height:98%;
+            height:100%;
             width:100%;
             overflow:hidden;
-            background:<?php echo e($config["background_video"]); ?>;
-            
+            background:<?php echo e($config["background_video"]); ?>;            
         }
 
         .schedule{
             position: relative;
-            overflow: hidden;
-            background-size:cover;
+            overflow: hidden;            
             height:70%;
             min-height:90%;
-            background: url(<?php echo e(base_url('rep.png')); ?>); // KURANG IKI TOK , LEK SEMISAL AREP DI TEST , TOLONG IKI DI GAWE DINAMIS
+            background: linear-gradient( <?php echo e($config['background_color_schedule']); ?>,<?php echo e($config['background_color_schedule']); ?> ), url(<?php echo e(base_url('files/').$config['background_schedule']); ?>); /* KURANG IKI TOK , LEK SEMISAL AREP DI TEST , TOLONG IKI DI GAWE DINAMIS*/            
             background-position:center;
-            background-size:cover;
+            background-size:contain;
             background-repeat:repeat;
-            background-attachment:center;  
+            background-attachment:center;
         }
 
        .rey {
             position: inherit;
             overflow: hidden;
             /* background-color:black; */
-            height:90%;
-            min-height:90%;
-            width:90%;
+            height:93%;
+            min-height:93%;
+            width:93%;
         }
                
         .rey video {            
@@ -98,11 +96,18 @@
 
         .slider{
             margin-top:-20px;
+            size: cover;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(<?php echo e($config["background_marquee"]); ?>,<?php echo e($config["background_marquee"]); ?>),url(<?php echo e(base_url("files/").$config["background_image_marquee"]); ?>);
+            background-position:center;
+            background-size:contain;
+            background-repeat:repeat;
+            background-attachment:center;
         }
 
         .borderless td, .borderless th {
-                border: none;
-                
+            border: none;                
         }
         .roundedt {
             border: none;
@@ -125,7 +130,7 @@
         .tdhead{
             border: none;
             background-color: <?php echo e($config['tabel']); ?>;
-            border-top: solid 1px #957030;
+            border-top: solid 1px <?php echo e($config['border_table_color']); ?>/*#957030*/;
         }
         .roundedt tbody tr:last-child td:first-child {
             border-radius: 0 0 0 10px;
@@ -135,19 +140,27 @@
         }
 
         .font1{
-                  font-family: "<?php echo e($config['font_type_1']); ?>";
-                  font-size:<?php echo e($config['font_size_1']); ?>;
-                  color:<?php echo e($config['font_color_1']); ?>;
+            font-family: "<?php echo e($config['font_type_1']); ?>";
+            font-size:<?php echo e($config['font_size_1']); ?>px;
+            color:<?php echo e($config['font_color_1']); ?>;
+            vertical-align: middle;
+            margin-bottom:0px;
+        }
+        .fonthead{
+            font-family: "<?php echo e($config['font_type_1']); ?>";
+            font-size:<?php echo e($config['font_size_1h']); ?>px;
+            color:<?php echo e($config['font_color_1h']); ?>;
+            margin-bottom:0px;
         }        
-
+        
     </style>
 </head>
-<body>
+<body> 
     
     <div class="maxw">
         <div class="row" style="padding:0;height:100%;margin:0;">
-            <div class="rey col-md-8" style="padding:0">
-                <video autoplay muted loop poster="https://dummyimage.com/900x400/000/fff">    
+            <div class="rey col-xs-7" style="padding:0;width:70%;max-width:70%">
+                <video autoplay loop poster="https://dummyimage.com/600x400/000/000000">    
                     <?php foreach($content as $val): ?>                
                         <?php if($val['type']=='video'): ?> 
                             <source class="active" src="<?php echo e(base_url('files/').$val['filename']); ?>" data-src="<?php echo e(base_url('files/').$val['filename']); ?>" type="video/mp4">
@@ -155,67 +168,50 @@
                     <?php endforeach; ?>
                 </video>
             </div>
-            <div class="schedule col-md-4" style="padding:0;">
-                <div class="row" style="padding:0;margin:0;">
+            <div class="schedule col-xs-5" style="padding:0;border-left:5px solid <?php echo e($config['slider_color']); ?>;max-width:30%;width:30%">
+                <?php /*<div class="row" style="padding:0;margin:0;">
                     <div class="col-md-12"style="padding:0;height:100%;margin:0;">                       
                         <a class="weatherwidget-io" href="https://forecast7.com/en/n7d26112d75/surabaya/" data-label_1="SURABAYA" data-label_2="WEATHER" data-icons="Climacons Animated" data-mode="Current" data-days="3" data-theme="random_grey" data-textcolor="#fdfdfd" >SURABAYA WEATHER</a>
                         <script>
                         !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
                         </script>      
                     </div>                
-                </div>
-                <hr>
-                <div class="row" style="padding:0;margin:0;">
+                </div>-*/ ?>
+                <br>
+                <div class="row" style="max-width:100%;width:100%;margin-left:0px;">
                     <div class="col-md-12"style="padding:0;height:100%;margin:0;">
-                        <div class="col-md-10 offset-1" style="padding:0;">
-                            <table class="table  table-striped borderless roundedt" style="text-align:center;margin:0;font-size:18px;color:white;font-style:bold">
+                        <div class="col-md-10" style="padding:10px;">
+                            <p align="center" class="fonthead" style="font-weight:900"><b>TODAY</b></p>
+                            <p align="center" class="fonthead">EVENT SCHEDULE</p>
+                            
+                            <?php foreach($schedule as $val): ?>
+                                <br>
+                                <p class="font1" align="center"><?php echo e($val['groupevent']); ?></p>
+                                <p class="font1" align="center"><?php echo e($val['timeevent']); ?></p>
+                                <p class="font1" align="center" style="border-bottom:1px solid <?php echo e($config['slider_color']); ?>; padding-bottom:5px;width:100%;"><?php echo e($val['locationevent']); ?></p>
+                            <?php endforeach; ?>
+                            
+                            <?php /*- <table class="table  table-striped borderless roundedt" style="text-align:center;margin:0;font-size:18px;color:white;font-style:bold">
                                 <thead >
-                                    <th style="text-align:left" class="font1">Group / Event</th>
-                                    <th style="text-align:left" class="font1">Room</th>
-                                    <th style="text-align:left" class="font1">Start/End</th>
+                                    <th style="text-align:left" class="fonthead">Event</th>
+                                    <th style="text-align:left" class="fonthead">Room</th>
+                                    <th style="text-align:left" class="fonthead">Time</th>
                                 </thead>
-                                <tbody>
-                                    <?php $var="heads"; ?>
-                                    <?php foreach($schedule as $val): ?>
-                                    <?php
-                                        
-                                        if($var!=$val['title'])
-                                        {                                        
-                                            $temp="head";
-                                        }
-                                        else
-                                        {
-                                            $temp="nohead";
-                                        }
-                                        $var = $val['title'];
-                                        
-                                    ?>
-                                        <?php if($temp=='head'): ?>
-                                            <tr class="tdhead">
-                                                <td colspan="3" style="text-align:left;">
-                                                    <b style="font-size:24px;" class="font1"><?php echo e($val['title']); ?></b>
-                                                </td>
-                                            </tr> 
-                                            <tr style="border-top:solid 0px white;">
-                                                <td style="text-align:left;" class="font1"><b><?php echo e($val['description']); ?></b></td>
-                                                <td style="text-align:left;" class="font1"><b><?php echo e($val['room']); ?></b></td>
-                                                <td style="text-align:center;" class="font1"><?php echo e($val['start']); ?> <br> <?php echo e($val['end']); ?></td>
-                                            </tr>       
-                                        <?php else: ?>
-                                            <tr style="border-top:solid 0px white;">
-                                                <td style="text-align:left;" class="font1"><b><?php echo e($val['description']); ?></b></td>
-                                                <td style="text-align:left;" class="font1"><b><?php echo e($val['room']); ?></b></td>
-                                                <td style="text-align:center;" class="font1"><?php echo e($val['start']); ?> <br> <?php echo e($val['end']); ?></td>
-                                            </tr>  
-                                        <?php endif; ?>
+                                <tbody>                                   
+                                    <?php foreach($schedule as $val): ?>                                    
+                                        <tr style="border-top:solid 0px white;padding-top:10px;padding-bottom:5px;">
+                                            <td style="text-align:left;padding-top:0px;padding-bottom:5px;vertical-align: middle;" class="font1"><?php echo e($val['description']); ?></td>
+                                            <td style="text-align:left;padding-top:0px;padding-bottom:5px;vertical-align: middle;" class="font1"><?php echo e($val['room']); ?></td>
+                                            <td style="text-align:center;padding-top:0px;padding-bottom:5px;" class="font1"><?php echo e(strtoupper($val['start'])); ?><br><?php echo e(strtoupper($val['end'])); ?></td>
+                                        </tr>                                          
                                     <?php endforeach; ?>                                                                
                                 </tbody>
-                            </table>  
+                            </table>  -*/ ?>
                         </div>
                     </div>
                 </div>
             </div>                            
-            <div class="slider" style="width:100%;height:20%;border-top:10px solid <?php echo e($config['slider_color']); ?>;z-index:999;"></div>        
+            <div class="slider" style="width:100%;height:15%;border-top:5px solid <?php echo e($config['slider_color']); ?>;z-index:999;"></div>        
         </div>                
     </div>
 </body>
